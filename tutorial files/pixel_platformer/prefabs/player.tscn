@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxyfa46i8s3ig"]
+
+[ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/player.gd" id="1_laj48"]
+[ext_resource type="Texture2D" uid="uid://bgylyll1ilomt" path="res://tutorial files/2d_simple_game/sprites/player_tilesheet.png" id="2_3l2c8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpcv7"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(0, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcy7s"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(400, 220, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nkb7"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(80, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n8xs"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(160, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tb7x"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(240, 0, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jlhv"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(0, 110, 80, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xijoa"]
+atlas = ExtResource("2_3l2c8")
+region = Rect2(80, 110, 80, 110)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3hbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpcv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcy7s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nkb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n8xs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tb7x")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jlhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xijoa")
+}],
+"loop": true,
+"name": &"run",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fghxh"]
+size = Vector2(59, 91)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_laj48")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c3hbg")
+animation = &"jump"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 9.5)
+shape = SubResource("RectangleShape2D_fghxh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="dash_cooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

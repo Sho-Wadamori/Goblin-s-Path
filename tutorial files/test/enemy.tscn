@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://yc2kkm00uxik"]
+
+[ext_resource type="Script" path="res://tutorial files/test/enemy.gd" id="1_wgff3"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_my7dy"]
+
+[sub_resource type="Curve2D" id="Curve2D_a6gdh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 640, 0, 0, 0, 0, 0, -632, 0, 0, 0, 0, 0, 640, 0)
+}
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h12dl"]
+size = Vector2(130.047, 129.559)
+
+[node name="enemy" type="Node2D"]
+script = ExtResource("1_wgff3")
+metadata/_edit_group_ = true
+
+[node name="Path2D" type="Path2D" parent="."]
+rotation = 3.14159
+curve = SubResource("Curve2D_a6gdh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(640, 0)
+rotation = 3.14159
+rotates = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
+texture = ExtResource("2_my7dy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D"]
+position = Vector2(-1.0235, 0.779551)
+shape = SubResource("RectangleShape2D_h12dl")

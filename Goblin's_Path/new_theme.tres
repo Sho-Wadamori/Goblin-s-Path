@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://brfp7htr8mxss"]
+
+[ext_resource type="FontFile" uid="uid://cpq2fq7irfgko" path="res://Goblin's_Path/sprites/font/kenvector_future.ttf" id="1_ff1o7"]
+
+[resource]
+default_font = ExtResource("1_ff1o7")
+default_font_size = 0

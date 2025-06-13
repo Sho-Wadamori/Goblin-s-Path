@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd1u2s7fjxsnb"]
+
+[ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/spike.gd" id="1_vc0u8"]
+[ext_resource type="Texture2D" uid="uid://b4jvxojylqaf1" path="res://tutorial files/2d_simple_game/sprites/platformPack_tile043 (2).png" id="2_65sje"]
+
+[node name="spike" type="Area2D"]
+scale = Vector2(1.79, 1.75)
+script = ExtResource("1_vc0u8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.998461, 0.995495)
+texture = ExtResource("2_65sje")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16.2011, 17.1429, 16.7598, 17.1429, 0, -17.1429)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
