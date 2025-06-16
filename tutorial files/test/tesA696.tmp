@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0rtr85hsuwr4"]
+
+[ext_resource type="PackedScene" uid="uid://b46qh3kqmefmw" path="res://tutorial files/test/raycasting testing.tscn" id="1_3svor"]
+[ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="2_yyjte"]
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="RaycastingTesting" parent="." instance=ExtResource("1_3svor")]
+
+[node name="Goblin" parent="." instance=ExtResource("2_yyjte")]

@@ -14,15 +14,15 @@ func _process(delta):
 	pass
 	
 	
-
-func _on_enemy_timer_timeout():
-	var enemy = enemy_prefab.instantiate()
-	#position
-	var random_y = randi_range(30, 610)
-	enemy.position = Vector2(1200, random_y)
-	enemy.enemy_killed.connect(_on_enemy_killed)
-	#add to the tree
-	add_child(enemy)
+# ------ SPAWNING ENEMY SHIPS ------
+#func _on_enemy_timer_timeout():
+	#var enemy = enemy_prefab.instantiate()
+	##position
+	#var random_y = randi_range(30, 610)
+	#enemy.position = Vector2(1200, random_y)
+	#enemy.enemy_killed.connect(_on_enemy_killed)
+	##add to the tree
+	#add_child(enemy)
 
 func _update_ui():
 	$game_UI/score_label.text = "SCORE: " + str(score)

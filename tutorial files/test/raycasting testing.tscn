@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://b46qh3kqmefmw"]
+
+[ext_resource type="Script" path="res://tutorial files/test/raycast_test.gd" id="1_buseg"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_owu74"]
+[ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="3_paata"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvjvo"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrjh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_paata")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RaycastingTesting" type="Node2D"]
+position = Vector2(594, 300)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_buseg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_wvjvo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_wrjh1")
+frame_progress = 0.943034
+
+[node name="RayCastHorizontal" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+position = Vector2(-64, 0)
+rotation = 1.5708
+
+[node name="RayCastDown" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+position = Vector2(0, 64)
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]

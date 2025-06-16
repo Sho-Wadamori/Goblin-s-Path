@@ -1,23 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://0jif25xxt42n"]
+[gd_scene load_steps=4 format=3 uid="uid://o2jj8f0o4qpy"]
 
-[ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_65k88"]
-[ext_resource type="Texture2D" uid="uid://dp580vrnume2k" path="res://Goblin's_Path/sprites/characters/playerShip2_orange.png" id="1_vkoyx"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_nn12l"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_qyqqq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4t0vg"]
-size = Vector2(37, 54)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqiel"]
+size = Vector2(61.3333, 61.3333)
 
-[node name="ship" type="Area2D"]
+[node name="Goblin" type="CharacterBody2D"]
+position = Vector2(144, 280)
 scale = Vector2(0.75, 0.75)
-script = ExtResource("1_65k88")
-metadata/_edit_group_ = true
+script = ExtResource("1_nn12l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.57139
 scale = Vector2(0.484284, 0.484284)
-texture = ExtResource("1_vkoyx")
+texture = ExtResource("2_qyqqq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_4t0vg")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+shape = SubResource("RectangleShape2D_eqiel")

@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://pps2ph6fqqcj" path="res://tutorial files/2d_simple_game/sprites/background/cloud7.png" id="18_ql7jv"]
 [ext_resource type="Texture2D" uid="uid://1mgwlh1lb3ff" path="res://tutorial files/2d_simple_game/sprites/background/cloud8.png" id="19_tfnby"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dio80"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lxg55"]
 texture = ExtResource("3_817ip")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -44,7 +44,7 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_3ui84"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_dio80")
+sources/1 = SubResource("TileSetAtlasSource_lxg55")
 
 [sub_resource type="Curve2D" id="Curve2D_t4vky"]
 _data = {

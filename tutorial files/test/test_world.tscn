@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0rtr85hsuwr4"]
+
+[ext_resource type="Script" path="res://tutorial files/test/raycast_test.gd" id="2_6tgv4"]
+[ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="2_yyjte"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="3_4han3"]
+[ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="4_roxwq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvjvo"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrjh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4han3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4han3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4han3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4han3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4han3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_roxwq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Goblin" parent="." instance=ExtResource("2_yyjte")]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(594, 300)
+script = ExtResource("2_6tgv4")
+player = NodePath("../Goblin")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_wvjvo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_wrjh1")
+frame_progress = 0.327734
+
+[node name="RayCastHorizontal" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+position = Vector2(-64, 0)
+rotation = 1.5708
+scale = Vector2(6.61123, 6.57936)
+
+[node name="RayCastDown" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+position = Vector2(0, 64)
+scale = Vector2(6.611, 6.611)
+
+[node name="Timer" type="Timer" parent="CharacterBody2D"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
