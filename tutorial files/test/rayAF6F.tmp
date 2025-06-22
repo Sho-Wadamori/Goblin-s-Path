@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://cck02m2uqgqdi"]
+
+[ext_resource type="Script" path="res://tutorial files/test/raycast_test.gd" id="1_buseg"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_owu74"]
+[ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="3_paata"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvjvo"]
+size = Vector2(128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wrjh1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_owu74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_paata")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(594, 300)
+script = ExtResource("1_buseg")
+SPEED = null
+CHASE_SPEED = null
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(546.703, 546.703)
+mesh = SubResource("QuadMesh_um6ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wvjvo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wrjh1")
+frame_progress = 0.327734
+
+[node name="RayCastRight" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(64, 0)
+rotation = -1.5708
+scale = Vector2(4.241, 4.22)
+
+[node name="RayCastLeft" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(-64, 0)
+rotation = 1.5708
+scale = Vector2(4.241, 4.22)
+
+[node name="RayCastUp" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -64)
+rotation = 3.14159
+scale = Vector2(4.241, 4.22)
+
+[node name="RayCastDown" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(0, 64)
+scale = Vector2(4.241, 4.22)
+
+[node name="Chase_Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="wander_idle_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="wander_move_timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_move_timer" to="." method="_on_timer_timeout"]

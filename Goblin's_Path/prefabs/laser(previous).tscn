@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c378ea37bl1e6"]
+
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/laser.gd" id="1_hb3wh"]
+[ext_resource type="Texture2D" uid="uid://d1pevmh8d6n2r" path="res://Goblin's_Path/sprites/laserBlue01.png" id="1_whfce"]
+[ext_resource type="AudioStream" uid="uid://fj5va1qvt3aa" path="res://Goblin's_Path/sprites/sound/sfx_laser1.ogg" id="3_bhc6m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_834rw"]
+size = Vector2(54, 10)
+
+[node name="laser" type="Area2D"]
+script = ExtResource("1_hb3wh")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_whfce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_834rw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bhc6m")
+autoplay = true

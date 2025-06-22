@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://btdti0r0kn3d2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1al3c"]
+
+[node name="Circle" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Polygon2D"]
+scale = Vector2(46.12, 46.12)
+mesh = SubResource("QuadMesh_1al3c")

@@ -1,9 +1,53 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0rtr85hsuwr4"]
+[gd_scene load_steps=13 format=3 uid="uid://d0rtr85hsuwr4"]
 
-[ext_resource type="Script" path="res://tutorial files/test/raycast_test.gd" id="2_6tgv4"]
+[ext_resource type="PackedScene" uid="uid://cck02m2uqgqdi" path="res://tutorial files/test/raycasting testing.tscn" id="1_dopcs"]
+[ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/enemy_top.gd" id="2_w2nas"]
 [ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="2_yyjte"]
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="3_4han3"]
-[ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="4_roxwq"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="4_ntb2t"]
+[ext_resource type="Script" path="res://tutorial files/test/enemy_raycast.gd" id="4_sp5t8"]
+[ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="5_dcpbf"]
+
+[sub_resource type="Curve2D" id="Curve2D_fi5wx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1603.42, 49.145, 0, 0, 0, 0, -1886, -200, 0, 0, 0, 0, -1026, -201, 0, 0, 0, 0, -1100.42, -77.855, 0, 0, 0, 0, -1100.42, -77.855, 0, 0, 0, 0, -1443.42, -13.855, 0, 0, 0, 0, -1601.42, 50.145)
+}
+point_count = 7
+
+[sub_resource type="GDScript" id="GDScript_w5r78"]
+script/source = "extends CharacterBody2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+
+func _physics_process(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	# Handle jump.
+	if Input.is_action_just_pressed(\"ui_accept\") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction = Input.get_axis(\"ui_left\", \"ui_right\")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
+"
+
+[sub_resource type="Curve2D" id="Curve2D_woths"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 732, -1, 0, 0, 0, 0, 316, -2, 0, 0, 0, 0, 431, 270, 0, 0, 0, 0, 733, 2)
+}
+point_count = 4
+
+[sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvjvo"]
 size = Vector2(128, 128)
@@ -12,22 +56,22 @@ size = Vector2(128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_4han3")
+"texture": ExtResource("4_ntb2t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_4han3")
+"texture": ExtResource("4_ntb2t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_4han3")
+"texture": ExtResource("4_ntb2t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_4han3")
+"texture": ExtResource("4_ntb2t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_4han3")
+"texture": ExtResource("4_ntb2t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_roxwq")
+"texture": ExtResource("5_dcpbf")
 }],
 "loop": true,
 "name": &"default",
@@ -38,29 +82,50 @@ animations = [{
 
 [node name="Goblin" parent="." instance=ExtResource("2_yyjte")]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("player")]
-position = Vector2(594, 300)
-script = ExtResource("2_6tgv4")
-player = NodePath("../Goblin")
+[node name="enemy" type="Node2D" parent="."]
+script = ExtResource("2_w2nas")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="Path2D" type="Path2D" parent="enemy"]
+position = Vector2(2023.42, 328.855)
+curve = SubResource("Curve2D_fi5wx")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="enemy/Path2D"]
+position = Vector2(-1603.42, 49.145)
+rotates = false
+
+[node name="CharacterBody2D" parent="enemy/Path2D/PathFollow2D" instance=ExtResource("1_dopcs")]
+position = Vector2(0, 0)
+
+[node name="enemy_raycast" type="Node2D" parent="."]
+script = ExtResource("4_sp5t8")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = SubResource("GDScript_w5r78")
+
+[node name="Path2D" type="Path2D" parent="CharacterBody2D"]
+curve = SubResource("Curve2D_woths")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CharacterBody2D/Path2D"]
+position = Vector2(732, -1)
+rotation = -3.13919
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="CharacterBody2D/Path2D/PathFollow2D"]
+visible = false
+scale = Vector2(546.703, 546.703)
+mesh = SubResource("QuadMesh_um6ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Path2D/PathFollow2D"]
 shape = SubResource("RectangleShape2D_wvjvo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Path2D/PathFollow2D"]
 sprite_frames = SubResource("SpriteFrames_wrjh1")
 frame_progress = 0.327734
 
-[node name="RayCastHorizontal" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+[node name="RayCastHorizontal" type="RayCast2D" parent="CharacterBody2D/Path2D/PathFollow2D/AnimatedSprite2D"]
 position = Vector2(-64, 0)
 rotation = 1.5708
-scale = Vector2(6.61123, 6.57936)
+scale = Vector2(4.241, 4.22)
 
-[node name="RayCastDown" type="RayCast2D" parent="CharacterBody2D/AnimatedSprite2D"]
+[node name="RayCastDown" type="RayCast2D" parent="CharacterBody2D/Path2D/PathFollow2D/AnimatedSprite2D"]
 position = Vector2(0, 64)
-scale = Vector2(6.611, 6.611)
-
-[node name="Timer" type="Timer" parent="CharacterBody2D"]
-wait_time = 10.0
-one_shot = true
-
-[connection signal="timeout" from="CharacterBody2D/Timer" to="CharacterBody2D" method="_on_timer_timeout"]
+scale = Vector2(4.241, 4.22)

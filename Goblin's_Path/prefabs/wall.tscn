@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_se5s3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkngt"]
-size = Vector2(16.0643, 18.0451)
+size = Vector2(24.0602, 24.0602)
 
 [node name="Enemy" type="Area2D"]
 scale = Vector2(0.5, 0.5)
@@ -16,7 +16,7 @@ rotation = 1.5708
 texture = ExtResource("2_se5s3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.6226e-06)
+position = Vector2(0, 1.90735e-06)
 scale = Vector2(5.32, 5.32)
 shape = SubResource("RectangleShape2D_nkngt")
 

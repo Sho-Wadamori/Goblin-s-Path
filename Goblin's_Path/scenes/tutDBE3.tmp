@@ -1,0 +1,133 @@
+[gd_scene load_steps=13 format=4 uid="uid://cylcvgde4swim"]
+
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/space_shooter.gd" id="1_uklbp"]
+[ext_resource type="Theme" uid="uid://brfp7htr8mxss" path="res://Goblin's_Path/new_theme.tres" id="2_80bom"]
+[ext_resource type="Texture2D" uid="uid://ct3kap2orr678" path="res://tutorial files/2d_simple_game/sprites/New Piskel (2).png" id="4_cdhh0"]
+[ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="4_i5q7o"]
+[ext_resource type="PackedScene" uid="uid://cck02m2uqgqdi" path="res://tutorial files/test/raycasting testing.tscn" id="5_icngg"]
+[ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/portal.gd" id="6_rl05p"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="7_5ng2s"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1t387"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vicgq"]
+texture = ExtResource("4_cdhh0")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_cx3bp"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_vicgq")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1n1w3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_5ng2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6c2o3"]
+radius = 29.0
+height = 120.0
+
+[node name="tutorial" type="Node2D"]
+script = ExtResource("1_uklbp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.113875, 0.303638, 0.115593, 1)
+position = Vector2(558, 360)
+scale = Vector2(2340, 1242)
+mesh = SubResource("QuadMesh_1t387")
+metadata/_edit_lock_ = true
+
+[node name="game_UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1152, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 100.0
+theme = ExtResource("2_80bom")
+
+[node name="score_label" type="Label" parent="game_UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "SCORE: 0000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enemy_timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="restart_timer" type="Timer" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+position = Vector2(-1, 0)
+scale = Vector2(0.5, 0.5)
+tile_set = SubResource("TileSet_cx3bp")
+rendering_quadrant_size = 64
+format = 2
+
+[node name="Layer1" type="TileMapLayer" parent="TileMap"]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(1, 0)
+tile_map_data = PackedByteArray("AAACAAUAAQACAAEAAAADAAUAAQACAAEAAAAEAAUAAQACAAEAAAAFAAUAAQACAAEAAAAGAAUAAQACAAEAAAAHAAUAAQACAAEAAAAIAAUAAQACAAEAAAAJAAUAAQACAAEAAAAJAAYAAQACAAEAAAAJAAcAAQACAAEAAAAKAAgAAQACAAEAAAAKAAkAAQACAAEAAAAKAAoAAQACAAEAAAAKAAsAAQACAAEAAAAKAAwAAQACAAEAAAAKAA0AAQACAAEAAAAFAA0AAQACAAEAAAAFAA4AAQACAAEAAAAFAA8AAQACAAEAAAAGAA8AAQACAAEAAAAGABAAAQACAAEAAAAHABAAAQACAAEAAAAIABAAAQACAAEAAAAJABAAAQACAAEAAAAKABEAAQACAAEAAAALABEAAQACAAEAAAAMABEAAQACAAEAAAANABEAAQACAAEAAAAOABEAAQACAAEAAAAPABEAAQACAAEAAAAQABEAAQACAAEAAAARABEAAQACAAEAAAASABEAAQACAAEAAAASABAAAQACAAEAAAATABAAAQACAAEAAAATAA8AAQACAAEAAAAUAA4AAQACAAEAAAAUAA0AAQACAAEAAAAUAAwAAQACAAEAAAATAAwAAQACAAEAAAATAAsAAQACAAEAAAATAAoAAQACAAEAAAATAAkAAQACAAEAAAATAAgAAQACAAEAAAATAAcAAQACAAEAAAAQAAUAAQACAAEAAAAPAAUAAQACAAEAAAAPAAQAAQACAAEAAAAOAAQAAQACAAEAAAAOAAMAAQACAAEAAAANAAMAAQACAAEAAAAMAAMAAQACAAEAAAALAAIAAQACAAEAAAAKAAIAAQACAAEAAAAJAAEAAQACAAEAAAAIAAEAAQACAAEAAAAHAAAAAQACAAEAAAAGAAAAAQACAAEAAAAFAAAAAQACAAEAAAAEAAAAAQACAAEAAAATAAIAAQACAAEAAAAUAAEAAQACAAEAAAAVAAEAAQACAAEAAAAWAAEAAQACAAEAAAAXAAEAAQACAAEAAAAYAAEAAQACAAEAAAAZAAEAAQACAAEAAAAaAAEAAQACAAEAAAAbAAIAAQACAAEAAAAcAAIAAQACAAEAAAAdAAIAAQACAAEAAAAdAAMAAQACAAEAAAAeAAMAAQACAAEAAAAfAAMAAQACAAEAAAAfAAQAAQACAAEAAAAgAAQAAQACAAEAAAAhAAUAAQACAAEAAAAiAAYAAQACAAEAAAAfAAoAAQACAAEAAAAfAAsAAQACAAEAAAAgAAsAAQACAAEAAAAgAAwAAQACAAEAAAAhAAwAAQACAAEAAAAiAAwAAQACAAEAAAAjAAwAAQACAAEAAAAkAAwAAQACAAEAAAAmAAwAAQACAAEAAAAnAAwAAQACAAEAAAAlAAwAAQACAAEAAAA=")
+tile_set = SubResource("TileSet_cx3bp")
+rendering_quadrant_size = 64
+
+[node name="Goblin" parent="." instance=ExtResource("4_i5q7o")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_icngg")]
+position = Vector2(972, 271)
+scale = Vector2(0.419927, 0.419927)
+CHASE_SPEED = 150
+
+[node name="next-level-area" type="Area2D" parent="."]
+position = Vector2(1218, 232)
+scale = Vector2(0.256054, 0.256054)
+script = ExtResource("6_rl05p")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="next-level-area"]
+texture_filter = 1
+position = Vector2(-4, 0)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_1n1w3")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="next-level-area"]
+scale = Vector2(8.81085, 8.81085)
+shape = SubResource("CapsuleShape2D_6c2o3")
+
+[connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="restart_timer" to="." method="_on_restart_timer_timeout"]
+[connection signal="body_entered" from="next-level-area" to="next-level-area" method="_on_body_entered"]

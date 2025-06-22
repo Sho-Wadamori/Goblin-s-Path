@@ -18,3 +18,15 @@ texture = ExtResource("2_qyqqq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eqiel")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(-2.60826, -2.60826)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.38734, 0.38734)
+shape = SubResource("RectangleShape2D_eqiel")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_goblin_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area2d_body_entered"]

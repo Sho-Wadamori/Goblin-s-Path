@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://lqexj26y8o6m"]
+
+[ext_resource type="Texture2D" uid="uid://yck0e7qvt5u6" path="res://Goblin's_Path/sprites/star1.png" id="1_4h88y"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/explosion.gd" id="1_dmq2q"]
+[ext_resource type="AudioStream" uid="uid://frortk3juxc8" path="res://Goblin's_Path/sprites/sound/explosion-42132.mp3" id="3_qa5gl"]
+
+[sub_resource type="Gradient" id="Gradient_w51bk"]
+colors = PackedColorArray(0.843137, 0, 0, 1, 0.551001, 0, 0.0654164, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vsn8n"]
+gradient = SubResource("Gradient_w51bk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wgq71"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0, 0, 0)
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_vsn8n")
+
+[node name="explosion" type="Node2D"]
+script = ExtResource("1_dmq2q")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_wgq71")
+texture = ExtResource("1_4h88y")
+one_shot = true
+explosiveness = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qa5gl")
+volume_db = -24.208
+pitch_scale = 2.8
+autoplay = true

@@ -2,8 +2,8 @@ extends Area2D
 class_name enemy
 
 @export var speed = 2
-@onready var explosion_prefab = preload("res://Goblin's_Path/prefabs/explosion.tscn")
-@onready var laser_prefab = preload("res://Goblin's_Path/prefabs/enemy_laser.tscn")
+@onready var explosion_prefab = preload("res://Goblin's_Path/prefabs/explosion(previous).tscn")
+@onready var laser_prefab = preload("res://Goblin's_Path/prefabs/enemy_laser(previous).tscn")
 signal enemy_killed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkspk32ddst2e"]
+
+[ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="1_fwpq7"]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Sad-emoji" type="Sprite2D" parent="."]
+position = Vector2(594, 303)
+scale = Vector2(2.41317, 1.42808)
+texture = ExtResource("1_fwpq7")

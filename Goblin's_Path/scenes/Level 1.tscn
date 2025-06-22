@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bajyvddbxwf1n"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 357.0
+offset_top = 251.0
+offset_right = 491.0
+offset_bottom = 291.0
+scale = Vector2(3.81475, 3.85244)
+text = "MVP COMPLETED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

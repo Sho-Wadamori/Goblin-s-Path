@@ -15,6 +15,16 @@ run/main_scene="res://Goblin's_Path/scenes/tutorial.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Goblin's_Path/icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://Goblin's_Path/prefabs/": "blue",
+"res://Goblin's_Path/scenes/": "red",
+"res://Goblin's_Path/scripts/": "yellow",
+"res://Goblin's_Path/sprites/": "green",
+"res://tutorial files/test/": "gray"
+}
+
 [input]
 
 player_up={
@@ -41,13 +51,18 @@ player_left={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-player_shoot={
+player_throw={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
-player_dash={
+player_sneak={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+player_speedbst={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
