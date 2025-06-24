@@ -50,11 +50,17 @@ func mechanics():
 		get_parent().add_child(laser)
 
 	# ----- Sneaking Mechanics -----
-	var current_sneaking_state = Input.is_action_pressed("player_sneak")
-	if current_sneaking_state != is_sneaking:
-		is_sneaking = current_sneaking_state
-		print("Am i sneaking?: ", current_sneaking_state)
-		print("")
+	#var current_sneaking_state = Input.is_action_pressed("player_sneak")
+
+	#if current_sneaking_state != is_sneaking:
+		#is_sneaking = current_sneaking_state
+		#print("Am i sneaking?: ", current_sneaking_state)
+		#print("")
+	if Input.is_action_pressed("player_sneak"):
+		player_sneaking.emit(true)
+	
+	else:
+		player_sneaking.emit(false)
 
 	# ----- TEMP MECHANICS -----
 	if Input.is_action_pressed("player_speedbst"):  # Note: _pressed not _just_pressed

@@ -653,6 +653,6 @@ texture = ExtResource("10_5hykm")
 centered = false
 
 [node name="player" parent="." instance=ExtResource("1_44tma")]
-position = Vector2(635, 386)
+position = Vector2(2304, 315)
 
 [connection signal="body_entered" from="enemy/Path2D/PathFollow2D/Enemy" to="enemy/Path2D/PathFollow2D/Enemy" method="_on_body_entered"]

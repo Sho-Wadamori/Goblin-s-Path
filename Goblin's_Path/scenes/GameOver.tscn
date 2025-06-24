@@ -5,6 +5,11 @@
 [node name="GameOver" type="Node2D"]
 
 [node name="Sad-emoji" type="Sprite2D" parent="."]
-position = Vector2(594, 303)
+position = Vector2(590, 322)
 scale = Vector2(2.41317, 1.42808)
 texture = ExtResource("1_fwpq7")
+
+[node name="Camera2D" type="Camera2D" parent="Sad-emoji"]
+position = Vector2(-244.492, -225.478)
+scale = Vector2(0.414393, 0.700241)
+anchor_mode = 0

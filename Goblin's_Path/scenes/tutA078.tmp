@@ -109,7 +109,15 @@ rendering_quadrant_size = 64
 position = Vector2(1429, 294)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="CharacterBody2D" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("5_icngg")]
 position = Vector2(972, 271)
@@ -120,49 +128,113 @@ player = NodePath("../../Goblin")
 position = Vector2(790, 574)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(1197, 615)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast4" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(1184, 22)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast5" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(695, 204)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast6" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(1002, 743)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast7" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(1431, 714)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast8" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(1402, 25)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="FOV_Raycast9" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(655, 741)
 scale = Vector2(0.410424, 0.410424)
 player = NodePath("../../Goblin")
+SPEED = null
 CHASE_SPEED = 90
+ACCELERATION = null
+wander_distance = null
+detection_range = null
+wander_change_interval = null
+wander_angle_change = null
+wander_walk_time = null
+wander_idle_time = null
 
 [node name="Goblin" parent="." instance=ExtResource("4_i5q7o")]
 position = Vector2(-481, 789)

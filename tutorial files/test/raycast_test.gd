@@ -21,8 +21,8 @@ class_name four_direc_enemy
 
 ## Timers
 @onready var chase_timer = $Chase_Timer # Timer to stop Chasing
-@onready var wander_move_timer = $WanderMoveTimer # Timer for amount of wandering
-@onready var wander_idle_timer = $WanderIdleTimer # Timer for stopping in place when wandering
+@onready var wander_move_timer = $wander_move_timer # Timer for amount of wandering
+@onready var wander_idle_timer = $wander_idle_timer # Timer for stopping in place when wandering
 
 var direction: Vector2
 var right_bounds: Vector2

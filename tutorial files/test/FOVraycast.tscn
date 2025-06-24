@@ -45,7 +45,7 @@ CHASE_SPEED = 180
 modulate = Color(1, 1, 1, 0.25098)
 show_behind_parent = true
 position = Vector2(2.49147e-05, 5.48363e-06)
-scale = Vector2(1.22727, 1.22727)
+scale = Vector2(1.862, 1.862)
 texture = ExtResource("2_3rh0f")
 offset = Vector2(117.333, 2.44444)
 

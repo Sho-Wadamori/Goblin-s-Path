@@ -27,8 +27,8 @@ class_name fov_enemy
 
 ## Timers
 @onready var chase_timer = $Chase_Timer # Timer to stop Chasing
-@onready var wander_move_timer = $WanderMoveTimer # Timer for amount of wandering
-@onready var wander_idle_timer = $WanderIdleTimer # Timer for stopping in place when wandering
+@onready var wander_move_timer = $wander_move_timer # Timer for amount of wandering
+@onready var wander_idle_timer = $wander_idle_timer # Timer for stopping in place when wandering
 
 var direction: Vector2
 var wander_direction: Vector2 # Current wandering direction
@@ -50,20 +50,15 @@ func _ready():
 	wander_direction = Vector2(cos(wander_angle), sin(wander_angle))
 	direction = wander_direction
 
-	# Connect to the player's sneaking signal
-	if player:
-		player.player_sneaking.connect(_on_player_sneaking)
 
-
-func _on_player_sneaking(is_sneaking: bool):
-	# If sneaking
+func _on_goblin_player_sneaking(is_sneaking):	# If sneaking
 	if is_sneaking:
 		print("Player is sneaking")
-		
-	# Restore normal detection
+		bitmap.set_scale(Vector2(1.227, 1.227))
+
 	else:
 		print("Player stopped sneaking")
-		
+		bitmap.set_scale(Vector2(1.862, 1.862))
 
 
 ## ------------------------- Every Tick -------------------------
@@ -72,6 +67,8 @@ func _physics_process(delta: float) -> void:
 	change_direction(delta)
 	look_for_player()
 	update_raycast_positions()
+	# This print should tell you what the scale is *after* all other _physics_process logic
+	print("Bitmap scale at end of _physics_process: ", bitmap.scale)
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
@@ -94,14 +91,14 @@ func look_for_player():
 		print("Error: Path isnt working :(")
 		return
 
-	# Force raycast updates before checking (Godot 4 method)
+	# Force raycast update
 	ray_cast_1.force_raycast_update()
 	ray_cast_2.force_raycast_update()
 	ray_cast_3.force_raycast_update()
 	ray_cast_4.force_raycast_update()
 	ray_cast_5.force_raycast_update()
 
-	# Check all four directions
+	# Check all directions
 	if check_raycast_for_player(ray_cast_1):
 		player_detected = true
 	elif check_raycast_for_player(ray_cast_2):
