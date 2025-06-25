@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cck02m2uqgqdi"]
+[gd_scene load_steps=8 format=3 uid="uid://cck02m2uqgqdi"]
 
-[ext_resource type="Script" path="res://tutorial files/test/raycast_test.gd" id="1_buseg"]
+[ext_resource type="Script" path="res://tutorial files/test/raycasting/raycast_test.gd" id="1_buseg"]
 [ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_owu74"]
 [ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="3_paata"]
+[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://tutorial files/test/raycasting/bitmap.png" id="4_ey5yx"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_m1k5f"]
 
@@ -40,10 +41,34 @@ position = Vector2(594, 300)
 script = ExtResource("1_buseg")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 modulate = Color(0.281187, 0.281187, 0.281187, 0.588235)
 show_behind_parent = true
 scale = Vector2(546.703, 546.703)
 mesh = SubResource("SphereMesh_m1k5f")
+
+[node name="Bitmap" type="Sprite2D" parent="."]
+position = Vector2(-101.13, 0)
+rotation = -3.14159
+scale = Vector2(1.38088, 0.107784)
+texture = ExtResource("4_ey5yx")
+
+[node name="Bitmap2" type="Sprite2D" parent="."]
+position = Vector2(0, -106)
+rotation = -1.5708
+scale = Vector2(1.38088, 0.107784)
+texture = ExtResource("4_ey5yx")
+
+[node name="Bitmap3" type="Sprite2D" parent="."]
+position = Vector2(101.13, 0)
+scale = Vector2(1.38088, 0.107784)
+texture = ExtResource("4_ey5yx")
+
+[node name="Bitmap4" type="Sprite2D" parent="."]
+position = Vector2(0, 106)
+rotation = 1.5708
+scale = Vector2(1.38088, 0.107784)
+texture = ExtResource("4_ey5yx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wvjvo")

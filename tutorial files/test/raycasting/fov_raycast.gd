@@ -1,3 +1,17 @@
+"""
+Script for the enemy with field of view
+Includes:
+	- Look for player with raycasts
+	- Chasing Player
+	- Wandering in any direction
+	- Pauses when wandering
+	- Wandering nearby their spawning point
+	- Changes in speed depending on state
+	- Changes in field of view if player is sneaking
+	- inspect items thrown by the player
+	- Bouncing off walls to avoid getting stuck
+"""
+
 extends CharacterBody2D
 class_name fov_enemy
 
@@ -9,38 +23,45 @@ class_name fov_enemy
 @export var wander_distance: float = 250 # Wandering Distance
 @export var detection_range: float = 125 # Detection range for all directions
 @export var wander_change_interval: float = 2.0 # How often to change wander direction (seconds)
-@export var wander_angle_change: float = 30.0 # Max angle change when wandering (degrees) - reduced for smoother turning
+@export var wander_angle_change: float = 60.0 # Max angle change when wandering (degrees)
 @export var wander_walk_time: float = 5.0 # Time to walk before stopping
 @export var wander_idle_time: float = 2.0 # Time to idle before walking again
 
-@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D # Sprite Variable
-@onready var Mesh2D: MeshInstance2D = $MeshInstance2D
-@onready var baseColor = $MeshInstance2D.modulate
-@onready var bitmap: Node2D = $Bitmap 
+@export var object_to_chase: Node2D = null  # assign in inspector or dynamically
+@export var object_chase_range: float = 200.0 # how close to start chasing object
 
-# Multiple raycasts for all direction
+## Node References
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D # Sprite Variable
+@onready var bitmap: Node2D = $Bitmap # Bitmap reference, contains all raycasts
+
+## All Raycasts
 @onready var ray_cast_1: RayCast2D = $Bitmap/RayCast1
 @onready var ray_cast_2: RayCast2D = $Bitmap/RayCast2  
 @onready var ray_cast_3: RayCast2D = $Bitmap/RayCast3
 @onready var ray_cast_4: RayCast2D = $Bitmap/RayCast4
 @onready var ray_cast_5: RayCast2D = $Bitmap/RayCast5
 
-## Timers
+## All Timers
 @onready var chase_timer = $Chase_Timer # Timer to stop Chasing
 @onready var wander_move_timer = $wander_move_timer # Timer for amount of wandering
 @onready var wander_idle_timer = $wander_idle_timer # Timer for stopping in place when wandering
+@onready var inspect_timer = $inspect_timer # Timer for how long to inspect
 
+## State & Movement
 var direction: Vector2
 var wander_direction: Vector2 # Current wandering direction
 var spawn_position: Vector2 # Starting position for boundary checking
 var wander_angle: float = 0.0 # Current wander angle in radians
 var wander_timer: float = 0.0 # Timer for walk/idle cycle
 var is_wandering: bool = true # Whether currently walking or idling
-
-enum States { WANDER, CHASE } # States the character can be in
+var is_player_sneaking: bool = false  # Player sneaking state
+var view_range: Vector2 = Vector2(1.862, 1.862) # Scale of view range
+enum States { WANDER, CHASE, INSPECT } # States the character can be in
 enum WanderState { WALKING, IDLE } # Sub-states for wandering
 var current_state = States.WANDER # Default State
 var wander_state = WanderState.WALKING # Default wander sub-state
+var object_detected = false
+
 
 ## ------------------------- On Game Run -------------------------
 func _ready():
@@ -49,26 +70,22 @@ func _ready():
 	wander_angle = randf() * 2 * PI
 	wander_direction = Vector2(cos(wander_angle), sin(wander_angle))
 	direction = wander_direction
-
-
-func _on_goblin_player_sneaking(is_sneaking):	# If sneaking
-	if is_sneaking:
-		print("Player is sneaking")
-		bitmap.set_scale(Vector2(1.227, 1.227))
-
-	else:
-		print("Player stopped sneaking")
-		bitmap.set_scale(Vector2(1.862, 1.862))
-
+	var object_detected = false
 
 ## ------------------------- Every Tick -------------------------
 func _physics_process(delta: float) -> void:
 	handle_movement(delta)
+	move_and_slide()
 	change_direction(delta)
+	
 	look_for_player()
+	
+	if current_state != States.CHASE:
+		look_for_object()
+	
 	update_raycast_positions()
-	# This print should tell you what the scale is *after* all other _physics_process logic
-	print("Bitmap scale at end of _physics_process: ", bitmap.scale)
+	change_view_distance()
+
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
@@ -81,6 +98,33 @@ func update_raycast_positions():
 			sprite.flip_h = true
 		elif direction.x < 0:
 			sprite.flip_h = false
+
+
+## ------------------------- Look For the Object -------------------------
+func get_thrown_object() -> Node2D:
+	var thrown_objects = get_tree().get_nodes_in_group("ThrownObjects")
+	if thrown_objects.size() > 0:
+		return thrown_objects[0]
+	return null
+
+func look_for_object():
+	var new_object = get_thrown_object()
+	
+	if new_object and is_instance_valid(new_object):
+		var dist = position.distance_to(new_object.position)
+		if dist <= object_chase_range and current_state != States.CHASE:
+			object_to_chase = new_object
+			current_state = States.INSPECT
+			inspect_timer.start()
+			print("DEBUG: Switching to INSPECT state")
+			bitmap.set_scale(Vector2(2.4, 2.4))
+
+func _on_inspect_timer_timeout():
+	current_state = States.WANDER
+	change_wander_direction()
+	print("DEBUG: Finished inspecting, returning to wander")
+	print("MEOWWWWW")
+
 
 ## ------------------------- Look For the Player -------------------------
 func look_for_player():
@@ -108,11 +152,14 @@ func look_for_player():
 	elif check_raycast_for_player(ray_cast_4):
 		player_detected = true
 	
-	if player_detected:
+	if player_detected: # chase if player is detected
+		object_to_chase = null  # stop inspecting object
+		bitmap.set_scale(Vector2(2.4, 2.4))
 		chase_player()
+		print("DEBUG: Player Discovered")
 
 	elif current_state == States.CHASE:
-		stop_chase()
+		stop_chase() # stop chase
 
 func check_raycast_for_player(raycast: RayCast2D) -> bool:
 	if raycast and raycast.enabled and raycast.is_colliding():
@@ -120,6 +167,7 @@ func check_raycast_for_player(raycast: RayCast2D) -> bool:
 		if collider and collider == player:
 			return true
 	return false
+
 
 ## ------------------------- Chase the Player -------------------------
 func chase_player() -> void: # Chase the player
@@ -129,20 +177,22 @@ func chase_player() -> void: # Chase the player
 func stop_chase() -> void: # Stop chasing the player
 	if chase_timer.time_left <= 0:
 		chase_timer.start()
+		print("DEBUG: Chase Stopped")
+
 
 ## ------------------------- Movement -------------------------
 func handle_movement(delta: float) -> void: # Character speeds based on state
 	if current_state == States.WANDER:
 		velocity = velocity.move_toward(direction * SPEED, ACCELERATION * delta)
-	else: 
+	elif current_state == States.CHASE: 
 		velocity = velocity.move_toward(direction * CHASE_SPEED, ACCELERATION * delta)
-	move_and_slide()
+	elif current_state == States.INSPECT: 
+		velocity = velocity.move_toward(direction * CHASE_SPEED, ACCELERATION * delta)
 	
 	# Check if hit a wall while wandering
 	if current_state == States.WANDER and wander_state == WanderState.WALKING:
 		if get_slide_collision_count() > 0:
-			#print("Hit wall!") # DEBUG
-			change_wander_direction()
+			change_wander_direction() # change direction if colliding with wall
 
 func change_direction(delta: float) -> void: # moving direction
 	if current_state == States.WANDER:
@@ -174,9 +224,18 @@ func change_direction(delta: float) -> void: # moving direction
 				wander_angle = to_spawn.angle()
 			
 			direction = wander_direction
-	else:
+	
+	elif current_state == States.CHASE:
 		# chase state: follow the player
 		direction = (player.position - self.position).normalized()
+	
+	elif current_state == States.INSPECT:
+		if object_to_chase and is_instance_valid(object_to_chase):
+			direction = (object_to_chase.position - position).normalized()
+	else:
+		# Object disappeared, return to wander
+		current_state = States.WANDER
+		change_wander_direction()
 
 func change_wander_direction():
 	# Change angle by a random amount within the specified range (smoother turning)
@@ -186,6 +245,7 @@ func change_wander_direction():
 	# Create new direction vector
 	wander_direction = Vector2(cos(wander_angle), sin(wander_angle))
 
+
 ## ------------------------- Return To Wander -------------------------
 func _on_timer_timeout(): # Return to Wander State after timeout
 	current_state = States.WANDER
@@ -193,3 +253,20 @@ func _on_timer_timeout(): # Return to Wander State after timeout
 	wander_timer = 0.0
 	# Reset wander direction when returning from chase
 	change_wander_direction()
+
+
+## -------------------------  Change View Distance -------------------------
+func change_view_distance():	# If sneaking
+	# Only do something if the state actually changed
+	var is_sneaking = Input.is_action_pressed("player_sneak")
+	if is_sneaking != is_player_sneaking:
+		is_player_sneaking = is_sneaking
+		if current_state == States.INSPECT or current_state == States.CHASE:
+			view_range = Vector2(2.4, 2.4)
+		elif is_sneaking:
+			print("DEBUG: Player is sneaking")
+			view_range = Vector2(1.227, 1.227)
+		else:
+			print("DEBUG: Player stopped sneaking")
+			view_range = Vector2(1.862, 1.862)
+		bitmap.set_scale(view_range)

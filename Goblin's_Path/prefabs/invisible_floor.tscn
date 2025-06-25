@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cckjpmjnrd47u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaac5"]
+size = Vector2(5352, 0)
+
+[node name="invisible_floor" type="StaticBody2D"]
+position = Vector2(400, 317)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_yaac5")
