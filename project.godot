@@ -72,3 +72,8 @@ player_speedbst={
 2d_physics/layer_1="base"
 2d_physics/layer_2="invisible-floor"
 2d_physics/layer_3="non-interacting"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

@@ -10,7 +10,7 @@ func _ready():
 	_update_ui()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 	
 	
@@ -39,7 +39,3 @@ func _on_restart_timer_timeout():
 func _on_goblin_goblin_killed() -> void:
 	get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
 	print("DEBUG: Player Killed")
-
-
-func _on_goblin_player_sneaking(is_sneaking):
-	pass # Replace with function body.

@@ -1,15 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkspk32ddst2e"]
+[gd_scene load_steps=4 format=3 uid="uid://dkspk32ddst2e"]
 
+[ext_resource type="Script" path="res://Goblin's_Path/scenes/game_over.gd" id="1_fid6f"]
 [ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="1_fwpq7"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="3_rfpcd"]
 
 [node name="GameOver" type="Node2D"]
+position = Vector2(-99, -102)
+script = ExtResource("1_fid6f")
 
 [node name="Sad-emoji" type="Sprite2D" parent="."]
-position = Vector2(590, 322)
+position = Vector2(689, 422)
 scale = Vector2(2.41317, 1.42808)
 texture = ExtResource("1_fwpq7")
+offset = Vector2(-4.19392, -3.77132)
 
 [node name="Camera2D" type="Camera2D" parent="Sad-emoji"]
-position = Vector2(-244.492, -225.478)
+position = Vector2(-7.45908, -2.80099)
 scale = Vector2(0.414393, 0.700241)
-anchor_mode = 0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 1004.88
+offset_top = 142.614
+offset_right = 1224.88
+offset_bottom = 278.614
+scale = Vector2(1.04292, 1.04292)
+text = "Play Again"
+icon = ExtResource("3_rfpcd")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

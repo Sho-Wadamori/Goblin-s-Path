@@ -7,7 +7,7 @@ class_name enemy
 signal enemy_killed
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	position.x -= speed
 	
 
@@ -23,6 +23,6 @@ func _on_area_entered(area):
 
 
 func _on_shoot_timer_timeout():
-	var laser = laser_prefab.instantiate()
-	laser.position = position
-	get_parent().add_child(laser)
+	var new_laser = laser_prefab.instantiate()
+	new_laser.position = position
+	get_parent().add_child(new_laser)

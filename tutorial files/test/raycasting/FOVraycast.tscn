@@ -39,7 +39,6 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(594, 300)
 script = ExtResource("1_qmai2")
-CHASE_SPEED = 180
 
 [node name="Bitmap" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.25098)
@@ -103,9 +102,8 @@ scale = Vector2(546.703, 546.703)
 mesh = SubResource("QuadMesh_um6ob")
 
 [node name="inspect_timer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
-
-[node name="ignore_timer" type="Timer" parent="."]
 
 [connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]

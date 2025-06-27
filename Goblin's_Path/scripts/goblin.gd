@@ -21,17 +21,23 @@ signal object_thrown
 @onready var explosion_prefab = preload("res://Goblin's_Path/prefabs/explosion(previous).tscn")
 @onready var throw_object_prefab = preload("res://Goblin's_Path/prefabs/throwable_object.tscn")
 @onready var invis_floor_prefab = preload("res://Goblin's_Path/prefabs/invisible_floor.tscn")
-
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D # Sprite Variable
 @onready var is_sneaking: bool = false # Default is false
-@export var SPEED: int = 50 # how fast the character moves
+@export var default_speed: int = 100 # how fast the character moves
 
+@onready var despawn_timer = $object_despawn_timer # Timer to despawn thrwn object
+
+var SPEED = 50
+var direction: Vector2
 var previous_thrown_object: Node2D = null
 var previous_invis_floor: Node2D = null
+var throw_cooldown = false
 
 # ------------------------- Every Tick -------------------------
-func _physics_process(delta):
+func _physics_process(_delta):
 	movement()
 	mechanics()
+
 
 # ------------------------- Movement -------------------------
 func movement():
@@ -47,9 +53,16 @@ func movement():
 	# prevent faster diagonal movement
 	if input_direction.length() > 0:
 		input_direction = input_direction.normalized()
-	
+		direction = input_direction
 	# velocity calculation
 	velocity = input_direction * SPEED
+	
+	# Rotate Sprite to face movement direction
+	# Update sprite facing based on movement direction
+	if direction.x > 0:
+		sprite.flip_v = true
+	elif direction.x < 0:
+		sprite.flip_v = false
 
 	# CharacterBody2D collision
 	move_and_slide()
@@ -65,13 +78,14 @@ func mechanics():
 		#get_parent().add_child(laser)
 	
 	# ----- Throwing Mechanics -----
-	if Input.is_action_just_pressed("player_throw"):
+	if Input.is_action_just_pressed("player_throw") and not throw_cooldown:
 		# --- delete previous ones if they exist ---
 		if previous_thrown_object and previous_thrown_object.is_inside_tree():
 			previous_thrown_object.queue_free()
 		if previous_invis_floor and previous_invis_floor.is_inside_tree():
 			previous_invis_floor.queue_free()
-		
+			
+		despawn_timer.start()
 		# --- instantiate floor ---
 		var floor_offset = Vector2(0, 10)
 		var invis_floor = invis_floor_prefab.instantiate()
@@ -80,24 +94,32 @@ func mechanics():
 		previous_invis_floor = invis_floor
 		
 		# --- instantiate object ---
+		var angle_degrees = 0
+		var object_offset = Vector2(0, 0)
+		
+		if sprite.flip_v == true:
+			angle_degrees = -30
+			object_offset = Vector2(30, 0) #give it an offset
+		else:
+			angle_degrees = -150
+			object_offset = Vector2(-30, 0) #give it an offset
+		
 		# Give it velocity in a fixed direction — 30 degrees
-		var angle_degrees = -30
 		var angle_radians = deg_to_rad(angle_degrees)
-		var direction = Vector2(1, 0).rotated(angle_radians)
-		#give it an offset
-		var object_offset = Vector2(30, 0)
+		var object_direction = Vector2(1, 0).rotated(angle_radians)
 		
 		# make the object
 		var throw_object = throw_object_prefab.instantiate()
 		
 		throw_object.angular_velocity = 5.0  # radians per second; positive = clockwise
-		throw_object.linear_velocity = direction * 500  # Adjust to change speed
+		throw_object.linear_velocity = object_direction * 500  # Adjust to change speed
 		
 		throw_object.position = position + object_offset
 		get_parent().add_child(throw_object)
 		throw_object.add_to_group("ThrownObjects")
 		previous_thrown_object = throw_object
 		object_thrown.emit()
+		throw_cooldown = true
 
 	# ----- Sneaking Mechanics -----
 	if Input.is_action_pressed("player_sneak"):
@@ -107,10 +129,7 @@ func mechanics():
 		SPEED = 200
 	else:
 		player_sneaking.emit(false)
-		SPEED = 120
-
-	# ----- Distracting Mechanics -----
-	
+		SPEED = default_speed
 
 
 ## ------------------------- Death -------------------------
@@ -124,11 +143,19 @@ func mechanics():
 
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body is fov_enemy or body is four_direc_enemy:
-		print("DEBUG: Player & enemy collided")
+		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ffffff][/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#f6b26b]ENEMY[/color][color=#ffffff][/color][color=#ffffff] [/color][b][color=#ff0000]COLLIDED[/color][/b]")
 		var explosion = explosion_prefab.instantiate()
 		explosion.position = position
 		get_parent().add_child(explosion)
 		queue_free()
 		goblin_killed.emit()
 	else:
-		print("DEBUG: Player collided with wall")
+		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#00ffff]WALL [/color][b][color=#ff0000]COLLIDED[/color][/b]")
+
+
+func _on_object_despawn_timer_timeout() -> void:
+	previous_thrown_object.queue_free()
+	previous_invis_floor.queue_free()
+	previous_thrown_object = null
+	previous_invis_floor = null
+	throw_cooldown = false
