@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwr3pit7gpm8y"
-path="res://.godot/imported/bitmap.png-d640dd2531f03e13cb41accbd7c72241.ctex"
+uid="uid://vbmpsqw3cfsl"
+path="res://.godot/imported/Monster_Slime-Sheet.png-ae7a882c4104b146cde6ba6aab1bec66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tutorial files/test/raycasting/bitmap.png"
-dest_files=["res://.godot/imported/bitmap.png-d640dd2531f03e13cb41accbd7c72241.ctex"]
+source_file="res://Goblin's_Path/sprites/characters/slime/Monster_Slime-Sheet.png"
+dest_files=["res://.godot/imported/Monster_Slime-Sheet.png-ae7a882c4104b146cde6ba6aab1bec66.ctex"]
 
 [params]
 

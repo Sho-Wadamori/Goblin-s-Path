@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cey4g5wm4sm87"
-path="res://.godot/imported/icon.svg-9da4e0c45776b0bc6bed8c19b78b6996.ctex"
+uid="uid://p0ad1j0c1aa4"
+path="res://.godot/imported/Soldier.png-6e9d2f311860a82c253ecefed2644de5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Goblin's_Path/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-9da4e0c45776b0bc6bed8c19b78b6996.ctex"]
+source_file="res://Goblin's_Path/sprites/characters/soldier/Soldier.png"
+dest_files=["res://.godot/imported/Soldier.png-6e9d2f311860a82c253ecefed2644de5.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

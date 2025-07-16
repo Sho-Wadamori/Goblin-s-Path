@@ -104,6 +104,7 @@ func _physics_process(delta: float) -> void:
 	
 	update_raycast_positions()
 	change_view_distance()
+	update_animation()
 
 
 ## ------------------------- Set Raycast Positions -------------------------
@@ -114,9 +115,9 @@ func update_raycast_positions():
 		
 		# Update sprite facing based on movement direction
 		if direction.x > 0:
-			sprite.flip_h = true
-		elif direction.x < 0:
 			sprite.flip_h = false
+		elif direction.x < 0:
+			sprite.flip_h = true
 
 
 ## ------------------------- Look For the Object -------------------------
@@ -326,3 +327,22 @@ func change_view_distance():	# If sneaking
 			print("DEBUG: Player stopped sneaking")
 			view_range = Vector2(1.862, 1.862)
 		bitmap.set_scale(view_range)
+
+
+## -------------------------  Animations -------------------------
+func update_animation():
+	if current_state == States.WANDER:
+		if wander_state == WanderState.IDLE:
+			sprite.play("idle")
+		else:
+			sprite.play("walk")
+	elif current_state == States.CHASE:
+		sprite.play("run")
+		sprite.speed_scale = 2
+	elif current_state == States.INSPECT:
+		if is_close_to_inspect_object:
+			sprite.play("idle")
+		else:
+			sprite.play("walk")
+
+###### PLAYER CHASE MIDWAY INSPECTING ANIMATION

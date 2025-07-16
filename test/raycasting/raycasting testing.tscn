@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cck02m2uqgqdi"]
 
-[ext_resource type="Script" path="res://tutorial files/test/raycasting/raycast_test.gd" id="1_buseg"]
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_owu74"]
+[ext_resource type="Script" path="res://test/raycasting/raycast_test.gd" id="1_buseg"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="2_owu74"]
 [ext_resource type="Texture2D" uid="uid://tdubgm3rnl7" path="res://Goblin's_Path/sprites/laserRed08.png" id="3_paata"]
-[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://tutorial files/test/raycasting/bitmap.png" id="4_ey5yx"]
+[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://test/raycasting/bitmap.png" id="4_ey5yx"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_m1k5f"]
 
@@ -100,12 +100,12 @@ rotation = 1.5708
 scale = Vector2(26.111, 4.22)
 
 [node name="RayCastUp" type="RayCast2D" parent="."]
-position = Vector2(5, -64)
+position = Vector2(0, -64)
 rotation = -3.14159
 scale = Vector2(26.111, 4.22)
 
 [node name="RayCastDown" type="RayCast2D" parent="."]
-position = Vector2(5, 64)
+position = Vector2(0, 64)
 scale = Vector2(26.111, 4.22)
 
 [connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]

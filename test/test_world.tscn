@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dylj7phk5bcy1" path="res://Goblin's_Path/prefabs/throwable_object.tscn" id="2_t6jjy"]
 [ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="2_yyjte"]
 [ext_resource type="PackedScene" uid="uid://cckjpmjnrd47u" path="res://Goblin's_Path/prefabs/invisible_floor.tscn" id="4_mjgo3"]
-[ext_resource type="PackedScene" uid="uid://bgtx3qodty7ef" path="res://tutorial files/test/raycasting/FOVraycast.tscn" id="7_7igkv"]
+[ext_resource type="PackedScene" uid="uid://bgtx3qodty7ef" path="res://test/raycasting/FOVraycast.tscn" id="7_7igkv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b6oxh"]
 bounce = 0.45

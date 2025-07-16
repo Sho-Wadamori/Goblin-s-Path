@@ -60,9 +60,9 @@ func movement():
 	# Rotate Sprite to face movement direction
 	# Update sprite facing based on movement direction
 	if direction.x > 0:
-		sprite.flip_v = true
+		sprite.flip_h = false
 	elif direction.x < 0:
-		sprite.flip_v = false
+		sprite.flip_h = true
 
 	# CharacterBody2D collision
 	move_and_slide()

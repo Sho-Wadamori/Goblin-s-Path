@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://yc2kkm00uxik"]
 
-[ext_resource type="Script" path="res://tutorial files/test/enemy.gd" id="1_wgff3"]
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="2_my7dy"]
+[ext_resource type="Script" path="res://test/enemy.gd" id="1_wgff3"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="2_my7dy"]
 
 [sub_resource type="Curve2D" id="Curve2D_a6gdh"]
 _data = {

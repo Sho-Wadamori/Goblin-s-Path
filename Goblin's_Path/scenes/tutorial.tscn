@@ -1,13 +1,16 @@
-[gd_scene load_steps=20 format=4 uid="uid://cylcvgde4swim"]
+[gd_scene load_steps=23 format=4 uid="uid://cylcvgde4swim"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/tutorial.gd" id="1_uklbp"]
-[ext_resource type="Theme" uid="uid://brfp7htr8mxss" path="res://Goblin's_Path/new_theme.tres" id="2_80bom"]
+[ext_resource type="Theme" uid="uid://brfp7htr8mxss" path="res://Goblin's_Path/sprites/new_theme.tres" id="2_80bom"]
+[ext_resource type="PackedScene" uid="uid://dnjaugfhmm4my" path="res://Goblin's_Path/prefabs/knight.tscn" id="4_8hnew"]
 [ext_resource type="Texture2D" uid="uid://ct3kap2orr678" path="res://tutorial files/2d_simple_game/sprites/New Piskel (2).png" id="4_cdhh0"]
 [ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="4_i5q7o"]
-[ext_resource type="PackedScene" uid="uid://cck02m2uqgqdi" path="res://tutorial files/test/raycasting/raycasting testing.tscn" id="5_icngg"]
+[ext_resource type="PackedScene" uid="uid://de7xj0ro6cse4" path="res://Goblin's_Path/prefabs/green_slime.tscn" id="4_w2nci"]
+[ext_resource type="PackedScene" uid="uid://cck02m2uqgqdi" path="res://test/raycasting/raycasting testing.tscn" id="5_icngg"]
 [ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/portal.gd" id="6_rl05p"]
+[ext_resource type="PackedScene" uid="uid://e1rxideekdxk" path="res://Goblin's_Path/prefabs/blue_slime.tscn" id="7_heyed"]
 [ext_resource type="Texture2D" uid="uid://cw36ycktra5jp" path="res://tutorial files/2d_simple_game/sprites/Dimensional_Portal.png" id="8_68bbp"]
-[ext_resource type="PackedScene" uid="uid://bgtx3qodty7ef" path="res://tutorial files/test/raycasting/FOVraycast.tscn" id="8_i4ux0"]
+[ext_resource type="PackedScene" uid="uid://bgtx3qodty7ef" path="res://test/raycasting/FOVraycast.tscn" id="8_i4ux0"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1t387"]
 
@@ -155,6 +158,15 @@ rendering_quadrant_size = 64
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="CharacterBody2D2" parent="Enemies" instance=ExtResource("4_w2nci")]
+position = Vector2(607, 212)
+scale = Vector2(0.41, 0.41)
+
+[node name="knight" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("4_8hnew")]
+scale = Vector2(0.41, 0.41)
+player = NodePath("../../Goblin")
+CHASE_SPEED = 90
+
 [node name="FOV_Raycast" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("8_i4ux0")]
 position = Vector2(684, 702)
 scale = Vector2(0.410424, 0.410424)
@@ -219,6 +231,12 @@ CHASE_SPEED = 90
 position = Vector2(972, 271)
 scale = Vector2(0.419927, 0.419927)
 player = NodePath("../../Goblin")
+
+[node name="CharacterBody2D3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_heyed")]
+scale = Vector2(0.41, 0.41)
+player = NodePath("../../Goblin")
+SPEED = 30
+CHASE_SPEED = 100
 
 [node name="Goblin" parent="." instance=ExtResource("4_i5q7o")]
 position = Vector2(305, 303)

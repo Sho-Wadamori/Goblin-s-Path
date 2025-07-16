@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dylj7phk5bcy1"]
 
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/icon.svg" id="1_wluy0"]
+[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="1_wluy0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b6oxh"]
 friction = 0.3

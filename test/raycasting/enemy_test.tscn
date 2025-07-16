@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cjc5tv7agojf7"]
 
-[ext_resource type="PackedScene" uid="uid://yc2kkm00uxik" path="res://tutorial files/test/enemy.tscn" id="1_r0yun"]
+[ext_resource type="PackedScene" uid="uid://yc2kkm00uxik" path="res://test/enemy.tscn" id="1_r0yun"]
 
 [node name="enemy_test" type="Node2D"]
 

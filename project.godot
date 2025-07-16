@@ -13,7 +13,7 @@ config_version=5
 config/name="First Project"
 run/main_scene="res://Goblin's_Path/scenes/tutorial.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Goblin's_Path/icon.svg"
+config/icon="res://Goblin's_Path/sprites/icon.svg"
 
 [file_customization]
 
@@ -22,7 +22,8 @@ folder_colors={
 "res://Goblin's_Path/scenes/": "red",
 "res://Goblin's_Path/scripts/": "yellow",
 "res://Goblin's_Path/sprites/": "green",
-"res://tutorial files/test/": "gray"
+"res://test/": "gray",
+"res://tutorial files/": "pink"
 }
 
 [input]
