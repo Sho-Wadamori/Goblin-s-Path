@@ -33,14 +33,26 @@ var previous_thrown_object: Node2D = null
 var previous_invis_floor: Node2D = null
 var throw_cooldown = false
 
+var dead = false
+var death_anim_played = false
+var sprint = false
+var sneak = false
+var throw = false
+var throw_anim_played = false
+
 # ------------------------- Every Tick -------------------------
 func _physics_process(_delta):
 	movement()
 	mechanics()
-
+	update_animation()
 
 # ------------------------- Movement -------------------------
 func movement():
+	if dead or throw:  # <- prevent movement during death or throwing
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+	
 	var input_direction = Vector2.ZERO
 	if Input.is_action_pressed("player_up"):
 		input_direction.y -= 1
@@ -67,7 +79,6 @@ func movement():
 	# CharacterBody2D collision
 	move_and_slide()
 
-
 # ------------------------- Mechanics -------------------------
 func mechanics():
 	## ----- Shooting Mechanics -----
@@ -86,6 +97,7 @@ func mechanics():
 			previous_invis_floor.queue_free()
 			
 		despawn_timer.start()
+		throw = true
 		# --- instantiate floor ---
 		var floor_offset = Vector2(0, 10)
 		var invis_floor = invis_floor_prefab.instantiate()
@@ -97,7 +109,7 @@ func mechanics():
 		var angle_degrees = 0
 		var object_offset = Vector2(0, 0)
 		
-		if sprite.flip_v == true:
+		if sprite.flip_h == false:
 			angle_degrees = -30
 			object_offset = Vector2(30, 0) #give it an offset
 		else:
@@ -125,11 +137,16 @@ func mechanics():
 	if Input.is_action_pressed("player_sneak"):
 		player_sneaking.emit(true)
 		SPEED = 40
+		sneak = true
 	elif Input.is_action_pressed("player_speedbst"):
 		SPEED = 200
+		sprint = true
 	else:
 		player_sneaking.emit(false)
 		SPEED = default_speed
+		sprint = false
+		sneak = false
+
 
 
 ## ------------------------- Death -------------------------
@@ -144,11 +161,13 @@ func mechanics():
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body is fov_enemy or body is four_direc_enemy:
 		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ffffff][/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#f6b26b]ENEMY[/color][color=#ffffff][/color][color=#ffffff] [/color][b][color=#ff0000]COLLIDED[/color][/b]")
-		var explosion = explosion_prefab.instantiate()
-		explosion.position = position
-		get_parent().add_child(explosion)
-		queue_free()
+		#var explosion = explosion_prefab.instantiate()
+		#explosion.position = position
+		#get_parent().add_child(explosion)
+		dead = true
 		goblin_killed.emit()
+		#queue_free()
+		
 	else:
 		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#00ffff]WALL [/color][b][color=#ff0000]COLLIDED[/color][/b]")
 
@@ -159,3 +178,38 @@ func _on_object_despawn_timer_timeout() -> void:
 	previous_thrown_object = null
 	previous_invis_floor = null
 	throw_cooldown = false
+
+## ------------------------- Animations -------------------------
+func update_animation():
+	if dead:
+		if not death_anim_played:
+			sprite.play("death")
+			death_anim_played = true
+		return
+	# only run if not dead
+	
+	if throw:
+		if not throw_anim_played:
+			throw_anim_played = true
+			sprite.play("attack")
+		return
+	
+	if velocity.length() > 0: # Character is moving
+		sprite.play("walk")
+		if sprint:
+			sprite.speed_scale = 2
+		else:
+			sprite.speed_scale = 1
+	else: 
+		sprite.play("idle")
+		sprite.speed_scale = 1
+		
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if sprite.animation == "attack":
+		throw = false
+		throw_anim_played = false
+	elif dead and sprite.animation == "death":
+		await get_tree().create_timer(1.0).timeout
+		get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+		print("DEBUG: Player Killed")

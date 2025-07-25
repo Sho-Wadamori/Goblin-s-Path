@@ -36,6 +36,6 @@ func _on_restart_timer_timeout():
 	get_tree().reload_current_scene()
 
 
-func _on_goblin_goblin_killed() -> void:
-	get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
-	print("DEBUG: Player Killed")
+#func _on_goblin_goblin_killed() -> void:
+	#get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+	#print("DEBUG: Player Killed")

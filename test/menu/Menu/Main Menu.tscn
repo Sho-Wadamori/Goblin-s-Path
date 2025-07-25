@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=3 uid="uid://8ywktsqekpwj"]
+
+[ext_resource type="PackedScene" uid="uid://bifm0dy8v7x3p" path="res://test/menu/Menu/Buttons/StartButton.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://c43o3atjm5irl" path="res://test/menu/Menu/background.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://vyty7uvpev45" path="res://test/menu/Menu/Logo.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://bse7vokor8kds" path="res://test/menu/Menu/Buttons/OptionsButton.tscn" id="4"]
+[ext_resource type="FontFile" uid="uid://6rgtywnuw6fu" path="res://test/menu/Menu/ARIAL.TTF" id="5"]
+[ext_resource type="PackedScene" uid="uid://c252i0hnqv1kd" path="res://test/menu/fade_in/FadeIn.tscn" id="6"]
+[ext_resource type="FontFile" path="res://test/menu/Menu/Main Menu.tres" id="7"]
+[ext_resource type="Script" path="res://test/menu/Menu/title_screen.gd" id="8"]
+[ext_resource type="PackedScene" uid="uid://cit64esxknk4c" path="res://test/menu/Menu/UISound.tscn" id="9"]
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("5")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="Title Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("8")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(800, 460)
+texture = ExtResource("2")
+offset = Vector2(160, 80)
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 1800.0
+offset_bottom = 1000.0
+
+[node name="Logo" type="TextureRect" parent="Menu"]
+layout_mode = 2
+texture = ExtResource("3")
+stretch_mode = 4
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Start Game" parent="Menu/CenterRow/Buttons" instance=ExtResource("1")]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7")
+
+[node name="OptionsButton" parent="Menu/CenterRow/Buttons" instance=ExtResource("4")]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7")
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Menu/CenterRow/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7")
+text = "Controls:
+left Click - Spawn ball
+Use mouse to move the paddle"
+uppercase = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CenterRow/CenterContainer"]
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("2")
+text = "Version 1.0
+jackboyman"
+
+[node name="FadeIn" parent="." instance=ExtResource("6")]
+visible = false
+layout_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UISound" parent="." instance=ExtResource("9")]
+
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_fade_in_fade_finished"]

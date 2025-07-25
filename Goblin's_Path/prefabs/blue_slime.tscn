@@ -399,6 +399,8 @@ radius = 8.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(594, 300)
+collision_layer = 17
+collision_mask = 17
 script = ExtResource("1_bc00a")
 
 [node name="Bitmap" type="Sprite2D" parent="."]

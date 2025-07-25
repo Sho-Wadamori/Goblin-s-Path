@@ -90,6 +90,17 @@ func _ready():
 	direction = wander_direction
 	object_detected = false	
 	print("Enemy ", enemy_id, " created at position ", position)
+	
+	player = get_node("../../Goblin")
+	print("Player found: ", player != null)
+	if player:
+		print("Player position: ", player.position)
+		# Connect the signal if needed
+		if player.has_signal("object_thrown"):
+			player.connect("object_thrown", Callable(self, "_on_goblin_object_thrown"))
+	else:
+		print("error!!!")
+
 
 ## ------------------------- Every Tick -------------------------
 func _physics_process(delta: float) -> void:
@@ -105,7 +116,16 @@ func _physics_process(delta: float) -> void:
 	update_raycast_positions()
 	change_view_distance()
 	update_animation()
-
+	
+	if Input.is_action_just_pressed("testbutton"):  # Space bar
+		if player:
+			# Create different offsets for each enemy to avoid overlap
+			var offset = Vector2(enemy_id * 60, 0)  # Each enemy 60 pixels apart
+			position = player.position + offset
+			print("Enemy ", enemy_id, " teleported to player at: ", player.position, " with offset: ", offset)
+			print("Enemy ", enemy_id, " final position: ", position)
+		else:
+			print("Cannot teleport: player is null!")
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
@@ -269,7 +289,7 @@ func change_direction(delta: float) -> void: # moving direction
 	
 	elif current_state == States.CHASE:
 		# chase state: follow the player
-		direction = (player.position - self.position).normalized()
+		direction = (player.global_position - self.global_position).normalized() # NOTE TO SELF: position is relative to parent, global_position is relative to scene
 	
 	elif current_state == States.INSPECT:
 		if object_to_chase and is_instance_valid(object_to_chase) and current_state != States.CHASE:
@@ -337,7 +357,6 @@ func update_animation():
 		else:
 			sprite.play("walk")
 	elif current_state == States.CHASE:
-		sprite.play("run")
 		sprite.speed_scale = 2
 	elif current_state == States.INSPECT:
 		if is_close_to_inspect_object:
@@ -346,3 +365,4 @@ func update_animation():
 			sprite.play("walk")
 
 ###### PLAYER CHASE MIDWAY INSPECTING ANIMATION
+###### ENEMY ATTACK ANIMATION ON PLAYER COLLISION

@@ -163,7 +163,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8uc38")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -281,7 +281,7 @@ animations = [{
 size = Vector2(54.1103, 60.709)
 
 [node name="Goblin" type="CharacterBody2D"]
-position = Vector2(144, 280)
+position = Vector2(605, 353)
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_nn12l")
 
@@ -301,7 +301,7 @@ autoplay = "idle"
 zoom = Vector2(1.585, 1.585)
 
 [node name="Area2D" type="Area2D" parent="."]
-scale = Vector2(-2.60826, -2.60826)
+scale = Vector2(-3.01991, -2.729)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.2556, 0)
@@ -312,6 +312,7 @@ shape = SubResource("RectangleShape2D_eqiel")
 wait_time = 5.0
 one_shot = true
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_goblin_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area2d_body_entered"]
 [connection signal="timeout" from="object_despawn_timer" to="." method="_on_object_despawn_timer_timeout"]

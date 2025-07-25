@@ -129,7 +129,7 @@ func change_direction() -> void: # moving direction
 				sprite.flip_h = true
 	else:
 		# chase state: follow the player
-		direction = (player.position - self.position).normalized()
+		direction = (player.global_position - self.global_position).normalized()
 		
 		# Update sprite facing based on movement direction
 		if direction.x > 0:

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bse7vokor8kds"]
+
+[ext_resource type="PackedScene" uid="uid://bifm0dy8v7x3p" path="res://test/menu/Menu/Buttons/StartButton.tscn" id="1"]
+
+[node name="OptionsButton" instance=ExtResource("1")]
+scene_to_load = "res://test/menu/Menu/Options.tscn"
+
+[node name="Label" parent="." index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 23.0
+text = "Options"
