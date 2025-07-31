@@ -1,18 +1,12 @@
-[gd_scene load_steps=40 format=3 uid="uid://o2jj8f0o4qpy"]
+[gd_scene load_steps=41 format=3 uid="uid://o2jj8f0o4qpy"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_nn12l"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="2_wxx26"]
+[ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="3_p15f5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ix0dn"]
-size = Vector2(52, 58.6667)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gm3gs"]
-atlas = ExtResource("2_wxx26")
-region = Rect2(0, 200, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rl1c2"]
-atlas = ExtResource("2_wxx26")
-region = Rect2(100, 200, 100, 100)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iujfw"]
+radius = 9.87878
+height = 35.0305
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0vj6"]
 atlas = ExtResource("2_wxx26")
@@ -146,12 +140,6 @@ region = Rect2(700, 100, 100, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gm3gs")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rl1c2")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_u0vj6")
 }, {
 "duration": 1.0,
@@ -163,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8uc38")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -277,41 +265,67 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqiel"]
-size = Vector2(54.1103, 60.709)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bssge"]
+shader = ExtResource("3_p15f5")
+shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
+shader_parameter/color_tolerance = 0.01
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_imkef"]
+radius = 12.5972
+height = 35.03
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ihjy6"]
+polygon = PackedVector2Array(-14.5455, 29.0909, 12.7272, 29.0909, 12.7272, 9.09088, -14.5455, 9.09088)
 
 [node name="Goblin" type="CharacterBody2D"]
-position = Vector2(144, 280)
+position = Vector2(605, 353)
 scale = Vector2(0.55, 0.55)
 script = ExtResource("1_nn12l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.666656, 0)
-shape = SubResource("RectangleShape2D_ix0dn")
+position = Vector2(-0.666626, 19.2121)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_iujfw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
 texture_filter = 1
 position = Vector2(-2.66667, 1.33334)
 scale = Vector2(3.945, 3.945)
 sprite_frames = SubResource("SpriteFrames_l6su5")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.585, 1.585)
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_bssge")
+position = Vector2(-2.667, 1.333)
+scale = Vector2(3.945, 3.945)
+sprite_frames = SubResource("SpriteFrames_l6su5")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Area2D" type="Area2D" parent="."]
-scale = Vector2(-2.60826, -2.60826)
+scale = Vector2(-3.01991, -2.729)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0.2556, 0)
+y_sort_enabled = true
+position = Vector2(0.255615, -6.87813)
+rotation = 1.5708
 scale = Vector2(0.38734, 0.38734)
-shape = SubResource("RectangleShape2D_eqiel")
+shape = SubResource("CapsuleShape2D_imkef")
 
 [node name="object_despawn_timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ihjy6")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_goblin_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area2d_body_entered"]
 [connection signal="timeout" from="object_despawn_timer" to="." method="_on_object_despawn_timer_timeout"]

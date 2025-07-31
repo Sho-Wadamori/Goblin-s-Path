@@ -1,13 +1,15 @@
 extends Node2D
 
 #in charge of keeping score and spawning enemies
-@onready var enemy_prefab = preload("res://Goblin's_Path/prefabs/enemy(previous).tscn")
+@onready var SceneChangeAnimation = $SceneChangeAnimation/AnimationPlayer
 
 var score = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_update_ui()
+	SceneChangeAnimation.get_parent().get_node("ColorRect").color.a = 255
+	SceneChangeAnimation.play("fade_out")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -36,6 +38,6 @@ func _on_restart_timer_timeout():
 	get_tree().reload_current_scene()
 
 
-func _on_goblin_goblin_killed() -> void:
-	get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
-	print("DEBUG: Player Killed")
+#func _on_goblin_goblin_killed() -> void:
+	#get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+	#print("DEBUG: Player Killed")

@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ypv22yc6n4v"]
+[gd_scene load_steps=3 format=3 uid="uid://b5qtwe2kqgrht"]
 
-[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemy.gd" id="1_2slgt"]
 [ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="2_se5s3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkngt"]
@@ -8,7 +7,6 @@ size = Vector2(24.0602, 24.0602)
 
 [node name="Enemy" type="Area2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_2slgt")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

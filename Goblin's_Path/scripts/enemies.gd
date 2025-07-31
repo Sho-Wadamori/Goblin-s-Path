@@ -40,7 +40,11 @@ class_name fov_enemy
 
 ## Node References
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D # Sprite Variable
+@onready var silhouette = $AnimatedSprite2D2
 @onready var bitmap: Node2D = $Bitmap # Bitmap reference, contains all raycasts
+@onready var LightOccluder = $PointLight2D
+@onready var Question = $AnimatedSprite2D/Question
+@onready var Exclaim = $AnimatedSprite2D/Exlaim
 
 ## All Raycasts
 @onready var ray_cast_1: RayCast2D = $Bitmap/RayCast1
@@ -82,6 +86,8 @@ func _ready():
 	enemy_counter += 1
 	enemy_id = enemy_counter
 	
+	Question.hide()
+	Exclaim.hide()
 	
 	spawn_position = self.position
 	# Start with a random direction
@@ -90,6 +96,18 @@ func _ready():
 	direction = wander_direction
 	object_detected = false	
 	print("Enemy ", enemy_id, " created at position ", position)
+	
+	player = get_node("../../Goblin")
+	print("Player found: ", player != null)
+	if player:
+		print("Player position: ", player.position)
+		# Connect the signal if needed
+		if player.has_signal("object_thrown"):
+			player.connect("object_thrown", Callable(self, "_on_goblin_object_thrown"))
+	else:
+		print("error!!!")
+
+
 
 ## ------------------------- Every Tick -------------------------
 func _physics_process(delta: float) -> void:
@@ -102,29 +120,44 @@ func _physics_process(delta: float) -> void:
 	if current_state != States.CHASE:
 		look_for_object()
 	
+	update_alert_icons()
+	
 	update_raycast_positions()
 	change_view_distance()
 	update_animation()
-
+	
+	if Input.is_action_just_pressed("testbutton"):  # Space bar
+		if player:
+			# Create different offsets for each enemy to avoid overlap
+			var offset = Vector2(enemy_id * 60, 0)  # Each enemy 60 pixels apart
+			position = player.position + offset
+			print("Enemy ", enemy_id, " teleported to player at: ", player.position, " with offset: ", offset)
+			print("Enemy ", enemy_id, " final position: ", position)
+		else:
+			print("Cannot teleport: player is null!")
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
 	# Rotate bitmap to face movement direction
 	if direction.length() > 0:
 		bitmap.rotation = direction.angle()
+		LightOccluder.rotation = direction.angle()
 		
 		# Update sprite facing based on movement direction
 		if direction.x > 0:
 			sprite.flip_h = false
+			silhouette.flip_h = false
 		elif direction.x < 0:
 			sprite.flip_h = true
-
+			silhouette.flip_h = true
 
 ## ------------------------- Look For the Object -------------------------
 func _on_goblin_object_thrown() -> void:
 	object_detected = false
 	print("Enemy ", enemy_id, " received object_thrown signal, reset object_detected to false")
-	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ffffff]NEW[/color] [color=#00ffff]OBJECT[/color][color=#00ffff] [color=#ff0000][b]THROWN[/b][/color][/color]")
+	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+	[/color][color=#ffffff]NEW[/color] [color=#00ffff]OBJECT[/color]\
+	[color=#00ffff] [color=#ff0000][b]THROWN[/b][/color][/color]")
 
 func get_thrown_object() -> Node2D:
 	var thrown_objects = get_tree().get_nodes_in_group("ThrownObjects")
@@ -146,15 +179,24 @@ func look_for_object():
 				print("Starting inspect timer with wait_time: ", inspect_timer.wait_time)
 				inspect_timer.start()
 				print("Timer started, time_left: ", inspect_timer.time_left)
-				print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b][/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff][b]TO [/b][/color][color=#00ff00][b]INSPECT STATE[/b][/color]")
+				print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+				[/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b]\
+				[/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff]\
+				[b]TO [/b][/color][color=#00ff00][b]INSPECT STATE[/b][/color]")
 				bitmap.set_scale(Vector2(2.4, 2.4))
+				LightOccluder.set_scale(Vector2(2.4, 2.4))
 
 func _on_inspect_timer_timeout():
 	current_state = States.WANDER
 	is_close_to_inspect_object = false
 	change_wander_direction()
-	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] FINISHED [/color][color=#00ff00]INSPECTING[/color][color=#ff0000], [/color][color=#ffffff]RETURNING TO [/color][color=#00ff00]WANDER STATE[/color][color=#ff0000] [/color]")
+	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] FINISHED \
+	[/color][color=#00ff00]INSPECTING[/color][color=#ff0000], [/color][color=#ffffff]\
+	RETURNING TO [/color][color=#00ff00]WANDER STATE[/color][color=#ff0000] [/color]")
 	object_detected = true
+	
+	Question.hide()
+	Exclaim.hide()
 	
 	# Reset bitmap scale to normal wander view
 	if is_player_sneaking:
@@ -162,6 +204,7 @@ func _on_inspect_timer_timeout():
 	else:
 		view_range = Vector2(1.862, 1.862)
 	bitmap.set_scale(view_range)
+	LightOccluder.set_scale(view_range)
 
 ## ------------------------- Look For the Player -------------------------
 func look_for_player():
@@ -192,8 +235,10 @@ func look_for_player():
 	if player_detected: # chase if player is detected
 		object_to_chase = null  # stop inspecting object
 		bitmap.set_scale(Vector2(2.4, 2.4))
+		LightOccluder.set_scale(Vector2(2.4, 2.4))
 		chase_player()
-		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#00ff00]PLAYER[color=#ff0000] DISCOVERED[/color][/color]")
+		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+		[/color][color=#00ff00]PLAYER[color=#ff0000] DISCOVERED[/color][/color]")
 
 	elif current_state == States.CHASE:
 		stop_chase() # stop chase
@@ -269,7 +314,7 @@ func change_direction(delta: float) -> void: # moving direction
 	
 	elif current_state == States.CHASE:
 		# chase state: follow the player
-		direction = (player.position - self.position).normalized()
+		direction = (player.global_position - self.global_position).normalized() # NOTE TO SELF: position is relative to parent, global_position is relative to scene
 	
 	elif current_state == States.INSPECT:
 		if object_to_chase and is_instance_valid(object_to_chase) and current_state != States.CHASE:
@@ -278,7 +323,8 @@ func change_direction(delta: float) -> void: # moving direction
 			if distance_to_object <= inspect_stop_distance:
 				if not is_close_to_inspect_object:
 					is_close_to_inspect_object = true
-					print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#00ff00] CLOSE ENOUGH TO OBJECT, STOPPING MOVEMENT[/color]")
+					print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#00ff00] \
+					CLOSE ENOUGH TO OBJECT, STOPPING MOVEMENT[/color]")
 				direction = Vector2.ZERO # Stop moving toward object
 			else:
 				direction = (object_to_chase.position - position).normalized()
@@ -293,6 +339,7 @@ func change_direction(delta: float) -> void: # moving direction
 			else:
 				view_range = Vector2(1.862, 1.862)
 			bitmap.set_scale(view_range)
+			LightOccluder.set_scale(view_range)
 
 func change_wander_direction():
 	# Change angle by a random amount within the specified range (smoother turning)
@@ -327,22 +374,73 @@ func change_view_distance():	# If sneaking
 			print("DEBUG: Player stopped sneaking")
 			view_range = Vector2(1.862, 1.862)
 		bitmap.set_scale(view_range)
+		LightOccluder.set_scale(view_range)
 
 
 ## -------------------------  Animations -------------------------
 func update_animation():
-	if current_state == States.WANDER:
-		if wander_state == WanderState.IDLE:
-			sprite.play("idle")
-		else:
-			sprite.play("walk")
-	elif current_state == States.CHASE:
-		sprite.play("run")
-		sprite.speed_scale = 2
-	elif current_state == States.INSPECT:
+	sprite.speed_scale = 2
+	silhouette.speed_scale = 2
+	match current_state:
+		States.WANDER:
+			if wander_state == WanderState.IDLE:
+				if sprite.animation != "idle":
+					sprite.play("idle")
+				if silhouette.animation != "idle":
+					silhouette.play("idle")
+			else:
+				if sprite.animation != "walk":
+					sprite.play("walk")
+				if silhouette.animation != "walk":
+					silhouette.play("walk")
+		
+		States.CHASE:
+			if sprite.animation != "walk":
+				sprite.play("walk")
+			if silhouette.animation != "walk":
+				silhouette.play("walk")
+		
+		States.INSPECT:
+			if is_close_to_inspect_object:
+				if sprite.animation != "idle":
+					sprite.play("idle")
+				if silhouette.animation != "idle":
+					silhouette.play("idle")
+			else:
+				if sprite.animation != "walk":
+					sprite.play("walk")
+				if silhouette.animation != "walk":
+					silhouette.play("walk")
+
+
+func update_alert_icons():
+	if current_state == States.INSPECT:
 		if is_close_to_inspect_object:
-			sprite.play("idle")
+			Question.show()
+			Exclaim.hide()
 		else:
-			sprite.play("walk")
+			Question.show()
+			Exclaim.hide()
+			
+	elif current_state == States.CHASE:
+		var player_visible = is_player_visible()
+		if player_visible:
+			Exclaim.show()
+			Question.hide()
+		else:
+			Question.show()
+			Exclaim.hide()
+			
+	else:
+		Question.hide()
+		Exclaim.hide()
+
+func is_player_visible() -> bool:
+	return check_raycast_for_player(ray_cast_1) or \
+	check_raycast_for_player(ray_cast_2) or \
+	check_raycast_for_player(ray_cast_3) or \
+	check_raycast_for_player(ray_cast_4) or \
+	check_raycast_for_player(ray_cast_5)
 
 ###### PLAYER CHASE MIDWAY INSPECTING ANIMATION
+###### ENEMY ATTACK ANIMATION ON PLAYER COLLISION

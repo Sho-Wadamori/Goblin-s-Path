@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dylj7phk5bcy1"]
 
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="1_wluy0"]
+[ext_resource type="Texture2D" uid="uid://0x85ejhovq0r" path="res://Goblin's_Path/sprites/tilesets/boulder.png" id="1_bvwqp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b6oxh"]
 friction = 0.3
@@ -18,9 +18,11 @@ physics_material_override = SubResource("PhysicsMaterial_b6oxh")
 linear_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.745656, 0.745656)
+scale = Vector2(0.526638, 0.526638)
 shape = SubResource("CircleShape2D_7pxyf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("1_wluy0")
+texture_filter = 1
+position = Vector2(1, 0)
+scale = Vector2(2.02241, 2.02241)
+texture = ExtResource("1_bvwqp")

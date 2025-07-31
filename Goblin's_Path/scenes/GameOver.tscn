@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dkspk32ddst2e"]
 
-[ext_resource type="Script" path="res://Goblin's_Path/scenes/game_over.gd" id="1_fid6f"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/GameOver_Screen.gd" id="1_fid6f"]
 [ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="1_fwpq7"]
 [ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="3_rfpcd"]
 

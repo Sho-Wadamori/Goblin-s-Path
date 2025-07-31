@@ -268,7 +268,7 @@ func change_direction(delta: float) -> void: # moving direction
 	
 	elif current_state == States.CHASE:
 		# chase state: follow the player
-		direction = (player.position - self.position).normalized()
+		direction = (player.global_position - self.global_position).normalized()
 	
 	elif current_state == States.INSPECT:
 		if object_to_chase and is_instance_valid(object_to_chase) and current_state != States.CHASE:
