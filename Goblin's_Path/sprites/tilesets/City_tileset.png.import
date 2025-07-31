@@ -2,16 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/City_tileset.png.import
 uid="uid://xm162vidqlhx"
 path="res://.godot/imported/City_tileset.png-ac325670413d9b3471bdfe0105336282.ctex"
+========
+uid="uid://56j4wrqcwms3"
+path="res://.godot/imported/pixellab-32-pixels-1753345147744.png-9d2c4b0470f576a40db9ed2c41642a05.ctex"
+>>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/pixellab-32-pixels-1753345147744.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/City_tileset.png.import
 source_file="res://Goblin's_Path/sprites/tilesets/City_tileset.png"
 dest_files=["res://.godot/imported/City_tileset.png-ac325670413d9b3471bdfe0105336282.ctex"]
+========
+source_file="res://Goblin's_Path/sprites/pixellab-32-pixels-1753345147744.png"
+dest_files=["res://.godot/imported/pixellab-32-pixels-1753345147744.png-9d2c4b0470f576a40db9ed2c41642a05.ctex"]
+>>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/pixellab-32-pixels-1753345147744.png.import
 
 [params]
 

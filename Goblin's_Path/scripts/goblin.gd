@@ -38,7 +38,10 @@ var sprint = false
 var sneak = false
 var throw = false
 var throw_anim_played = false
+<<<<<<< HEAD
 var current_anim = ""
+=======
+>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 
 # ------------------------- Every Tick -------------------------
 func _physics_process(_delta):
@@ -183,6 +186,7 @@ func _on_object_despawn_timer_timeout() -> void:
 
 ## ------------------------- Animations -------------------------
 func update_animation():
+<<<<<<< HEAD
 	var target_anim = ""
 	var target_speed = 1
 	if dead:
@@ -206,13 +210,43 @@ func update_animation():
 	sprite.speed_scale = target_speed
 	silhouette.speed_scale = target_speed
 	
+=======
+	if dead:
+		if not death_anim_played:
+			sprite.play("death")
+			death_anim_played = true
+		return
+	# only run if not dead
+	
+	if throw:
+		if not throw_anim_played:
+			throw_anim_played = true
+			sprite.play("attack")
+		return
+	
+	if velocity.length() > 0: # Character is moving
+		sprite.play("walk")
+		if sprint:
+			sprite.speed_scale = 2
+		else:
+			sprite.speed_scale = 1
+	else: 
+		sprite.play("idle")
+		sprite.speed_scale = 1
+		
+>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "attack":
 		throw = false
 		throw_anim_played = false
 	elif dead and sprite.animation == "death":
+<<<<<<< HEAD
 		var tree = get_tree()
 		await get_tree().create_timer(1.0).timeout
 		tree.change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+=======
+		await get_tree().create_timer(1.0).timeout
+		get_tree().change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 		print("DEBUG: Player Killed")

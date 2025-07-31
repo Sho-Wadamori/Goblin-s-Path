@@ -1,5 +1,11 @@
 extends Node2D
+<<<<<<< HEAD
 @onready var SceneChangeAnimation = $SceneChangeAnimation/AnimationPlayer
+=======
+
+#@onready var enemy_prefab = preload("res://Goblin's_Path/prefabs/enemy(previous).tscn")
+
+>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
