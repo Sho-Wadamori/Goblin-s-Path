@@ -1,22 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1ypv22yc6n4v"]
+[gd_scene load_steps=4 format=3 uid="uid://cln7tyk4dl6g1"]
 
-[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemy(previous).gd" id="1_2slgt"]
-[ext_resource type="Texture2D" uid="uid://cey4g5wm4sm87" path="res://Goblin's_Path/sprites/icon.svg" id="2_se5s3"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemy(previous).gd" id="1_3pib2"]
+[ext_resource type="Texture2D" uid="uid://m0bd3cn58oqt" path="res://Goblin's_Path/sprites/characters/enemyBlack1.png" id="2_porci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nkngt"]
-size = Vector2(24.0602, 24.0602)
+size = Vector2(16.0643, 18.0451)
 
 [node name="Enemy" type="Area2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_2slgt")
+script = ExtResource("1_3pib2")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("2_se5s3")
+texture = ExtResource("2_porci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.90735e-06)
+position = Vector2(0, -2.6226e-06)
 scale = Vector2(5.32, 5.32)
 shape = SubResource("RectangleShape2D_nkngt")
 

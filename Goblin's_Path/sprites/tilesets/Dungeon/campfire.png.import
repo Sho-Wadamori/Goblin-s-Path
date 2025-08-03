@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/campfire.png.import
 uid="uid://dle5titcyx54x"
 path="res://.godot/imported/campfire.png-261b7f93dd8f07d3365bd67829e46e3f.ctex"
-========
-uid="uid://dy38gavihhrl1"
-path="res://.godot/imported/spr_wooden_bridge_horizontal.png-0552a442d4b301da3a25a8a09b39a72f.ctex"
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_wooden_bridge_horizontal.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/campfire.png.import
 source_file="res://Goblin's_Path/sprites/tilesets/Dungeon/campfire.png"
 dest_files=["res://.godot/imported/campfire.png-261b7f93dd8f07d3365bd67829e46e3f.ctex"]
-========
-source_file="res://Goblin's_Path/sprites/tilesets/spr_wooden_bridge_horizontal.png"
-dest_files=["res://.godot/imported/spr_wooden_bridge_horizontal.png-0552a442d4b301da3a25a8a09b39a72f.ctex"]
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_wooden_bridge_horizontal.png.import
 
 [params]
 

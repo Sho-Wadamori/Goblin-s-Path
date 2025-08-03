@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:Goblin's_Path/sprites/image(3).png.import
 uid="uid://ci5x1sl3dpw6x"
 path="res://.godot/imported/image(3).png-4afa6b7a4a3a238515fd647deeab6ecd.ctex"
-========
-uid="uid://icqvh0t0pbgt"
-path="res://.godot/imported/spr_tree3.png-2a9f1d38e4e48d4032610d769346eec9.ctex"
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_tree3.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Goblin's_Path/sprites/image(3).png.import
 source_file="res://Goblin's_Path/sprites/image(3).png"
 dest_files=["res://.godot/imported/image(3).png-4afa6b7a4a3a238515fd647deeab6ecd.ctex"]
-========
-source_file="res://Goblin's_Path/sprites/tilesets/spr_tree3.png"
-dest_files=["res://.godot/imported/spr_tree3.png-2a9f1d38e4e48d4032610d769346eec9.ctex"]
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_tree3.png.import
 
 [params]
 

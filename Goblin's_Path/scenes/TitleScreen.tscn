@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://hgstdmmkkdbb"]
+[gd_scene load_steps=12 format=3 uid="uid://hgstdmmkkdbb"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/TitleScreen.gd" id="1_r1djq"]
 [ext_resource type="Texture2D" uid="uid://ck286mbqkkeie" path="res://Goblin's_Path/sprites/MediavelFree.png" id="2_2dfwd"]
 [ext_resource type="Texture2D" uid="uid://duci5o71l446s" path="res://Goblin's_Path/sprites/FreeHorrorUi.png" id="3_w28cx"]
+[ext_resource type="Texture2D" uid="uid://by8dhksjn4q1" path="res://Goblin's_Path/prefabs/Boulder.png" id="4_5nmu6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mjwhy"]
 texture = ExtResource("2_2dfwd")
@@ -526,6 +527,7 @@ scale = Vector2(7, 7)
 tile_set = SubResource("TileSet_ewxik")
 format = 2
 layer_0/tile_data = PackedInt32Array(65539, 917504, 2, 65542, 917504, 2, 65545, 917504, 2, 65548, 917504, 0, 65536, 917504, 0, 131069, 0, 0)
+metadata/_edit_group_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
 position = Vector2(-10.8571, 13)
@@ -534,6 +536,7 @@ tile_map_data = PackedByteArray(0, 0, 253, 255, 2, 0, 0, 0, 4, 0, 12, 0, 0, 0, 2
 tile_set = SubResource("TileSet_f8glb")
 
 [node name="PlayButton" type="Button" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -552,8 +555,10 @@ theme = SubResource("Theme_1io4p")
 text = "Play"
 flat = true
 metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
 [node name="QuitButton" type="Button" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -572,22 +577,36 @@ theme = SubResource("Theme_q3aa3")
 text = "Quit"
 flat = true
 metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
 [node name="PlayButton2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-<<<<<<< HEAD
 anchor_left = 1.18604
-anchor_top = 0.907253
+anchor_top = 0.942747
 anchor_right = 1.19906
 anchor_bottom = 0.907253
-=======
-anchor_left = 1.18605
-anchor_top = 0.908796
-anchor_right = 1.1982
-anchor_bottom = 0.908796
->>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
+offset_left = -1949.32
+offset_top = -377.9
+offset_right = -1886.32
+offset_bottom = -331.9
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.55, 3.55)
+theme = SubResource("Theme_1io4p")
+icon = ExtResource("4_5nmu6")
+flat = true
+metadata/_edit_group_ = true
+
+[node name="Settings" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.18604
+anchor_top = 1.07701
+anchor_right = 1.19906
+anchor_bottom = 1.03997
 offset_left = -1949.32
 offset_top = -377.9
 offset_right = -1886.32
@@ -597,20 +616,16 @@ grow_vertical = 2
 scale = Vector2(3.55, 3.55)
 theme = SubResource("Theme_1io4p")
 flat = true
-metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
 [node name="QuitButton2" type="Button" parent="."]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -1.46417
-anchor_top = 1.17234
-<<<<<<< HEAD
+anchor_top = 1.20783
 anchor_right = -1.45115
-=======
-anchor_right = -1.45202
->>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
-anchor_bottom = 1.17234
+anchor_bottom = 1.17388
 offset_left = 1103.72
 offset_top = -379.675
 offset_right = 1166.72
@@ -620,9 +635,10 @@ grow_vertical = 2
 scale = Vector2(3.55, 3.55)
 theme = SubResource("Theme_q3aa3")
 flat = true
-metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="PlayButton2" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="QuitButton2" to="." method="_on_quit_button_pressed"]

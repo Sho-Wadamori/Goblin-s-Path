@@ -107,10 +107,7 @@ func _ready():
 	else:
 		print("error!!!")
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 
 ## ------------------------- Every Tick -------------------------
 func _physics_process(delta: float) -> void:
@@ -382,7 +379,6 @@ func change_view_distance():	# If sneaking
 
 ## -------------------------  Animations -------------------------
 func update_animation():
-<<<<<<< HEAD
 	sprite.speed_scale = 2
 	silhouette.speed_scale = 2
 	match current_state:
@@ -419,16 +415,6 @@ func update_animation():
 
 func update_alert_icons():
 	if current_state == States.INSPECT:
-=======
-	if current_state == States.WANDER:
-		if wander_state == WanderState.IDLE:
-			sprite.play("idle")
-		else:
-			sprite.play("walk")
-	elif current_state == States.CHASE:
-		sprite.speed_scale = 2
-	elif current_state == States.INSPECT:
->>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db
 		if is_close_to_inspect_object:
 			Question.show()
 			Exclaim.hide()

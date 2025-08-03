@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Goblin's_Path/scenes/level_2.gd" id="1_1vqqp"]
 [ext_resource type="TileSet" uid="uid://ba8232q1sqa5k" path="res://Goblin's_Path/sprites/tutorial.tres" id="2_kh8nc"]
-[ext_resource type="PackedScene" uid="uid://de7xj0ro6cse4" path="res://Goblin's_Path/prefabs/enemies/green_slime.tscn" id="3_dgou1"]
-[ext_resource type="PackedScene" uid="uid://e1rxideekdxk" path="res://Goblin's_Path/prefabs/enemies/blue_slime.tscn" id="4_u1nry"]
-[ext_resource type="PackedScene" uid="uid://dnjaugfhmm4my" path="res://Goblin's_Path/prefabs/enemies/knight.tscn" id="5_we72x"]
+[ext_resource type="PackedScene" uid="uid://de7xj0ro6cse4" path="res://Goblin's_Path/prefabs/green_slime.tscn" id="3_dgou1"]
+[ext_resource type="PackedScene" uid="uid://e1rxideekdxk" path="res://Goblin's_Path/prefabs/blue_slime.tscn" id="4_u1nry"]
+[ext_resource type="PackedScene" uid="uid://dnjaugfhmm4my" path="res://Goblin's_Path/prefabs/knight.tscn" id="5_we72x"]
 [ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="6_783gg"]
 [ext_resource type="PackedScene" uid="uid://cqhxlctcqhwb6" path="res://Goblin's_Path/scenes/scene_change_animation.tscn" id="7_58itf"]
 

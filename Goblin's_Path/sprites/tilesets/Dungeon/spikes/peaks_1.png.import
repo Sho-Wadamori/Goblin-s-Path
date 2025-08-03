@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/spikes/peaks_1.png.import
 uid="uid://ckgmdpqdfd8df"
 path="res://.godot/imported/peaks_1.png-bc36c82dae74935049b018523a3edf8a.ctex"
-========
-uid="uid://c557di3u16bfc"
-path="res://.godot/imported/spr_wooden_bridge_vertical.png-fd0394dd71f3b3acdf8937bed05cde53.ctex"
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_wooden_bridge_vertical.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/spikes/peaks_1.png.import
 source_file="res://Goblin's_Path/sprites/tilesets/Dungeon/spikes/peaks_1.png"
 dest_files=["res://.godot/imported/peaks_1.png-bc36c82dae74935049b018523a3edf8a.ctex"]
-========
-source_file="res://Goblin's_Path/sprites/tilesets/spr_wooden_bridge_vertical.png"
-dest_files=["res://.godot/imported/spr_wooden_bridge_vertical.png-fd0394dd71f3b3acdf8937bed05cde53.ctex"]
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_wooden_bridge_vertical.png.import
 
 [params]
 

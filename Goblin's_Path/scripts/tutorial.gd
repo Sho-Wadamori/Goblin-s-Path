@@ -1,6 +1,8 @@
 extends Node2D
 
 #in charge of keeping score and spawning enemies
+#@onready var enemy_prefab = preload("res://Goblin's_Path/prefabs/enemy(previous).tscn")
+
 @onready var SceneChangeAnimation = $SceneChangeAnimation/AnimationPlayer
 
 var score = 0

@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/arrow/arrow_1.png.import
 uid="uid://bifhqob6tbm1p"
 path="res://.godot/imported/arrow_1.png-8354d891d4a61c6eec8bcfd55426dc04.ctex"
-========
-uid="uid://dfo8u4iucemf8"
-path="res://.godot/imported/spr_grass_tileset.png-a1978048c77aeea6cde75f45358e466c.ctex"
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_grass_tileset.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Goblin's_Path/sprites/tilesets/Dungeon/arrow/arrow_1.png.import
 source_file="res://Goblin's_Path/sprites/tilesets/Dungeon/arrow/arrow_1.png"
 dest_files=["res://.godot/imported/arrow_1.png-8354d891d4a61c6eec8bcfd55426dc04.ctex"]
-========
-source_file="res://Goblin's_Path/sprites/tilesets/spr_grass_tileset.png"
-dest_files=["res://.godot/imported/spr_grass_tileset.png-a1978048c77aeea6cde75f45358e466c.ctex"]
->>>>>>>> 79c4ac5822847a8cf3de488b86a1e6bb373476db:Goblin's_Path/sprites/tilesets/spr_grass_tileset.png.import
 
 [params]
 
