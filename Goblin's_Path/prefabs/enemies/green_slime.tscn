@@ -457,15 +457,14 @@ shader_parameter/color_tolerance = 0.01
 [sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-show_behind_parent = true
 light_mask = 2
-position = Vector2(594, 300)
+y_sort_enabled = true
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_egtf1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(15, 20.55)
+position = Vector2(1, -0.450001)
 rotation = 1.5708
 scale = Vector2(6.35, 6.35)
 shape = SubResource("CapsuleShape2D_g86o3")
@@ -474,18 +473,18 @@ shape = SubResource("CapsuleShape2D_g86o3")
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(18.8, -21.2)
 scale = Vector2(6.35, 6.35)
 sprite_frames = SubResource("SpriteFrames_v8kur")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.685453
+frame_progress = 0.0170417
+offset = Vector2(0.755906, -6.64567)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.188972, -8.62992)
+position = Vector2(0, -8.62992)
 scale = Vector2(0.472441, 0.472441)
 texture = ExtResource("5_v6w8h")
 
@@ -493,7 +492,7 @@ texture = ExtResource("5_v6w8h")
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.188972, -8.62992)
+position = Vector2(0, -15.2756)
 scale = Vector2(0.472441, 0.472441)
 texture = ExtResource("6_qqu27")
 
@@ -502,11 +501,11 @@ light_mask = 2
 z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_4rgpq")
-position = Vector2(18.8, -21.2)
 scale = Vector2(6.35, 6.35)
 sprite_frames = SubResource("SpriteFrames_v8kur")
 animation = &"walk"
 autoplay = "idle"
+offset = Vector2(0.755906, -6.64567)
 
 [node name="Chase_Timer" type="Timer" parent="."]
 wait_time = 10.0
@@ -536,7 +535,8 @@ color = Color(0.617455, 0.617455, 0.617455, 1)
 energy = 0.5
 shadow_enabled = true
 texture = ExtResource("2_55prw")
-offset = Vector2(119.876, 3.22206)
+offset = Vector2(120.95, 3.22206)
+metadata/_edit_group_ = true
 
 [node name="Bitmap" type="Sprite2D" parent="."]
 visible = false
@@ -545,7 +545,8 @@ show_behind_parent = true
 z_index = -1
 scale = Vector2(1.862, 1.862)
 texture = ExtResource("2_55prw")
-offset = Vector2(117.333, 2.44444)
+offset = Vector2(121.092, 2.44444)
+metadata/_edit_group_ = true
 
 [node name="RayCast1" type="RayCast2D" parent="Bitmap"]
 position = Vector2(57.037, 6.51852)

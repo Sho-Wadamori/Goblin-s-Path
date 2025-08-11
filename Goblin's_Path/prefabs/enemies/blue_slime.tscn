@@ -407,16 +407,14 @@ shader_parameter/color_tolerance = 0.01
 [sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-show_behind_parent = true
 light_mask = 2
 y_sort_enabled = true
-position = Vector2(594, 300)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_bc00a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 19.5)
+position = Vector2(0.039978, -0.545988)
 rotation = 1.5708
 scale = Vector2(5.845, 5.845)
 shape = SubResource("CapsuleShape2D_cmi6u")
@@ -425,16 +423,19 @@ shape = SubResource("CapsuleShape2D_cmi6u")
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
+position = Vector2(3.72529e-09, -1.90735e-06)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_ojlcc")
-animation = &"death"
+animation = &"walk"
 autoplay = "idle"
+frame_progress = 0.485896
+offset = Vector2(0.00683969, -3.4296)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0, -13.0026)
+position = Vector2(0.0855419, -15.4833)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("10_m36pd")
 
@@ -442,7 +443,7 @@ texture = ExtResource("10_m36pd")
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0, -13.0026)
+position = Vector2(0.0855419, -15.4833)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("11_ovm6q")
 
@@ -451,11 +452,13 @@ light_mask = 2
 z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_a2u4e")
+position = Vector2(3.72529e-09, -1.90735e-06)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_ojlcc")
 animation = &"walk"
 autoplay = "idle"
 frame_progress = 0.287963
+offset = Vector2(0.00683969, -3.4296)
 
 [node name="Chase_Timer" type="Timer" parent="."]
 wait_time = 10.0
@@ -478,14 +481,28 @@ mesh = SubResource("QuadMesh_um6ob")
 wait_time = 3.0
 one_shot = true
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+z_index = -8
+position = Vector2(0, -20)
+scale = Vector2(1.862, 1.862)
+color = Color(0.615686, 0.615686, 0.615686, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("2_po7vt")
+offset = Vector2(120.95, 0)
+metadata/_edit_group_ = true
+
 [node name="Bitmap" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.25098)
 show_behind_parent = true
 z_index = -1
+position = Vector2(0, -20)
 scale = Vector2(1.862, 1.862)
 texture = ExtResource("2_po7vt")
-offset = Vector2(117.333, 2.44444)
+offset = Vector2(121.092, 2.44444)
+metadata/_edit_group_ = true
 
 [node name="RayCast1" type="RayCast2D" parent="Bitmap"]
 position = Vector2(57.037, 6.51852)
@@ -515,16 +532,6 @@ position = Vector2(61.9259, 27.7037)
 rotation = -1.62264
 scale = Vector2(40, 3.439)
 target_position = Vector2(-0.00115252, 51.6189)
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-show_behind_parent = true
-z_index = -8
-scale = Vector2(1.862, 1.862)
-color = Color(0.615686, 0.615686, 0.615686, 1)
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("2_po7vt")
-offset = Vector2(119.876, 0)
 
 [connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]

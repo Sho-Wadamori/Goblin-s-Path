@@ -1,0 +1,286 @@
+[gd_scene load_steps=23 format=3 uid="uid://j00awl2xlhuw"]
+
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemies.gd" id="1_3536k"]
+[ext_resource type="Texture2D" uid="uid://cxdeolyulmd3i" path="res://Goblin's_Path/sprites/characters/Enchanted Forest Characters with animations.png" id="2_kmt6e"]
+[ext_resource type="Texture2D" uid="uid://ccdooa5lis1dg" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Question_Mark_Help.png" id="3_rnchg"]
+[ext_resource type="Texture2D" uid="uid://cj1cgk3kd7e4n" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Exclaimation_Mark_Error.png" id="4_plex0"]
+[ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="5_s8dne"]
+[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://Goblin's_Path/sprites/bitmap.png" id="6_usw3q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gwpbn"]
+radius = 6.15911
+height = 24.6364
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1bou"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(0, 386, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3ll2"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(64, 386, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxq7j"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(128, 386, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64obh"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(256, 386, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrcqv"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(320, 386, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_600as"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(0, 449, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m05wc"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(64, 449, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esfds"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(128, 449, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_580b2"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(192, 449, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kq68"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(256, 449, 64, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rf4e"]
+atlas = ExtResource("2_kmt6e")
+region = Rect2(320, 449, 64, 63)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6il1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1bou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3ll2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxq7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64obh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrcqv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_600as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m05wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esfds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_580b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kq68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rf4e")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hbnsl"]
+shader = ExtResource("5_s8dne")
+shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
+shader_parameter/color_tolerance = 0.01
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qocuc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1bou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3ll2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxq7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64obh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrcqv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_600as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m05wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esfds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_580b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kq68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rf4e")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+light_mask = 2
+y_sort_enabled = true
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_3536k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.519929, 0.551598)
+rotation = 1.5708
+scale = Vector2(5.845, 5.845)
+shape = SubResource("CapsuleShape2D_gwpbn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-1.19209e-07, -1.52588e-05)
+scale = Vector2(5.845, 5.845)
+sprite_frames = SubResource("SpriteFrames_y6il1")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.677759
+offset = Vector2(-0.164252, -24.0287)
+
+[node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
+visible = false
+z_index = 5
+texture_filter = 1
+position = Vector2(0, -10.6162)
+scale = Vector2(0.513259, 0.513259)
+texture = ExtResource("3_rnchg")
+
+[node name="Exlaim" type="Sprite2D" parent="AnimatedSprite2D"]
+visible = false
+z_index = 5
+texture_filter = 1
+position = Vector2(0.171086, -36.2703)
+scale = Vector2(0.513259, 0.513259)
+texture = ExtResource("4_plex0")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_hbnsl")
+position = Vector2(-1.19209e-07, -1.52588e-05)
+scale = Vector2(5.845, 5.845)
+sprite_frames = SubResource("SpriteFrames_qocuc")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(-0.164252, -24.0287)
+
+[node name="inspect_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Chase_Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="wander_idle_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="wander_move_timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
+scale = Vector2(546.703, 546.703)
+mesh = SubResource("QuadMesh_um6ob")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, -103)
+scale = Vector2(1.862, 1.862)
+color = Color(0.615686, 0.615686, 0.615686, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("6_usw3q")
+offset = Vector2(120.838, 3.75938)
+metadata/_edit_group_ = true
+
+[node name="Bitmap" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.25098)
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, -103)
+scale = Vector2(1.862, 1.862)
+texture = ExtResource("6_usw3q")
+offset = Vector2(120.904, 2.12351)
+metadata/_edit_group_ = true
+
+[node name="RayCast1" type="RayCast2D" parent="Bitmap"]
+position = Vector2(57.037, 6.51852)
+rotation = -1.914
+scale = Vector2(83.665, 3.439)
+target_position = Vector2(0.142576, 54.2578)
+
+[node name="RayCast2" type="RayCast2D" parent="Bitmap"]
+position = Vector2(60.2963, 5.70369)
+rotation = -1.12143
+scale = Vector2(69.24, 3.437)
+target_position = Vector2(-0.0758212, 54.1303)
+
+[node name="RayCast3" type="RayCast2D" parent="Bitmap"]
+position = Vector2(63.5556, -28.5185)
+rotation = -2.36478
+scale = Vector2(40, 3.439)
+
+[node name="RayCast4" type="RayCast2D" parent="Bitmap"]
+position = Vector2(61.9259, 27.7037)
+rotation = -0.762277
+scale = Vector2(40, 3.439)
+target_position = Vector2(-0.00115252, 51.6189)
+
+[node name="RayCast5" type="RayCast2D" parent="Bitmap"]
+position = Vector2(61.9259, 27.7037)
+rotation = -1.62264
+scale = Vector2(39.7869, 3.42068)
+target_position = Vector2(-0.00115252, 51.6189)
+
+[connection signal="timeout" from="inspect_timer" to="." method="_on_inspect_timer_timeout"]
+[connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_move_timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,267 @@
+[gd_scene load_steps=21 format=3 uid="uid://b8l7ywvvhh501"]
+
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemies.gd" id="1_diyle"]
+[ext_resource type="Texture2D" uid="uid://cxdeolyulmd3i" path="res://Goblin's_Path/sprites/characters/Enchanted Forest Characters with animations.png" id="2_1y0he"]
+[ext_resource type="Texture2D" uid="uid://ccdooa5lis1dg" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Question_Mark_Help.png" id="3_dfei1"]
+[ext_resource type="Texture2D" uid="uid://cj1cgk3kd7e4n" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Exclaimation_Mark_Error.png" id="4_ts352"]
+[ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="5_hjucc"]
+[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://Goblin's_Path/sprites/bitmap.png" id="6_af5br"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hyy1v"]
+radius = 4.61933
+height = 10.9495
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0xv2"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(256, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkome"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(288, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc1fa"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(320, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d0nn"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(352, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gat62"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(256, 98, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxhun"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(384, 98, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhb3w"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(416, 98, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6jl1"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(448, 98, 32, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0n7a"]
+atlas = ExtResource("2_1y0he")
+region = Rect2(480, 98, 32, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6il1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0xv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkome")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc1fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d0nn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gat62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxhun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhb3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6jl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0n7a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hbnsl"]
+shader = ExtResource("5_hjucc")
+shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
+shader_parameter/color_tolerance = 0.01
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qocuc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0xv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkome")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vc1fa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d0nn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gat62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxhun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhb3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6jl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0n7a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="QuadMesh" id="QuadMesh_um6ob"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+light_mask = 2
+y_sort_enabled = true
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_diyle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.86102e-05, -1.06096e-05)
+rotation = 1.5708
+scale = Vector2(5.845, 5.845)
+shape = SubResource("CapsuleShape2D_hyy1v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-5.96046e-08, -7.62939e-06)
+scale = Vector2(5.845, 5.845)
+sprite_frames = SubResource("SpriteFrames_y6il1")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.421759
+offset = Vector2(-0.0821263, -11.5395)
+
+[node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
+visible = false
+z_index = 5
+texture_filter = 1
+position = Vector2(0.085542, -28.8281)
+scale = Vector2(0.513259, 0.513259)
+texture = ExtResource("3_dfei1")
+
+[node name="Exlaim" type="Sprite2D" parent="AnimatedSprite2D"]
+visible = false
+z_index = 5
+texture_filter = 1
+position = Vector2(0.085542, -28.8281)
+scale = Vector2(0.513259, 0.513259)
+texture = ExtResource("4_ts352")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+z_index = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_hbnsl")
+position = Vector2(-5.96046e-08, -7.62939e-06)
+scale = Vector2(5.845, 5.845)
+sprite_frames = SubResource("SpriteFrames_qocuc")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.162756
+offset = Vector2(-0.0821263, -11.5395)
+
+[node name="inspect_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Chase_Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="wander_idle_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="wander_move_timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
+scale = Vector2(546.703, 546.703)
+mesh = SubResource("QuadMesh_um6ob")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, -90)
+scale = Vector2(1.862, 1.862)
+color = Color(0.615686, 0.615686, 0.615686, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("6_af5br")
+offset = Vector2(120.838, 3.43822)
+metadata/_edit_group_ = true
+
+[node name="Bitmap" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.25098)
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, -90)
+scale = Vector2(1.862, 1.862)
+texture = ExtResource("6_af5br")
+offset = Vector2(121, 2.12351)
+metadata/_edit_group_ = true
+
+[node name="RayCast1" type="RayCast2D" parent="Bitmap"]
+position = Vector2(57.037, 6.51852)
+rotation = -1.914
+scale = Vector2(83.665, 3.439)
+target_position = Vector2(0.142576, 54.2578)
+
+[node name="RayCast2" type="RayCast2D" parent="Bitmap"]
+position = Vector2(60.2963, 5.70369)
+rotation = -1.12143
+scale = Vector2(69.24, 3.437)
+target_position = Vector2(-0.0758212, 54.1303)
+
+[node name="RayCast3" type="RayCast2D" parent="Bitmap"]
+position = Vector2(63.5556, -28.5185)
+rotation = -2.36478
+scale = Vector2(40, 3.439)
+
+[node name="RayCast4" type="RayCast2D" parent="Bitmap"]
+position = Vector2(61.9259, 27.7037)
+rotation = -0.762277
+scale = Vector2(40, 3.439)
+target_position = Vector2(-0.00115252, 51.6189)
+
+[node name="RayCast5" type="RayCast2D" parent="Bitmap"]
+position = Vector2(61.9259, 27.7037)
+rotation = -1.62264
+scale = Vector2(39.7869, 3.42068)
+target_position = Vector2(-0.00115252, 51.6189)
+
+[connection signal="timeout" from="inspect_timer" to="." method="_on_inspect_timer_timeout"]
+[connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="wander_move_timer" to="." method="_on_timer_timeout"]

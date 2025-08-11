@@ -1,80 +1,79 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxwntbr10k4e1"]
+[gd_scene load_steps=17 format=3 uid="uid://dsd6jrb4lnoji"]
 
-[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemies.gd" id="1_fn0pd"]
-[ext_resource type="Texture2D" uid="uid://cxdeolyulmd3i" path="res://Goblin's_Path/sprites/characters/Enchanted Forest Characters with animations.png" id="2_q0ynv"]
-[ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="3_pg3x3"]
-[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://Goblin's_Path/sprites/bitmap.png" id="4_mf427"]
-[ext_resource type="Texture2D" uid="uid://ccdooa5lis1dg" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Question_Mark_Help.png" id="5_oq62t"]
-[ext_resource type="Texture2D" uid="uid://cj1cgk3kd7e4n" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Exclaimation_Mark_Error.png" id="6_vlaf4"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/enemies.gd" id="1_fco73"]
+[ext_resource type="Texture2D" uid="uid://cxdeolyulmd3i" path="res://Goblin's_Path/sprites/characters/Enchanted Forest Characters with animations.png" id="3_cgb12"]
+[ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="8_exboc"]
+[ext_resource type="Texture2D" uid="uid://bwr3pit7gpm8y" path="res://Goblin's_Path/sprites/bitmap.png" id="9_nd4ca"]
+[ext_resource type="Texture2D" uid="uid://ccdooa5lis1dg" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Question_Mark_Help.png" id="10_a3bri"]
+[ext_resource type="Texture2D" uid="uid://cj1cgk3kd7e4n" path="res://Goblin's_Path/sprites/tilesets/Software_Warning_Sign_Circle_Exclaimation_Mark_Error.png" id="11_bkxy1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cmi6u"]
 radius = 3.45
-height = 13.0025
+height = 17.793
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kp5sr"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(0, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_n08pv"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qf8yy"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(32, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_lensu"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(96, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7c4g7"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(96, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pexj2"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(128, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3wgw"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(128, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bbl2"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(160, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1tl1"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(160, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0jim"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(192, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca3s8"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(192, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ml6q7"]
-atlas = ExtResource("2_q0ynv")
-region = Rect2(224, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlltm"]
+atlas = ExtResource("3_cgb12")
+region = Rect2(224, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ojlcc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kp5sr")
+"texture": SubResource("AtlasTexture_n08pv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qf8yy")
+"texture": SubResource("AtlasTexture_lensu")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 2.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7c4g7")
+"texture": SubResource("AtlasTexture_n08pv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k3wgw")
+"texture": SubResource("AtlasTexture_lensu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v1tl1")
+"texture": SubResource("AtlasTexture_pexj2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ca3s8")
+"texture": SubResource("AtlasTexture_3bbl2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ml6q7")
+"texture": SubResource("AtlasTexture_h0jim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlltm")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 3.0
+"speed": 5.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a2u4e"]
-shader = ExtResource("3_pg3x3")
+shader = ExtResource("8_exboc")
 shader_parameter/silhouette_color = Color(0, 0, 0, 0.5)
 shader_parameter/color_tolerance = 0.01
 
@@ -84,13 +83,12 @@ shader_parameter/color_tolerance = 0.01
 show_behind_parent = true
 light_mask = 2
 y_sort_enabled = true
-position = Vector2(594, 300)
 collision_layer = 17
 collision_mask = 17
-script = ExtResource("1_fn0pd")
+script = ExtResource("1_fco73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 73)
+position = Vector2(-26, -1.19209e-07)
 rotation = 1.5708
 scale = Vector2(5.845, 5.845)
 shape = SubResource("CapsuleShape2D_cmi6u")
@@ -99,37 +97,41 @@ shape = SubResource("CapsuleShape2D_cmi6u")
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
+position = Vector2(-2.38419e-07, -9.53674e-07)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_ojlcc")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.812311
+frame_progress = 0.772804
+offset = Vector2(-3.43168, -12.5714)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.0855408, -8.1266)
+position = Vector2(0.0855421, -24.8931)
 scale = Vector2(0.513259, 0.513259)
-texture = ExtResource("5_oq62t")
+texture = ExtResource("10_a3bri")
 
 [node name="Exlaim" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.0855408, -8.1266)
+position = Vector2(0.0855421, -24.8931)
 scale = Vector2(0.513259, 0.513259)
-texture = ExtResource("6_vlaf4")
+texture = ExtResource("11_bkxy1")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 light_mask = 2
 z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_a2u4e")
+position = Vector2(-2.38419e-07, -9.53674e-07)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_ojlcc")
-animation = &"walk"
-autoplay = "walk"
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(-3.43168, -12.5714)
 
 [node name="Chase_Timer" type="Timer" parent="."]
 wait_time = 10.0
@@ -152,14 +154,28 @@ mesh = SubResource("QuadMesh_um6ob")
 wait_time = 3.0
 one_shot = true
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+z_index = -8
+position = Vector2(0, -72)
+scale = Vector2(1.862, 1.862)
+color = Color(0.615686, 0.615686, 0.615686, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("9_nd4ca")
+offset = Vector2(120.95, 0)
+metadata/_edit_group_ = true
+
 [node name="Bitmap" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.25098)
 show_behind_parent = true
 z_index = -1
+position = Vector2(0, -72)
 scale = Vector2(1.862, 1.862)
-texture = ExtResource("4_mf427")
-offset = Vector2(117.333, 2.44444)
+texture = ExtResource("9_nd4ca")
+offset = Vector2(121.092, 2.44444)
+metadata/_edit_group_ = true
 
 [node name="RayCast1" type="RayCast2D" parent="Bitmap"]
 position = Vector2(57.037, 6.51852)
@@ -189,16 +205,6 @@ position = Vector2(61.9259, 27.7037)
 rotation = -1.62264
 scale = Vector2(40, 3.439)
 target_position = Vector2(-0.00115252, 51.6189)
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-show_behind_parent = true
-z_index = -8
-scale = Vector2(1.862, 1.862)
-color = Color(0.615686, 0.615686, 0.615686, 1)
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("4_mf427")
-offset = Vector2(119.876, 0)
 
 [connection signal="timeout" from="Chase_Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="wander_idle_timer" to="." method="_on_timer_timeout"]

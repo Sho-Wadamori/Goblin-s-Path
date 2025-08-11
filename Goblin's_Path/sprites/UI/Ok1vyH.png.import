@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw36ycktra5jp"
-path="res://.godot/imported/Dimensional_Portal.png-a07398a8730fecdca358d1bfb0b423a4.ctex"
+uid="uid://d2pisyxr0dyl8"
+path="res://.godot/imported/Ok1vyH.png-9c5e6f7e1b54edaef1aae8c4d96a4cd6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tutorial files/2d_simple_game/sprites/Dimensional_Portal.png"
-dest_files=["res://.godot/imported/Dimensional_Portal.png-a07398a8730fecdca358d1bfb0b423a4.ctex"]
+source_file="res://Goblin's_Path/sprites/UI/Ok1vyH.png"
+dest_files=["res://.godot/imported/Ok1vyH.png-9c5e6f7e1b54edaef1aae8c4d96a4cd6.ctex"]
 
 [params]
 

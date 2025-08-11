@@ -15,6 +15,12 @@ run/main_scene="res://Goblin's_Path/scenes/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Goblin's_Path/sprites/icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+
 [file_customization]
 
 folder_colors={

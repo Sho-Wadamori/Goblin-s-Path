@@ -27,6 +27,7 @@ signal object_thrown
 @export var default_speed: int = 100 # how fast the character moves
 @onready var despawn_timer = $object_despawn_timer # Timer to despawn thrwn object
 @onready var camera: Camera2D = get_node("Camera2D")
+@onready var collision: CollisionShape2D = $CollisionShape2D
 
 var SPEED = 50
 var direction: Vector2
@@ -41,6 +42,16 @@ var sneak = false
 var throw = false
 var throw_anim_played = false
 var current_anim = ""
+var auto_walk = false
+
+func _ready():
+	var current_scene_name = get_tree().current_scene.name
+	print(current_scene_name)
+	#await get_tree().create_timer(1).timeout
+	if current_scene_name == "Level1":
+		simulate_start_walk(2)
+	if current_scene_name == "Level2":
+		simulate_start_walk(0.5)
 
 # ------------------------- Every Tick -------------------------
 func _physics_process(_delta):
@@ -56,14 +67,19 @@ func movement():
 		return
 	
 	var input_direction = Vector2.ZERO
-	if Input.is_action_pressed("player_up"):
-		input_direction.y -= 1
-	if Input.is_action_pressed("player_down"):
-		input_direction.y += 1
-	if Input.is_action_pressed("player_left"):
-		input_direction.x -= 1
-	if Input.is_action_pressed("player_right"):
-		input_direction.x += 1
+	
+	if auto_walk:
+		input_direction.x += 1  # Walk right automatically
+		
+	else:
+		if Input.is_action_pressed("player_up"):
+			input_direction.y -= 1
+		if Input.is_action_pressed("player_down"):
+			input_direction.y += 1
+		if Input.is_action_pressed("player_left"):
+			input_direction.x -= 1
+		if Input.is_action_pressed("player_right"):
+			input_direction.x += 1
 	# prevent faster diagonal movement
 	if input_direction.length() > 0:
 		input_direction = input_direction.normalized()
@@ -140,7 +156,7 @@ func mechanics():
 	# ----- Sneaking Mechanics -----
 	if Input.is_action_pressed("player_sneak"):
 		player_sneaking.emit(true)
-		SPEED = 40
+		SPEED = 75
 		sneak = true
 	elif Input.is_action_pressed("player_speedbst"):
 		SPEED = 200
@@ -188,6 +204,7 @@ func update_animation():
 	var target_anim = ""
 	var target_speed = 1
 	if dead:
+		collision.disabled = true
 		target_anim = "death"
 		# Smooth zoom in on death
 		if camera and camera.zoom.length() > 1.2:
@@ -218,3 +235,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		await get_tree().create_timer(1.0).timeout
 		tree.change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
 		print("DEBUG: Player Killed")
+
+
+func simulate_start_walk(timer):
+	auto_walk = true
+	await get_tree().create_timer(timer).timeout
+	auto_walk = false

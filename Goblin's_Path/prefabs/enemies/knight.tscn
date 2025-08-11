@@ -487,13 +487,13 @@ shader_parameter/color_tolerance = 0.01
 [node name="CharacterBody2D" type="CharacterBody2D"]
 light_mask = 2
 y_sort_enabled = true
-position = Vector2(594, 300)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_ng0l2")
+SPEED = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, 38.8025)
+position = Vector2(-0.00250238, 0.00650033)
 rotation = 1.5708
 scale = Vector2(5.845, 5.845)
 shape = SubResource("CapsuleShape2D_hyy1v")
@@ -502,18 +502,19 @@ shape = SubResource("CapsuleShape2D_hyy1v")
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(8, 2.99997)
+position = Vector2(-1.19209e-07, -3.8147e-06)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_qocuc")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.470619
+frame_progress = 0.329342
+offset = Vector2(-0.171515, -6.12421)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(-0.51326, -15.911)
+position = Vector2(-0.0855445, -21.4713)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("5_fx0qe")
 
@@ -521,7 +522,7 @@ texture = ExtResource("5_fx0qe")
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(-0.51326, -15.911)
+position = Vector2(-0.0855445, -21.4713)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("6_avtxf")
 
@@ -530,12 +531,13 @@ light_mask = 2
 z_index = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_hbnsl")
-position = Vector2(8, 3)
+position = Vector2(-1.19209e-07, -3.8147e-06)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_qocuc")
 animation = &"walk"
 autoplay = "idle"
 frame_progress = 0.740162
+offset = Vector2(-0.171515, -6.12421)
 
 [node name="inspect_timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -561,22 +563,25 @@ mesh = SubResource("QuadMesh_um6ob")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 show_behind_parent = true
 z_index = -1
-position = Vector2(-0.999939, -1)
+position = Vector2(0, -45)
 scale = Vector2(1.862, 1.862)
 color = Color(0.615686, 0.615686, 0.615686, 1)
 energy = 0.5
 shadow_enabled = true
 texture = ExtResource("2_gxvw0")
-offset = Vector2(119.764, 3.75938)
+offset = Vector2(121, 3.75938)
+metadata/_edit_group_ = true
 
 [node name="Bitmap" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.25098)
 show_behind_parent = true
 z_index = -1
+position = Vector2(0, -45)
 scale = Vector2(1.862, 1.862)
 texture = ExtResource("2_gxvw0")
-offset = Vector2(117.333, 2.44444)
+offset = Vector2(121.027, 2.44444)
+metadata/_edit_group_ = true
 
 [node name="RayCast1" type="RayCast2D" parent="Bitmap"]
 position = Vector2(57.037, 6.51852)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://s31r16pncpev"]
 
 [ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/portal.gd" id="1_bg51y"]
-[ext_resource type="Texture2D" uid="uid://cw36ycktra5jp" path="res://tutorial files/2d_simple_game/sprites/Dimensional_Portal.png" id="2_ddkcp"]
+[ext_resource type="Texture2D" uid="uid://cw36ycktra5jp" path="res://Goblin's_Path/sprites/tilesets/Dimensional_Portal.png" id="2_ddkcp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10ln4"]
 atlas = ExtResource("2_ddkcp")

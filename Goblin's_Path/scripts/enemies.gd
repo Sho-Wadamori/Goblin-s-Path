@@ -23,11 +23,11 @@ class_name fov_enemy
 
 ## ------------------------- Variables -------------------------
 @export var player: CharacterBody2D
-@export var SPEED: int = 50 # Wander Speed
-@export var CHASE_SPEED: int = 150 # Chase Speed
+@export var SPEED: int = 75 # Wander Speed
+@export var CHASE_SPEED: int = 200 # Chase Speed
 @export var ACCELERATION: int = 300 # General Acceleration
 @export var wander_distance: float = 250 # Wandering Distance
-@export var detection_range: float = 125 # Detection range for all directions
+@export var detection_range: float = 1  #  FOV size scale
 # Wandering State
 @export var wander_change_interval: float = 2.0 # How often to change wander direction (seconds)
 @export var wander_angle_change: float = 60.0 # Max angle change when wandering (degrees)
@@ -59,6 +59,11 @@ class_name fov_enemy
 @onready var wander_idle_timer = $wander_idle_timer # Timer for stopping in place when wandering
 @onready var inspect_timer = $inspect_timer # Timer for how long to inspect
 
+const BASE_SCALE: float = 1.862 # Default Scale
+const NORMAL_SCALE = 1.0
+const SNEAK_SCALE = 1.227 / BASE_SCALE  # ~0.66
+const CHASE_INSPECT_SCALE = 2.4 / BASE_SCALE  # ~1.29
+
 ## State & Movement
 var direction: Vector2
 var spawn_position: Vector2 # Starting position for boundary checking
@@ -85,7 +90,7 @@ static var enemy_counter: int = 0
 func _ready():
 	enemy_counter += 1
 	enemy_id = enemy_counter
-	
+	apply_fov_scale(NORMAL_SCALE)
 	Question.hide()
 	Exclaim.hide()
 	
@@ -183,8 +188,8 @@ func look_for_object():
 				[/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b]\
 				[/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff]\
 				[b]TO [/b][/color][color=#00ff00][b]INSPECT STATE[/b][/color]")
-				bitmap.set_scale(Vector2(2.4, 2.4))
-				LightOccluder.set_scale(Vector2(2.4, 2.4))
+				
+				apply_fov_scale(CHASE_INSPECT_SCALE)
 
 func _on_inspect_timer_timeout():
 	current_state = States.WANDER
@@ -200,11 +205,9 @@ func _on_inspect_timer_timeout():
 	
 	# Reset bitmap scale to normal wander view
 	if is_player_sneaking:
-		view_range = Vector2(1.227, 1.227)
+		apply_fov_scale(SNEAK_SCALE)
 	else:
-		view_range = Vector2(1.862, 1.862)
-	bitmap.set_scale(view_range)
-	LightOccluder.set_scale(view_range)
+		apply_fov_scale(NORMAL_SCALE)
 
 ## ------------------------- Look For the Player -------------------------
 func look_for_player():
@@ -234,8 +237,9 @@ func look_for_player():
 	
 	if player_detected: # chase if player is detected
 		object_to_chase = null  # stop inspecting object
-		bitmap.set_scale(Vector2(2.4, 2.4))
-		LightOccluder.set_scale(Vector2(2.4, 2.4))
+		
+		apply_fov_scale(CHASE_INSPECT_SCALE)
+		
 		chase_player()
 		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
 		[/color][color=#00ff00]PLAYER[color=#ff0000] DISCOVERED[/color][/color]")
@@ -335,11 +339,9 @@ func change_direction(delta: float) -> void: # moving direction
 			change_wander_direction()
 			# Reset bitmap scale when object disappears
 			if is_player_sneaking:
-				view_range = Vector2(1.227, 1.227)
+				apply_fov_scale(SNEAK_SCALE)
 			else:
-				view_range = Vector2(1.862, 1.862)
-			bitmap.set_scale(view_range)
-			LightOccluder.set_scale(view_range)
+				apply_fov_scale(NORMAL_SCALE)
 
 func change_wander_direction():
 	# Change angle by a random amount within the specified range (smoother turning)
@@ -366,16 +368,13 @@ func change_view_distance():	# If sneaking
 	if is_sneaking != is_player_sneaking:
 		is_player_sneaking = is_sneaking
 		if current_state == States.INSPECT or current_state == States.CHASE:
-			view_range = Vector2(2.4, 2.4)
+			apply_fov_scale(CHASE_INSPECT_SCALE)
 		elif is_sneaking:
 			print("DEBUG: Player is sneaking")
-			view_range = Vector2(1.227, 1.227)
+			apply_fov_scale(SNEAK_SCALE)
 		else:
 			print("DEBUG: Player stopped sneaking")
-			view_range = Vector2(1.862, 1.862)
-		bitmap.set_scale(view_range)
-		LightOccluder.set_scale(view_range)
-
+			apply_fov_scale(NORMAL_SCALE)
 
 ## -------------------------  Animations -------------------------
 func update_animation():
@@ -441,6 +440,12 @@ func is_player_visible() -> bool:
 	check_raycast_for_player(ray_cast_3) or \
 	check_raycast_for_player(ray_cast_4) or \
 	check_raycast_for_player(ray_cast_5)
+
+func apply_fov_scale(multiplier: float = NORMAL_SCALE):
+	var scale_value = detection_range * BASE_SCALE * multiplier
+	var scale_vector = Vector2(scale_value, scale_value)
+	bitmap.scale = scale_vector
+	LightOccluder.scale = scale_vector
 
 ###### PLAYER CHASE MIDWAY INSPECTING ANIMATION
 ###### ENEMY ATTACK ANIMATION ON PLAYER COLLISION
