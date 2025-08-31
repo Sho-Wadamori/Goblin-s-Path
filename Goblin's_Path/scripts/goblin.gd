@@ -29,6 +29,10 @@ signal object_thrown
 @onready var camera: Camera2D = get_node("Camera2D")
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
+# sounds
+@onready var footstep_sound = $"Footstep-Sound"
+
+
 var SPEED = 50
 var direction: Vector2
 var previous_thrown_object: Node2D = null
@@ -204,19 +208,26 @@ func update_animation():
 	var target_anim = ""
 	var target_speed = 1
 	if dead:
+		footstep_sound.stop()
 		collision.disabled = true
 		target_anim = "death"
 		# Smooth zoom in on death
 		if camera and camera.zoom.length() > 1.2:
 			camera.zoom = camera.zoom.move_toward(Vector2(2.5, 2.5), 0.01)
+		
+		
 	elif throw:
 		target_anim = "attack"
+		footstep_sound.stop()
 	elif velocity.length() > 0:
 		target_anim = "walk"
+		if not footstep_sound.playing:
+			footstep_sound.play()
 		if sprint:
 			target_speed = 2
 	else:
 		target_anim = "idle"
+		footstep_sound.stop()
 	if target_anim != current_anim:
 		current_anim = target_anim
 		sprite.play(target_anim)
@@ -239,5 +250,12 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func simulate_start_walk(timer):
 	auto_walk = true
+	if not footstep_sound.playing:
+		footstep_sound.play()
 	await get_tree().create_timer(timer).timeout
 	auto_walk = false
+	footstep_sound.stop()
+
+## ------------------------- Sounds -------------------------
+func _play_footstep():
+	FootstepSoundManager.play_footstep(global_position)

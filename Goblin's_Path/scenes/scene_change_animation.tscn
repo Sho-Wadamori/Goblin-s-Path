@@ -62,6 +62,7 @@ offset_top = -25685.0
 offset_right = -59839.0
 offset_bottom = -24827.0
 scale = Vector2(80.5508, 80.5508)
+mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

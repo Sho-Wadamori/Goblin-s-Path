@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="First Project"
+config/name="Goblin's Path"
 run/main_scene="res://Goblin's_Path/scenes/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Goblin's_Path/sprites/icon.svg"
+
+[autoload]
+
+FootstepSoundManager="*res://Goblin's_Path/scripts/FootstepSoundManager.gd"
 
 [display]
 
@@ -91,3 +95,4 @@ testbutton={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -4,6 +4,7 @@ extends Node2D
 #@onready var enemy_prefab = preload("res://Goblin's_Path/prefabs/enemy(previous).tscn")
 
 @onready var SceneChangeAnimation = $SceneChangeAnimation/AnimationPlayer
+@onready var bg_music = $"bg_music"
 
 var score = 0
 
@@ -12,6 +13,7 @@ func _ready():
 	_update_ui()
 	SceneChangeAnimation.get_parent().get_node("ColorRect").color.a = 255
 	SceneChangeAnimation.play("fade_out")
+	bg_music.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

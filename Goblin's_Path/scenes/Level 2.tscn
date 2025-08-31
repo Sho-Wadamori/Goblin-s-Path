@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bstf628lherdy"]
+[gd_scene load_steps=22 format=4 uid="uid://bstf628lherdy"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scenes/level_2.gd" id="1_5w0wm"]
 [ext_resource type="TileSet" uid="uid://ba8232q1sqa5k" path="res://Goblin's_Path/sprites/tutorial.tres" id="2_v0ury"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://o2jj8f0o4qpy" path="res://Goblin's_Path/prefabs/goblin.tscn" id="6_agqhe"]
 [ext_resource type="Script" path="res://Goblin's_Path/scenes/next_level_area_level2.gd" id="9_nv0o4"]
 [ext_resource type="Texture2D" uid="uid://cw36ycktra5jp" path="res://Goblin's_Path/sprites/tilesets/Dimensional_Portal.png" id="9_v8ou2"]
+[ext_resource type="AudioStream" uid="uid://cu8vwfbomkqo4" path="res://Goblin's_Path/sprites/sound/dungeon-bg.mp3" id="10_2myko"]
 [ext_resource type="PackedScene" uid="uid://cqhxlctcqhwb6" path="res://Goblin's_Path/scenes/scene_change_animation.tscn" id="31_rqtgo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioc6g"]
@@ -285,6 +286,10 @@ frame_progress = 0.802062
 [node name="SceneChangeAnimation" parent="." instance=ExtResource("31_rqtgo")]
 position = Vector2(144, 168)
 metadata/_edit_lock_ = true
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_2myko")
+volume_db = -0.215
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="body_entered" from="next-level-area" to="next-level-area" method="_on_body_entered"]

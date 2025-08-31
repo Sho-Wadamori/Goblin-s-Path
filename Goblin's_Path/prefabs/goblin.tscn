@@ -1,8 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://o2jj8f0o4qpy"]
+[gd_scene load_steps=42 format=3 uid="uid://o2jj8f0o4qpy"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_nn12l"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="2_wxx26"]
 [ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="3_p15f5"]
+[ext_resource type="AudioStream" uid="uid://b0vr5o4jdofqi" path="res://Goblin's_Path/sprites/sound/grass_footsteps.mp3" id="4_3h84r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iujfw"]
 radius = 9.87878
@@ -323,6 +324,11 @@ one_shot = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ihjy6")
+
+[node name="Footstep-Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3h84r")
+volume_db = -0.115
+pitch_scale = 1.6
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_animation_finished"]
