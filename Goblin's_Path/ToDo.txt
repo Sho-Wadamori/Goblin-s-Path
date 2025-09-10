@@ -1,0 +1,12 @@
+Things to add:
+	background music for level 1
+	
+	
+	
+	sound fx for throw, sprint, sneak, chase
+	story part (recieving package and delivering)
+	Game over and complete music 
+	game complete score
+	checkpoints
+	health mechanic
+	Finish journal text

@@ -1,9 +1,18 @@
-[gd_scene load_steps=42 format=3 uid="uid://o2jj8f0o4qpy"]
+[gd_scene load_steps=59 format=3 uid="uid://o2jj8f0o4qpy"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_nn12l"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="2_wxx26"]
 [ext_resource type="Shader" path="res://Goblin's_Path/scripts/silhouette.gdshader" id="3_p15f5"]
 [ext_resource type="AudioStream" uid="uid://b0vr5o4jdofqi" path="res://Goblin's_Path/sprites/sound/grass_footsteps.mp3" id="4_3h84r"]
+[ext_resource type="PackedScene" uid="uid://d14vf1p5g51y0" path="res://Goblin's_Path/prefabs/timer.tscn" id="5_fod8w"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/level_intro.gd" id="6_0fs0v"]
+[ext_resource type="FontFile" uid="uid://da8hpdeu0yufv" path="res://Goblin's_Path/sprites/UI/m3x6.ttf" id="6_dyypu"]
+[ext_resource type="Texture2D" uid="uid://0ik7dv0jciln" path="res://Goblin's_Path/sprites/UI/divider-fade-005.png" id="7_l8d4d"]
+[ext_resource type="PackedScene" uid="uid://i23ug14mjg4e" path="res://Goblin's_Path/prefabs/joys_stick.tscn" id="9_y13j0"]
+[ext_resource type="Texture2D" uid="uid://bun08cscs75ao" path="res://Goblin's_Path/sprites/UI/book/icons/RPG_Spell_Skill_Meteorite_Strike_Comet.png" id="10_vbkkn"]
+[ext_resource type="Texture2D" uid="uid://dcqrrg681u3aj" path="res://Goblin's_Path/sprites/UI/joyring.png" id="11_0am2w"]
+[ext_resource type="Texture2D" uid="uid://curnhd8ph7yqw" path="res://Goblin's_Path/sprites/UI/book/icons/RPG_Skill_Dash_Dodge_Movement_Speed_Run_Sprint.png" id="12_7yfap"]
+[ext_resource type="Texture2D" uid="uid://d34skom8cf0gd" path="res://Goblin's_Path/sprites/UI/book/icons/RPG_Stat_Dexterity_Agility_Boots_Movement_Speed.png" id="12_nahnf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iujfw"]
 radius = 9.87878
@@ -278,6 +287,71 @@ height = 35.03
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ihjy6"]
 polygon = PackedVector2Array(-14.5455, 29.0909, 12.7272, 29.0909, 12.7272, 9.09088, -14.5455, 9.09088)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akbao"]
+content_margin_bottom = 19.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_rni6m"]
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_akbao")
+
+[sub_resource type="Animation" id="Animation_jqxnp"]
+resource_name = "LevelIntro"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fk24i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r38no"]
+_data = {
+"LevelIntro": SubResource("Animation_jqxnp"),
+"RESET": SubResource("Animation_fk24i")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaiyv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41jj1"]
+bg_color = Color(0.392157, 0.392157, 0.392157, 0.65098)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+
+[sub_resource type="Theme" id="Theme_lmgr6"]
+Button/styles/focus = SubResource("StyleBoxFlat_jaiyv")
+Button/styles/hover = SubResource("StyleBoxFlat_jaiyv")
+Button/styles/normal = SubResource("StyleBoxFlat_jaiyv")
+Button/styles/pressed = SubResource("StyleBoxFlat_41jj1")
+
 [node name="Goblin" type="CharacterBody2D"]
 position = Vector2(605, 353)
 scale = Vector2(0.55, 0.55)
@@ -327,11 +401,206 @@ occluder = SubResource("OccluderPolygon2D_ihjy6")
 
 [node name="Footstep-Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3h84r")
-volume_db = -0.115
+volume_db = 0.5
 pitch_scale = 1.6
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="Timer" parent="." instance=ExtResource("5_fod8w")]
+
+[node name="LevelIntro" type="CanvasLayer" parent="."]
+script = ExtResource("6_0fs0v")
+
+[node name="CenterContainer" type="CenterContainer" parent="LevelIntro"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 95.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelIntro/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelIntro/CenterContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_l8d4d")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LevelName" type="RichTextLabel" parent="LevelIntro/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(347.7, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.1
+theme = SubResource("Theme_rni6m")
+theme_override_fonts/normal_font = ExtResource("6_dyypu")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]Level Name
+"
+fit_content = true
+
+[node name="TextureRect2" type="TextureRect" parent="LevelIntro/CenterContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("7_l8d4d")
+expand_mode = 3
+stretch_mode = 5
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelIntro"]
+libraries = {
+"": SubResource("AnimationLibrary_r38no")
+}
+
+[node name="TouchControls" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TouchControlContainer" type="Control" parent="TouchControls"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JoystickContainer" type="Control" parent="TouchControls/TouchControlContainer"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="JoysStick" parent="TouchControls/TouchControlContainer/JoystickContainer" instance=ExtResource("9_y13j0")]
+position = Vector2(99, -62)
+scale = Vector2(0.055, 0.055)
+
+[node name="Throw" type="Control" parent="TouchControls/TouchControlContainer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ThrowButton" type="Button" parent="TouchControls/TouchControlContainer/Throw"]
+layout_mode = 0
+offset_left = -171.72
+offset_top = -243.72
+offset_right = -91.72
+offset_bottom = -163.72
+focus_mode = 0
+theme = SubResource("Theme_lmgr6")
+action_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="ThrowIcon" type="Sprite2D" parent="TouchControls/TouchControlContainer/Throw"]
+texture_filter = 1
+position = Vector2(-132.72, -204.72)
+scale = Vector2(3, 3)
+texture = ExtResource("10_vbkkn")
+
+[node name="ThrowRing" type="Sprite2D" parent="TouchControls/TouchControlContainer/Throw"]
+position = Vector2(-131.72, -203.72)
+scale = Vector2(0.043, 0.043)
+texture = ExtResource("11_0am2w")
+
+[node name="Sneak" type="Control" parent="TouchControls/TouchControlContainer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SneakButton" type="Button" parent="TouchControls/TouchControlContainer/Sneak"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018
+anchor_top = -0.607
+anchor_right = 0.043
+anchor_bottom = -0.582
+offset_left = -265.72
+offset_top = -109.72
+offset_right = -185.72
+offset_bottom = -29.72
+focus_mode = 0
+theme = SubResource("Theme_lmgr6")
+action_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="SneakIcon" type="Sprite2D" parent="TouchControls/TouchControlContainer/Sneak"]
+texture_filter = 1
+position = Vector2(-225.72, -94.72)
+scale = Vector2(3, 3)
+texture = ExtResource("12_nahnf")
+
+[node name="SneakRing" type="Sprite2D" parent="TouchControls/TouchControlContainer/Sneak"]
+position = Vector2(-224.72, -93.72)
+scale = Vector2(0.043, 0.043)
+texture = ExtResource("11_0am2w")
+
+[node name="Sprint" type="Control" parent="TouchControls/TouchControlContainer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SprintButton" type="Button" parent="TouchControls/TouchControlContainer/Sprint"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.000674438
+anchor_top = 0.0100006
+anchor_right = 0.999326
+anchor_bottom = 1.01
+offset_left = -149.973
+offset_top = -133.4
+offset_right = -69.973
+offset_bottom = -53.4
+focus_mode = 0
+theme = SubResource("Theme_lmgr6")
+action_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="SprintIcon" type="Sprite2D" parent="TouchControls/TouchControlContainer/Sprint"]
+texture_filter = 1
+position = Vector2(-91.473, -74.9)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("12_7yfap")
+
+[node name="SprintRing" type="Sprite2D" parent="TouchControls/TouchControlContainer/Sprint"]
+position = Vector2(-89.973, -73.4)
+scale = Vector2(0.0645, 0.0645)
+texture = ExtResource("11_0am2w")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_goblin_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area2d_body_entered"]
 [connection signal="timeout" from="object_despawn_timer" to="." method="_on_object_despawn_timer_timeout"]
+[connection signal="button_down" from="TouchControls/TouchControlContainer/Throw/ThrowButton" to="." method="_on_throw_button_down"]
+[connection signal="button_up" from="TouchControls/TouchControlContainer/Throw/ThrowButton" to="." method="_on_throw_button_up"]
+[connection signal="button_down" from="TouchControls/TouchControlContainer/Sneak/SneakButton" to="." method="_on_sneak_button_down"]
+[connection signal="button_up" from="TouchControls/TouchControlContainer/Sneak/SneakButton" to="." method="_on_sneak_button_up"]
+[connection signal="button_down" from="TouchControls/TouchControlContainer/Sprint/SprintButton" to="." method="_on_sprint_button_down"]
+[connection signal="button_up" from="TouchControls/TouchControlContainer/Sprint/SprintButton" to="." method="_on_sprint_button_up"]

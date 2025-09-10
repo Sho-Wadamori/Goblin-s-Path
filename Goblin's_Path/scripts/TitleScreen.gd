@@ -15,7 +15,7 @@ extends Control
 @onready var MainMenu = $"Main Menu"
 @onready var H2P = $HowToPlay
 @onready var Credits = $Credits
-#@onready var Settings = 
+@onready var Settings = $Settings
 @onready var Characters = $Characters
 @onready var Journal = $Characters/JournalMenu
 
@@ -49,8 +49,13 @@ func _ready() -> void:
 	## Sounds
 	bg_music.play() # play bg music
 	fire_crackle.play() # play fire crackle sound
+	$Settings/MusicSlider.value = 50
+	$Settings/SFXSlider.value = 50
+	_on_music_slider_value_changed($Settings/MusicSlider.value)
+	_on_sfx_slider_value_changed($Settings/SFXSlider.value)
 	
 	## Hide Everything
+	Settings.hide()
 	MainMenu.hide()
 	Credits.hide()
 	H2P.hide()
@@ -67,6 +72,12 @@ func _ready() -> void:
 	for i in Creatures.values(): # hide creature subpages
 		i.hide()
 	
+	# touch screen detection
+	if DisplayServer.is_touchscreen_available():
+		SettingsGlobal.touchscreen = true
+	else:
+		SettingsGlobal.touchscreen = false
+	
 	## Show main menu book parts
 	ConnectTitle.show() # show main menu title bg
 	MainMenu.show() # show main menu page
@@ -81,10 +92,16 @@ func _on_play_button_pressed() -> void:
 	click.play()
 	
 	## Scene Animation
+	var fade_time = 1  # seconds
+	var tween = create_tween()
+	tween.tween_property(bg_music, "volume_db", -80, fade_time)  # -80 dB is silence
+
 	SceneChangeAnimationParent.show() # show animation player node
 	SceneChangeAnimation.play("fade_in") # play animation
+	
 	await SceneChangeAnimation.animation_finished # pause everything until animation is finished
 	
+	bg_music.stop()
 	## Change Scene
 	get_tree().change_scene_to_file("res://Goblin's_Path/scenes/tutorial.tscn") # change to tutorial scene
 
@@ -104,7 +121,67 @@ func _on_quit_button_pressed() -> void:
 
 ## -------------------- Settings --------------------
 func _on_tab1_button_pressed() -> void:
-	pass # Replace with function body.
+	await page_flip_start() # hide everything & play animations
+	
+	# rebuild everything
+	Settings.show() # show credits page
+	
+	Home.show() # show back to main menu button
+	Tabs.show() # show tabs
+	Tab1.show()
+	Tab2.hide()
+	Tab3.hide()
+	Tab4.hide()
+	ActiveTabs.show() # show active tabs
+	FloatTitle.show() # show title floating title bg
+	
+	await page_flip_end()
+
+func _on_feedback_pressed() -> void:
+	OS.shell_open("http://godotengine.org")
+
+func _on_full_screen_pressed() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		# Already fullscreen → go back to windowed
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		SettingsGlobal.fullscreen = false
+	else:
+		# Not fullscreen → make it fullscreen
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		SettingsGlobal.fullscreen = true
+
+# turn 0 - 100 scale to db
+func slider_to_db(value: float) -> float:
+	var normalized = float(value) / 100.0
+	if normalized <= 0.001:
+		return -80.0  # silence
+	return lerp(-40.0, 0.0, normalized)
+
+# music volume slider
+func _on_music_slider_value_changed(value: float) -> void:
+	var db = slider_to_db(value)
+	var bus = AudioServer.get_bus_index("Music")
+	AudioServer.set_bus_volume_db(bus, db)
+	SettingsGlobal.music_volume = value
+
+# SFX volume slider
+func _on_sfx_slider_value_changed(value: float) -> void:
+	var db = slider_to_db(value)
+	var bus = AudioServer.get_bus_index("SFX")
+	AudioServer.set_bus_volume_db(bus, db)
+	SettingsGlobal.sfx_volume = value
+
+func _on_timer_pressed() -> void:
+	if SettingsGlobal.enable_timer:
+		SettingsGlobal.enable_timer = false
+	else:
+		SettingsGlobal.enable_timer = true
+
+func _on_touch_controls_pressed() -> void:
+	if SettingsGlobal.touchscreen:
+		SettingsGlobal.touchscreen = false
+	else:
+		SettingsGlobal.touchscreen = true
 
 
 ### -------------------- Credits --------------------
@@ -146,16 +223,6 @@ func _on_tab2_button_pressed() -> void:
 	await page_flip_end()
 
 
-### -------------------- Return Home --------------------
-func _on_home_pressed() -> void:
-	await page_flip_start() # hide everything & play animations
-	
-	MainMenu.show() # show main menu page
-	ConnectTitle.show() # show main menu title bg
-	
-	await page_flip_end()
-
-
 ### -------------------- Page Flip Start --------------------
 func page_flip_start():
 	click.play() # play click sound
@@ -168,6 +235,7 @@ func page_flip_start():
 	page_flip.play() # play page flipping sound 
 	
 	## Hide Everything
+	Settings.hide()
 	MainMenu.hide()
 	Credits.hide()
 	H2P.hide()
@@ -194,7 +262,26 @@ func page_flip_end():
 	SceneChangeAnimationParent.hide() # hide animationplayer node to allow user to click
 
 
-### -------------------- Journal Sub-Pages --------------------
+### -------------------- Journal --------------------
+func _on_tab3_button_pressed() -> void:
+	await page_flip_start() # hide everything & play animations
+	
+	# rebuild everything
+	Characters.show() # show characters/creatures main page
+	Journal.show() # show creature list/table of contents
+	
+	Home.show() # show back to main menu button
+	Tabs.show() # show tabs
+	Tab1.hide()
+	Tab2.hide()
+	Tab3.show()
+	Tab4.hide()
+	ActiveTabs.show() # show active tabs
+	FloatTitle.show() # show title floating title bg
+	
+	await page_flip_end()
+
+### Journal Sub-Pages 
 func _on_table_of_contents_meta_clicked(meta: Variant) -> void:
 	print(meta) # DEBUG PRINT
 	
@@ -208,7 +295,6 @@ func _on_table_of_contents_meta_clicked(meta: Variant) -> void:
 		await page_flip_end()
 	
 	print("Has Not Been Added Yet") # DEBUG PRINT
-
 
 func show_creature(index: int) -> void:
 	Characters.show() # show characters page
@@ -243,29 +329,18 @@ func _on_dev_button_pressed() -> void:
 	pass # Replace with function body.
 
 
+### -------------------- Return Home --------------------
+func _on_home_pressed() -> void:
+	await page_flip_start() # hide everything & play animations
+	
+	MainMenu.show() # show main menu page
+	ConnectTitle.show() # show main menu title bg
+	
+	await page_flip_end()
+
+
 ### -------------------- Next Page Button --------------------
 func _on_next_pressed() -> void:
 	await page_flip_start()
 	show_creature(current_creature_index + 1)
-	await page_flip_end()
-
-
-### -------------------- Journal --------------------
-func _on_tab3_button_pressed() -> void:
-	await page_flip_start() # hide everything & play animations
-	
-	
-	# rebuild everything
-	Characters.show() # show characters/creatures main page
-	Journal.show() # show creature list/table of contents
-	
-	Home.show() # show back to main menu button
-	Tabs.show() # show tabs
-	Tab1.hide()
-	Tab2.hide()
-	Tab3.show()
-	Tab4.hide()
-	ActiveTabs.show() # show active tabs
-	FloatTitle.show() # show title floating title bg
-	
 	await page_flip_end()

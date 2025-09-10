@@ -28,6 +28,9 @@ signal object_thrown
 @onready var despawn_timer = $object_despawn_timer # Timer to despawn thrwn object
 @onready var camera: Camera2D = get_node("Camera2D")
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var is_mobile = OS.has_feature("mobile") or OS.has_feature("HTML5")
+
+@onready var joystick = $TouchControls/TouchControlContainer/JoystickContainer/JoysStick
 
 # sounds
 @onready var footstep_sound = $"Footstep-Sound"
@@ -62,45 +65,60 @@ func _physics_process(_delta):
 	movement()
 	mechanics()
 	update_animation()
+	
+	if $TouchControls.visible != SettingsGlobal.touchscreen:
+		$TouchControls.visible = SettingsGlobal.touchscreen
 
 # ------------------------- Movement -------------------------
 func movement():
-	if dead or throw:  # <- prevent movement during death or throwing
+	if dead or throw:  # prevent movement during death or throwing
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
 	
-	var input_direction = Vector2.ZERO
+	var final_dir = Vector2.ZERO
 	
+	# --- Keyboard Input ---
 	if auto_walk:
-		input_direction.x += 1  # Walk right automatically
-		
+		final_dir.x += 1
 	else:
+		var keyboard_dir = Vector2.ZERO
 		if Input.is_action_pressed("player_up"):
-			input_direction.y -= 1
+			keyboard_dir.y -= 1
 		if Input.is_action_pressed("player_down"):
-			input_direction.y += 1
+			keyboard_dir.y += 1
 		if Input.is_action_pressed("player_left"):
-			input_direction.x -= 1
+			keyboard_dir.x -= 1
 		if Input.is_action_pressed("player_right"):
-			input_direction.x += 1
-	# prevent faster diagonal movement
-	if input_direction.length() > 0:
-		input_direction = input_direction.normalized()
-		direction = input_direction
-	# velocity calculation
-	velocity = input_direction * SPEED
+			keyboard_dir.x += 1
+		
+		if keyboard_dir.length() > 0:
+			final_dir = keyboard_dir.normalized()  # keyboard takes priority
+		else:
+			# --- Joystick Input ---
+			var joystick_dir = joystick.posVector
+			if joystick_dir.length() > 0:
+				final_dir = joystick_dir.normalized()
 	
-	# Rotate Sprite to face movement direction
-	# Update sprite facing based on movement direction
+	# Adjust speed for sneaking/sprinting
+	var move_speed = default_speed
+	if sneak:
+		move_speed = 75
+	elif sprint:
+		move_speed = 200
+		
+	# Set velocity
+	velocity = final_dir * move_speed
+	direction = final_dir  # for sprite flipping
+	
+	# Rotate sprite based on movement
 	if direction.x > 0:
 		sprite.flip_h = false
 		silhouette.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
 		silhouette.flip_h = true
-
-	# CharacterBody2D collision
+	
 	move_and_slide()
 
 # ------------------------- Mechanics -------------------------
@@ -152,6 +170,11 @@ func mechanics():
 		
 		throw_object.position = position + object_offset
 		get_parent().add_child(throw_object)
+		
+		# haptic feedback
+		if is_mobile:
+			Input.vibrate_handheld(70, 0.8)
+		
 		throw_object.add_to_group("ThrownObjects")
 		previous_thrown_object = throw_object
 		object_thrown.emit()
@@ -184,16 +207,18 @@ func mechanics():
 
 func _on_area2d_body_entered(body: Node2D) -> void:
 	if body is fov_enemy or body is four_direc_enemy:
-		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ffffff][/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#f6b26b]ENEMY[/color][color=#ffffff][/color][color=#ffffff] [/color][b][color=#ff0000]COLLIDED[/color][/b]")
+		#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#ffffff][/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#f6b26b]ENEMY[/color][color=#ffffff][/color][color=#ffffff] [/color][b][color=#ff0000]COLLIDED[/color][/b]")
 		#var explosion = explosion_prefab.instantiate()
 		#explosion.position = position
 		#get_parent().add_child(explosion)
 		dead = true
+		
+		# haptic feedback
+		if is_mobile:
+			Input.vibrate_handheld(100, 1.0)
+		
 		goblin_killed.emit()
 		#queue_free()
-		
-	else:
-		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] [/color][color=#00ff00]PLAYER[/color][color=#ffffff] [/color][color=#ffffff]& [/color][color=#00ffff]WALL [/color][b][color=#ff0000]COLLIDED[/color][/b]")
 
 
 func _on_object_despawn_timer_timeout() -> void:
@@ -235,7 +260,7 @@ func update_animation():
 	
 	sprite.speed_scale = target_speed
 	silhouette.speed_scale = target_speed
-	
+
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "attack":
@@ -259,3 +284,25 @@ func simulate_start_walk(timer):
 ## ------------------------- Sounds -------------------------
 func _play_footstep():
 	FootstepSoundManager.play_footstep(global_position)
+
+
+## ------------------------- Mobile -------------------------
+func _on_throw_button_down() -> void:
+	Input.action_press("player_throw")
+
+func _on_throw_button_up() -> void:
+	Input.action_release("player_throw")
+
+
+func _on_sneak_button_down() -> void:
+	Input.action_press("player_sneak")
+
+func _on_sneak_button_up() -> void:
+	Input.action_release("player_sneak")
+
+
+func _on_sprint_button_down() -> void:
+	Input.action_press("player_speedbst")
+
+func _on_sprint_button_up() -> void:
+	Input.action_release("player_speedbst")

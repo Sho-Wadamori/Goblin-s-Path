@@ -484,7 +484,7 @@ offset = Vector2(0.755906, -6.64567)
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0, -8.62992)
+position = Vector2(0, -15.276)
 scale = Vector2(0.472441, 0.472441)
 texture = ExtResource("5_v6w8h")
 

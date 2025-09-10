@@ -290,6 +290,7 @@ metadata/_edit_lock_ = true
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_2myko")
 volume_db = -0.215
+bus = &"Music"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="body_entered" from="next-level-area" to="next-level-area" method="_on_body_entered"]

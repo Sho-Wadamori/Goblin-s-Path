@@ -100,12 +100,11 @@ func _ready():
 	wander_direction = Vector2(cos(wander_angle), sin(wander_angle))
 	direction = wander_direction
 	object_detected = false	
-	print("Enemy ", enemy_id, " created at position ", position)
+	#print("Enemy ", enemy_id, " created at position ", position)
 	
 	player = get_node("../../Goblin")
-	print("Player found: ", player != null)
+	#print("Player found: ", player != null)
 	if player:
-		print("Player position: ", player.position)
 		# Connect the signal if needed
 		if player.has_signal("object_thrown"):
 			player.connect("object_thrown", Callable(self, "_on_goblin_object_thrown"))
@@ -131,15 +130,15 @@ func _physics_process(delta: float) -> void:
 	change_view_distance()
 	update_animation()
 	
-	if Input.is_action_just_pressed("testbutton"):  # Space bar
-		if player:
-			# Create different offsets for each enemy to avoid overlap
-			var offset = Vector2(enemy_id * 60, 0)  # Each enemy 60 pixels apart
-			position = player.position + offset
-			print("Enemy ", enemy_id, " teleported to player at: ", player.position, " with offset: ", offset)
-			print("Enemy ", enemy_id, " final position: ", position)
-		else:
-			print("Cannot teleport: player is null!")
+	#if Input.is_action_just_pressed("testbutton"):  # Space bar
+		#if player:
+			## Create different offsets for each enemy to avoid overlap
+			#var offset = Vector2(enemy_id * 60, 0)  # Each enemy 60 pixels apart
+			#position = player.position + offset
+			#print("Enemy ", enemy_id, " teleported to player at: ", player.position, " with offset: ", offset)
+			#print("Enemy ", enemy_id, " final position: ", position)
+		#else:
+			#print("Cannot teleport: player is null!")
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
@@ -159,10 +158,10 @@ func update_raycast_positions():
 ## ------------------------- Look For the Object -------------------------
 func _on_goblin_object_thrown() -> void:
 	object_detected = false
-	print("Enemy ", enemy_id, " received object_thrown signal, reset object_detected to false")
-	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
-	[/color][color=#ffffff]NEW[/color] [color=#00ffff]OBJECT[/color]\
-	[color=#00ffff] [color=#ff0000][b]THROWN[/b][/color][/color]")
+	#print("Enemy ", enemy_id, " received object_thrown signal, reset object_detected to false")
+	#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+	#[/color][color=#ffffff]NEW[/color] [color=#00ffff]OBJECT[/color]\
+	#[color=#00ffff] [color=#ff0000][b]THROWN[/b][/color][/color]")
 
 func get_thrown_object() -> Node2D:
 	var thrown_objects = get_tree().get_nodes_in_group("ThrownObjects")
@@ -181,13 +180,13 @@ func look_for_object():
 			
 			# start inspect timer (ONLY IF NOT ALREADY STARTED)
 			if inspect_timer.time_left == 0:
-				print("Starting inspect timer with wait_time: ", inspect_timer.wait_time)
+				#print("Starting inspect timer with wait_time: ", inspect_timer.wait_time)
 				inspect_timer.start()
-				print("Timer started, time_left: ", inspect_timer.time_left)
-				print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
-				[/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b]\
-				[/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff]\
-				[b]TO [/b][/color][color=#00ff00][b]INSPECT STATE[/b][/color]")
+				#print("Timer started, time_left: ", inspect_timer.time_left)
+				#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+				#[/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b]\
+				#[/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff]\
+				#[b]TO [/b][/color][color=#00ff00][b]INSPECT STATE[/b][/color]")
 				
 				apply_fov_scale(CHASE_INSPECT_SCALE)
 
@@ -241,8 +240,8 @@ func look_for_player():
 		apply_fov_scale(CHASE_INSPECT_SCALE)
 		
 		chase_player()
-		print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
-		[/color][color=#00ff00]PLAYER[color=#ff0000] DISCOVERED[/color][/color]")
+		#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
+		#[/color][color=#00ff00]PLAYER[color=#ff0000] DISCOVERED[/color][/color]")
 
 	elif current_state == States.CHASE:
 		stop_chase() # stop chase
@@ -264,7 +263,7 @@ func chase_player() -> void: # Chase the player
 func stop_chase() -> void: # Stop chasing the player
 	if chase_timer.time_left <= 0:
 		chase_timer.start()
-		print("DEBUG: Player out of view")
+		#print("DEBUG: Player out of view")
 
 
 ## ------------------------- Movement -------------------------
@@ -327,8 +326,6 @@ func change_direction(delta: float) -> void: # moving direction
 			if distance_to_object <= inspect_stop_distance:
 				if not is_close_to_inspect_object:
 					is_close_to_inspect_object = true
-					print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#00ff00] \
-					CLOSE ENOUGH TO OBJECT, STOPPING MOVEMENT[/color]")
 				direction = Vector2.ZERO # Stop moving toward object
 			else:
 				direction = (object_to_chase.position - position).normalized()
@@ -370,10 +367,8 @@ func change_view_distance():	# If sneaking
 		if current_state == States.INSPECT or current_state == States.CHASE:
 			apply_fov_scale(CHASE_INSPECT_SCALE)
 		elif is_sneaking:
-			print("DEBUG: Player is sneaking")
 			apply_fov_scale(SNEAK_SCALE)
 		else:
-			print("DEBUG: Player stopped sneaking")
 			apply_fov_scale(NORMAL_SCALE)
 
 ## -------------------------  Animations -------------------------

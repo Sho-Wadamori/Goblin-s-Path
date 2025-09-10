@@ -183,7 +183,7 @@ offset = Vector2(-0.164252, -24.0287)
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0, -10.6162)
+position = Vector2(0, -36.27)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("3_rnchg")
 
@@ -191,7 +191,7 @@ texture = ExtResource("3_rnchg")
 visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.171086, -36.2703)
+position = Vector2(0, -36.27)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("4_plex0")
 

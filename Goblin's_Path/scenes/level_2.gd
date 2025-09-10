@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var SceneChangeAnimation = $SceneChangeAnimation/AnimationPlayer
+@onready var LevelIntro = $YSorting/Goblin/LevelIntro/AnimationPlayer
 @onready var bg_music = $"bg_music"
 @onready var portalfade = $"Portal Fade"
 
@@ -12,6 +13,11 @@ func _ready() -> void:
 	# Fade out the portal after 1 second
 	portalfade.play("portal-fade")
 	bg_music.play()
+	
+	$YSorting/Goblin/LevelIntro/CenterContainer.modulate.a = 0.0
+	await get_tree().create_timer(0.5).timeout
+	LevelIntro.play("LevelIntro")
+	await LevelIntro.animation_finished
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

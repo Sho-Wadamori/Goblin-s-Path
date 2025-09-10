@@ -150,7 +150,6 @@ frame_progress = 0.774534
 offset = Vector2(-0.0821232, -12.4893)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
-visible = false
 z_index = 5
 texture_filter = 1
 position = Vector2(0.085542, -32.0787)
@@ -158,7 +157,6 @@ scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("3_yw1yv")
 
 [node name="Exlaim" type="Sprite2D" parent="AnimatedSprite2D"]
-visible = false
 z_index = 5
 texture_filter = 1
 position = Vector2(0.085542, -32.0787)

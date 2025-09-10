@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://d14vf1p5g51y0"]
+
+[ext_resource type="FontFile" uid="uid://da8hpdeu0yufv" path="res://Goblin's_Path/sprites/UI/m3x6.ttf" id="1_kw2bw"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/timer.gd" id="1_v3uci"]
+
+[sub_resource type="Animation" id="Animation_u6pga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ucpke"]
+resource_name = "TimerFadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0ajb2"]
+resource_name = "TimerFadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pxvmh"]
+_data = {
+"RESET": SubResource("Animation_u6pga"),
+"TimerFadeIn": SubResource("Animation_ucpke"),
+"TimerFadeOut": SubResource("Animation_0ajb2")
+}
+
+[node name="Timer" type="CanvasLayer"]
+script = ExtResource("1_v3uci")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 8.0
+offset_right = -39.0
+offset_bottom = 73.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("1_kw2bw")
+theme_override_font_sizes/font_size = 81
+text = "00.00"
+horizontal_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pxvmh")
+}

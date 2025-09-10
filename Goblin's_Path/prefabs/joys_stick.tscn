@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://i23ug14mjg4e"]
+
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/joys_stick.gd" id="1_lkj44"]
+[ext_resource type="Texture2D" uid="uid://dcqrrg681u3aj" path="res://Goblin's_Path/sprites/UI/joyring.png" id="2_hirjg"]
+[ext_resource type="Texture2D" uid="uid://ccolnucgs6rnm" path="res://Goblin's_Path/sprites/UI/joyknobpng.png" id="3_v3yei"]
+[ext_resource type="Script" path="res://Goblin's_Path/scripts/joyknob.gd" id="4_gdxpl"]
+
+[node name="JoysStick" type="Node2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_lkj44")
+
+[node name="Joyring" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_hirjg")
+
+[node name="Joyknob" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_v3yei")
+script = ExtResource("4_gdxpl")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -933.0
+offset_top = -933.0
+offset_right = 933.0
+offset_bottom = 933.0
+
+[connection signal="button_down" from="Button" to="Joyknob" method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="Joyknob" method="_on_button_button_up"]

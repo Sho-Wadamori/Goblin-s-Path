@@ -4,21 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="2_yhqp4"]
 [ext_resource type="Texture2D" uid="uid://1y50w2nrsaw5" path="res://Goblin's_Path/sprites/UI/Back.png" id="3_pc6oc"]
 [ext_resource type="Texture2D" uid="uid://boov218pxaiar" path="res://Goblin's_Path/sprites/envelope.png" id="4_i1hhp"]
-[ext_resource type="Texture2D" uid="uid://co4uwkhy2dfgp" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_BookCover01a.png" id="5_opvmn"]
+[ext_resource type="Texture2D" uid="uid://co4uwkhy2dfgp" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_BookCover01a.png" id="5_opvmn"]
 [ext_resource type="Texture2D" uid="uid://ck286mbqkkeie" path="res://Goblin's_Path/sprites/MediavelFree.png" id="6_l5ojn"]
 [ext_resource type="Texture2D" uid="uid://duci5o71l446s" path="res://Goblin's_Path/sprites/FreeHorrorUi.png" id="7_1hbt0"]
-[ext_resource type="Texture2D" uid="uid://irp6fcrhk66n" path="res://Goblin's_Path/sprites/UI/UI_TravelBookAnimated_Spritesheet01a.png" id="8_l8gmr"]
+[ext_resource type="Texture2D" uid="uid://irp6fcrhk66n" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBookAnimated_Spritesheet01a.png" id="8_l8gmr"]
 [ext_resource type="Texture2D" uid="uid://b0u7cyc4hnu2l" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_Spritesheet01a.png" id="9_mvkdn"]
-[ext_resource type="Texture2D" uid="uid://blw3q3wcoblf2" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_BookPageLeft01a.png" id="10_send1"]
-[ext_resource type="Texture2D" uid="uid://bhesux7fsq0h7" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_BookPageRight01a.png" id="11_y6l48"]
+[ext_resource type="Texture2D" uid="uid://blw3q3wcoblf2" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_BookPageLeft01a.png" id="10_send1"]
+[ext_resource type="Texture2D" uid="uid://bhesux7fsq0h7" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_BookPageRight01a.png" id="11_y6l48"]
 [ext_resource type="Texture2D" uid="uid://l8qa5qae4b50" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_Slot01b.png" id="12_bnnxr"]
 [ext_resource type="Texture2D" uid="uid://d2dynneenvsk" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_Select01a.png" id="13_dhtiq"]
 [ext_resource type="FontFile" uid="uid://da8hpdeu0yufv" path="res://Goblin's_Path/sprites/UI/m3x6.ttf" id="14_il600"]
-[ext_resource type="Texture2D" uid="uid://b3fev0uvvvt1c" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_IconPlay01a.png" id="15_ykes0"]
-[ext_resource type="Texture2D" uid="uid://btrpf5vf53ohu" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_IconGear01a.png" id="16_xlaql"]
-[ext_resource type="Texture2D" uid="uid://dajrdqfm053y6" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_IconCross01a.png" id="17_8fjy2"]
-[ext_resource type="Texture2D" uid="uid://dpifq3r141w7j" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_IconRestart01a.png" id="18_3iro2"]
-[ext_resource type="Texture2D" uid="uid://06dnnori8ea3" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_IconHome01a.png" id="19_rg6yn"]
+[ext_resource type="Texture2D" uid="uid://b3fev0uvvvt1c" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconPlay01a.png" id="15_ykes0"]
+[ext_resource type="Texture2D" uid="uid://btrpf5vf53ohu" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconGear01a.png" id="16_xlaql"]
+[ext_resource type="Texture2D" uid="uid://dajrdqfm053y6" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconCross01a.png" id="17_8fjy2"]
+[ext_resource type="Texture2D" uid="uid://dpifq3r141w7j" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconRestart01a.png" id="18_3iro2"]
+[ext_resource type="Texture2D" uid="uid://06dnnori8ea3" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconHome01a.png" id="19_rg6yn"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="20_tu3nr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vf8hd"]
@@ -1144,160 +1144,158 @@ scale = Vector2(13.9534, 13.9534)
 texture = ExtResource("3_pc6oc")
 metadata/_edit_group_ = true
 
+[node name="Envelope6" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(74.1756, 126.994)
+rotation = -0.523599
+scale = Vector2(1.15596, 1.15596)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope8" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(76.5404, 140.181)
+rotation = 0.0880606
+scale = Vector2(1.15596, 1.15596)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope9" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(71.9289, 152.189)
+rotation = -0.191986
+scale = Vector2(1.15596, 1.15596)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope10" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(73.4587, 141.973)
+rotation = 0.287979
+scale = Vector2(1.15596, 1.15596)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope11" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(82.0339, 132.911)
+rotation = -0.10472
+scale = Vector2(1.15596, 1.15596)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope7" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(44.2901, 94.1708)
+rotation = -0.392291
+scale = Vector2(1.0304, 1.0304)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope13" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(44.792, 86.2871)
+rotation = 0.462243
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope14" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(61.9922, 94.0273)
+rotation = 0.230587
+scale = Vector2(1.02704, 1.02704)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope15" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(57.4772, 85.4272)
+rotation = 0.0666455
+scale = Vector2(0.956198, 0.956198)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope16" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(77.0423, 96.1772)
+rotation = -0.172961
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope17" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(75.6805, 84.6388)
+rotation = 0.0498111
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope18" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(56.4019, 78.5473)
+rotation = 0.712618
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope19" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(46.2253, 77.1139)
+rotation = -0.00126303
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope20" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(68.8006, 75.7521)
+rotation = 0.452177
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope21" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(76.5404, 76.1821)
+rotation = -0.143152
+scale = Vector2(0.85151, 0.85151)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope5" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(0.0716553, 111.299)
+rotation = 0.57177
+scale = Vector2(1.91997, 1.91997)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(-6.73671, 134.161)
+rotation = -0.448247
+scale = Vector2(1.40216, 1.40216)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope4" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(46.5119, 111.514)
+rotation = -0.47142
+scale = Vector2(1.05357, 1.05357)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope3" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(43.4373, 118.642)
+rotation = -0.168167
+scale = Vector2(1.01015, 1.01015)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope12" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(43.5021, 126.421)
+rotation = 0.362596
+scale = Vector2(1.18813, 1.18813)
+texture = ExtResource("4_i1hhp")
+
+[node name="Envelope2" type="Sprite2D" parent="Back"]
+texture_filter = 1
+position = Vector2(29.6702, 135.666)
+rotation = 0.492358
+scale = Vector2(1.70986, 1.70986)
+texture = ExtResource("4_i1hhp")
+
 [node name="Settings3" type="Node2D" parent="."]
 texture_filter = 1
 position = Vector2(719.68, -1461.32)
 scale = Vector2(0.496652, 0.496652)
 metadata/_edit_group_ = true
-
-[node name="envelope" type="Node2D" parent="Settings3"]
-
-[node name="Envelope6" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2212.82, 4417.58)
-rotation = -0.523599
-scale = Vector2(32.4767, 32.4767)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope8" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2279.26, 4788.06)
-rotation = 0.0880606
-scale = Vector2(32.4767, 32.4767)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope9" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2149.7, 5125.44)
-rotation = -0.191986
-scale = Vector2(32.4767, 32.4767)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope10" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2192.68, 4838.4)
-rotation = 0.287979
-scale = Vector2(32.4767, 32.4767)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope11" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2433.6, 4583.81)
-rotation = -0.10472
-scale = Vector2(32.4767, 32.4767)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope7" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1373.19, 3495.41)
-rotation = -0.392291
-scale = Vector2(28.9489, 28.9489)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope13" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1387.29, 3273.92)
-rotation = 0.462243
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope14" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1870.53, 3491.38)
-rotation = 0.230587
-scale = Vector2(28.8546, 28.8546)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope15" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1743.68, 3249.76)
-rotation = 0.0666455
-scale = Vector2(26.8643, 26.8643)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope16" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2293.36, 3551.78)
-rotation = -0.172961
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope17" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2255.1, 3227.61)
-rotation = 0.0498111
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope18" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1713.47, 3056.47)
-rotation = 0.712618
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope19" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1427.56, 3016.2)
-rotation = -0.00126303
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope20" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2061.81, 2977.94)
-rotation = 0.452177
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope21" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(2279.26, 2990.02)
-rotation = -0.143152
-scale = Vector2(23.9231, 23.9231)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope5" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(130.876, 3976.63)
-rotation = 0.57177
-scale = Vector2(53.9413, 53.9413)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(-60.4046, 4618.93)
-rotation = -0.448247
-scale = Vector2(39.3936, 39.3936)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope4" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1435.61, 3982.67)
-rotation = -0.47142
-scale = Vector2(29.6, 29.6)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope3" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1349.23, 4182.93)
-rotation = -0.168167
-scale = Vector2(28.38, 28.38)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope12" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(1351.05, 4401.47)
-rotation = 0.362596
-scale = Vector2(33.3804, 33.3804)
-texture = ExtResource("4_i1hhp")
-
-[node name="Envelope2" type="Sprite2D" parent="Settings3/envelope"]
-texture_filter = 1
-position = Vector2(962.445, 4661.21)
-rotation = 0.492358
-scale = Vector2(48.0383, 48.0383)
-texture = ExtResource("4_i1hhp")
 
 [node name="book cover" type="Sprite2D" parent="Settings3"]
 position = Vector2(672.503, 4258.51)

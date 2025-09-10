@@ -77,18 +77,16 @@ autoplay = "idle"
 offset = Vector2(0.26005, -12.4003)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]
-visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.509845, -12.3216)
+position = Vector2(0.509845, -24)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("3_dvjwr")
 
 [node name="Exlaim" type="Sprite2D" parent="AnimatedSprite2D"]
-visible = false
 z_index = 5
 texture_filter = 1
-position = Vector2(0.509845, -12.3216)
+position = Vector2(0.509845, -24)
 scale = Vector2(0.513259, 0.513259)
 texture = ExtResource("4_ddpr8")
 
