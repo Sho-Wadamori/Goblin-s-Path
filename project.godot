@@ -25,6 +25,11 @@ SettingsGlobal="*res://Goblin's_Path/scripts/SettingsGlobal.gd"
 window/size/viewport_width=400
 window/size/viewport_height=225
 window/size/mode=2
+mouse_cursor/custom_image="res://Goblin's_Path/sprites/UI/cursor_big.png"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/User/Documents/School/2025 Game Design/movie/Users/User/Documents/School/2025 Game Design/movie"
 
 [file_customization]
 

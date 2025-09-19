@@ -154,9 +154,8 @@ texture_filter = 1
 position = Vector2(-5.96046e-08, -7.62939e-06)
 scale = Vector2(5.845, 5.845)
 sprite_frames = SubResource("SpriteFrames_y6il1")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.421759
 offset = Vector2(-0.0821263, -11.5395)
 
 [node name="Question" type="Sprite2D" parent="AnimatedSprite2D"]

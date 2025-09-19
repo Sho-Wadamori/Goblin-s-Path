@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b4gfg5maypgt3"]
+[gd_scene load_steps=8 format=4 uid="uid://dcx2y1gpgmfba"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scenes/level_2.gd" id="1_1vqqp"]
 [ext_resource type="TileSet" uid="uid://ba8232q1sqa5k" path="res://Goblin's_Path/sprites/tutorial.tres" id="2_kh8nc"]

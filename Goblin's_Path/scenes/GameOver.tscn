@@ -1,9 +1,11 @@
-[gd_scene load_steps=61 format=4 uid="uid://dkspk32ddst2e"]
+[gd_scene load_steps=69 format=4 uid="uid://dkspk32ddst2e"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/GameOver_Screen.gd" id="1_fid6f"]
 [ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="1_fwpq7"]
+[ext_resource type="Shader" path="res://Goblin's_Path/scenes/GameOver.gdshader" id="1_x78pd"]
 [ext_resource type="Texture2D" uid="uid://1y50w2nrsaw5" path="res://Goblin's_Path/sprites/UI/Back.png" id="4_bmelx"]
 [ext_resource type="Texture2D" uid="uid://boov218pxaiar" path="res://Goblin's_Path/sprites/envelope.png" id="5_cexym"]
+[ext_resource type="Texture2D" uid="uid://cnivekrjp66tn" path="res://Goblin's_Path/sprites/UI/map(1).png" id="5_u0xcc"]
 [ext_resource type="Texture2D" uid="uid://co4uwkhy2dfgp" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_BookCover01a.png" id="6_txyij"]
 [ext_resource type="Texture2D" uid="uid://ck286mbqkkeie" path="res://Goblin's_Path/sprites/MediavelFree.png" id="7_allly"]
 [ext_resource type="Texture2D" uid="uid://duci5o71l446s" path="res://Goblin's_Path/sprites/FreeHorrorUi.png" id="8_tb5qh"]
@@ -20,6 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="19_6xrhy"]
 [ext_resource type="Texture2D" uid="uid://dpifq3r141w7j" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconRestart01a.png" id="19_bb4ui"]
 [ext_resource type="Texture2D" uid="uid://06dnnori8ea3" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconHome01a.png" id="20_c5jp8"]
+[ext_resource type="AudioStream" uid="uid://b4wyp5lygm08y" path="res://Goblin's_Path/sprites/sound/overbgm.mp3" id="21_fiobm"]
+[ext_resource type="PackedScene" uid="uid://ed8loq44dr5k" path="res://Goblin's_Path/prefabs/scene_change_animation.tscn" id="23_bh8tc"]
+[ext_resource type="AudioStream" uid="uid://dx3snp4rxjboo" path="res://Goblin's_Path/sprites/sound/ui-click.mp3" id="23_h64mc"]
+[ext_resource type="AudioStream" uid="uid://2f81xedclne1" path="res://Goblin's_Path/sprites/sound/book_page-45210.mp3" id="24_fb6kc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vf8hd"]
 texture = ExtResource("7_allly")
@@ -857,6 +863,20 @@ sources/1 = SubResource("TileSetAtlasSource_xfiwa")
 sources/2 = SubResource("TileSetAtlasSource_4t0q5")
 sources/3 = SubResource("TileSetAtlasSource_724bc")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1p8x"]
+shader = ExtResource("1_x78pd")
+shader_parameter/shake_power = 0.003
+shader_parameter/shake_rate = 0.093
+shader_parameter/shake_speed = 1.905
+shader_parameter/shake_block_size = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3scl"]
+shader = ExtResource("1_x78pd")
+shader_parameter/shake_power = 0.015
+shader_parameter/shake_rate = 0.093
+shader_parameter/shake_speed = 1.905
+shader_parameter/shake_block_size = 1.0
+
 [sub_resource type="Theme" id="Theme_a8mw4"]
 
 [sub_resource type="Theme" id="Theme_2i0b8"]
@@ -1158,6 +1178,7 @@ position = Vector2(2212.82, 4417.58)
 rotation = -0.523599
 scale = Vector2(32.4767, 32.4767)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope8" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1172,6 +1193,7 @@ position = Vector2(2149.7, 5125.44)
 rotation = -0.191986
 scale = Vector2(32.4767, 32.4767)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope10" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1186,6 +1208,7 @@ position = Vector2(2433.6, 4583.81)
 rotation = -0.10472
 scale = Vector2(32.4767, 32.4767)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope7" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1200,6 +1223,7 @@ position = Vector2(1387.29, 3273.92)
 rotation = 0.462243
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope14" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1214,6 +1238,7 @@ position = Vector2(1743.68, 3249.76)
 rotation = 0.0666455
 scale = Vector2(26.8643, 26.8643)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope16" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1228,6 +1253,7 @@ position = Vector2(2255.1, 3227.61)
 rotation = 0.0498111
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope18" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1242,6 +1268,7 @@ position = Vector2(1427.56, 3016.2)
 rotation = -0.00126303
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope20" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1256,6 +1283,7 @@ position = Vector2(2279.26, 2990.02)
 rotation = -0.143152
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope5" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1270,6 +1298,7 @@ position = Vector2(-60.4046, 4618.93)
 rotation = -0.448247
 scale = Vector2(39.3936, 39.3936)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope4" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1284,6 +1313,7 @@ position = Vector2(1349.23, 4182.93)
 rotation = -0.168167
 scale = Vector2(28.38, 28.38)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope12" type="Sprite2D" parent="Settings3/envelope"]
 texture_filter = 1
@@ -1298,6 +1328,13 @@ position = Vector2(962.445, 4661.21)
 rotation = 0.492358
 scale = Vector2(48.0383, 48.0383)
 texture = ExtResource("5_cexym")
+flip_h = true
+
+[node name="PnxEbm" type="Sprite2D" parent="Settings3"]
+position = Vector2(-1187.31, 5310.2)
+rotation = 0.689178
+scale = Vector2(2.01348, 2.01348)
+texture = ExtResource("5_u0xcc")
 
 [node name="book cover" type="Sprite2D" parent="Settings3"]
 position = Vector2(672.503, 4258.51)
@@ -1373,6 +1410,7 @@ tile_set = SubResource("TileSet_p5n5x")
 
 [node name="candle" type="TileMapLayer" parent="Settings3"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_e1p8x")
 position = Vector2(1574.55, 3584)
 scale = Vector2(4.501, 4.501)
 tile_map_data = PackedByteArray("AAD8/wMAAAANAAIAAAA=")
@@ -1380,6 +1418,7 @@ tile_set = SubResource("TileSet_p5n5x")
 
 [node name="candle2" type="TileMapLayer" parent="Settings3"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_e1p8x")
 position = Vector2(271.82, 3584)
 scale = Vector2(4.501, 4.501)
 tile_map_data = PackedByteArray("AAD8/wMAAAANAAIAAAA=")
@@ -1407,6 +1446,7 @@ position = Vector2(225.51, 3775.28)
 rotation = -0.18326
 scale = Vector2(6.58, 6.58)
 texture = ExtResource("5_cexym")
+flip_h = true
 
 [node name="Envelope7" type="Sprite2D" parent="Settings3"]
 texture_filter = 1
@@ -1428,6 +1468,7 @@ texture = ExtResource("14_ykeyr")
 
 [node name="Title" type="RichTextLabel" parent="Settings3"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_k3scl")
 offset_left = 423.476
 offset_top = 3691.36
 offset_right = 1286.48
@@ -1489,13 +1530,6 @@ scale = Vector2(8.035, 14.975)
 tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
 tile_set = SubResource("TileSet_p5n5x")
 
-[node name="setting" type="TileMapLayer" parent="Settings3/buttons"]
-texture_filter = 1
-position = Vector2(7170.65, -267.149)
-scale = Vector2(8.035, 11.905)
-tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
-tile_set = SubResource("TileSet_p5n5x")
-
 [node name="quit" type="TileMapLayer" parent="Settings3/buttons"]
 texture_filter = 1
 position = Vector2(720.684, -3547.22)
@@ -1513,19 +1547,6 @@ theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("15_ulos6")
 theme_override_font_sizes/normal_font_size = 166
 text = "Play Again"
-scroll_active = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Settings" type="RichTextLabel" parent="Settings3/buttons"]
-texture_filter = 1
-offset_left = 7394.15
-offset_top = 6014.92
-offset_right = 7744.16
-offset_bottom = 6191.92
-theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
-theme_override_fonts/normal_font = ExtResource("15_ulos6")
-theme_override_font_sizes/normal_font_size = 181
-text = "Settings"
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
@@ -1557,6 +1578,7 @@ offset_bottom = 4052.01
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_a8mw4")
 flat = true
 metadata/_edit_group_ = true
@@ -1575,6 +1597,7 @@ offset_bottom = 5046.73
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_a8mw4")
 flat = true
 metadata/_edit_group_ = true
@@ -1593,10 +1616,44 @@ offset_bottom = 4404.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_2i0b8")
 flat = true
 
+[node name="PlayAgain" type="Sprite2D" parent="Settings3/buttons"]
+position = Vector2(810.064, 4114.19)
+scale = Vector2(8.054, 8.054)
+texture = ExtResource("19_bb4ui")
+
+[node name="Home" type="Sprite2D" parent="Settings3/buttons"]
+position = Vector2(822.145, 4464.53)
+scale = Vector2(8.054, 8.054)
+texture = ExtResource("20_c5jp8")
+
+[node name="setting" type="TileMapLayer" parent="Settings3/buttons"]
+visible = false
+texture_filter = 1
+position = Vector2(7170.65, -267.149)
+scale = Vector2(8.035, 11.905)
+tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
+tile_set = SubResource("TileSet_p5n5x")
+
+[node name="Settings" type="RichTextLabel" parent="Settings3/buttons"]
+visible = false
+texture_filter = 1
+offset_left = 7394.15
+offset_top = 6014.92
+offset_right = 7744.16
+offset_bottom = 6191.92
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("15_ulos6")
+theme_override_font_sizes/normal_font_size = 181
+text = "Settings"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
 [node name="SettingsButton" type="Button" parent="Settings3/buttons"]
+visible = false
 texture_filter = 1
 anchors_preset = -1
 anchor_left = 1.18604
@@ -1634,16 +1691,6 @@ position = Vector2(814.091, 4464.53)
 scale = Vector2(8.05393, 8.05393)
 texture = ExtResource("18_dula8")
 
-[node name="PlayAgain" type="Sprite2D" parent="Settings3/buttons"]
-position = Vector2(810.064, 4114.19)
-scale = Vector2(8.054, 8.054)
-texture = ExtResource("19_bb4ui")
-
-[node name="Home" type="Sprite2D" parent="Settings3/buttons"]
-position = Vector2(822.145, 4464.53)
-scale = Vector2(8.054, 8.054)
-texture = ExtResource("20_c5jp8")
-
 [node name="Goblin" type="CharacterBody2D" parent="Settings3"]
 position = Vector2(302.022, 4316.91)
 scale = Vector2(9.89623, 9.89623)
@@ -1668,6 +1715,52 @@ texture = ExtResource("5_cexym")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1058.68, 641.68)
 metadata/_edit_group_ = true
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_fiobm")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_h64mc")
+bus = &"SFX"
+
+[node name="page_flip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_fb6kc")
+volume_db = 0.355
+bus = &"SFX"
+
+[node name="SceneChangeAnimation" parent="." instance=ExtResource("23_bh8tc")]
+
+[node name="Score" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 1565.33
+offset_top = 1875.0
+offset_right = 1953.33
+offset_bottom = 2018.0
+scale = Vector2(0.455, 0.455)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("15_ulos6")
+theme_override_font_sizes/normal_font_size = 166
+bbcode_enabled = true
+text = "Score:"
+fit_content = true
+scroll_active = false
+
+[node name="ScoreValue" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 1516.0
+offset_top = 1903.0
+offset_right = 1912.0
+offset_bottom = 2046.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("15_ulos6")
+theme_override_font_sizes/normal_font_size = 166
+bbcode_enabled = true
+text = "[center]00:00.00"
+scroll_active = false
 
 [connection signal="pressed" from="Settings3/buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Settings3/buttons/QuitButton" to="." method="_on_quit_button_pressed"]

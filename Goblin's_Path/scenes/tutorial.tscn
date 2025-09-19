@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cylcvgde4swim"]
+[gd_scene load_steps=24 format=4 uid="uid://cylcvgde4swim"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/tutorial.gd" id="1_uklbp"]
 [ext_resource type="Theme" uid="uid://brfp7htr8mxss" path="res://Goblin's_Path/sprites/new_theme.tres" id="2_80bom"]
@@ -12,12 +12,13 @@
 [ext_resource type="Script" path="res://tutorial files/2d_simple_game/scripts/portal.gd" id="6_rl05p"]
 [ext_resource type="PackedScene" uid="uid://e1rxideekdxk" path="res://Goblin's_Path/prefabs/enemies/blue_slime.tscn" id="7_heyed"]
 [ext_resource type="Texture2D" uid="uid://ck0hwd5tepgic" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_FrameSelect01b.png" id="9_1vuqs"]
-[ext_resource type="PackedScene" uid="uid://cqhxlctcqhwb6" path="res://Goblin's_Path/scenes/scene_change_animation.tscn" id="9_8lxb0"]
 [ext_resource type="FontFile" uid="uid://da8hpdeu0yufv" path="res://Goblin's_Path/sprites/UI/m3x6.ttf" id="10_imhhx"]
 [ext_resource type="Texture2D" uid="uid://l8qa5qae4b50" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_Slot01b.png" id="11_2axdy"]
 [ext_resource type="Texture2D" uid="uid://boov218pxaiar" path="res://Goblin's_Path/sprites/envelope.png" id="12_333ep"]
 [ext_resource type="AudioStream" uid="uid://11rm7uu2eavt" path="res://Goblin's_Path/sprites/sound/a-real-wild-forest-285327.mp3" id="17_wteeo"]
+[ext_resource type="PackedScene" uid="uid://ed8loq44dr5k" path="res://Goblin's_Path/prefabs/scene_change_animation.tscn" id="17_y0s4j"]
 [ext_resource type="AudioStream" uid="uid://ku2yw4qf746n" path="res://Goblin's_Path/sprites/sound/spring-forest-nature-332842.mp3" id="18_6427s"]
+[ext_resource type="Texture2D" uid="uid://cylati3br5rhf" path="res://Goblin's_Path/sprites/UI/book/BoxEmpty.png" id="19_dyke2"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1t387"]
 
@@ -30,6 +31,9 @@ shader_parameter/noise_scale = 0.005
 shader_parameter/rotation_strength = 1.0
 shader_parameter/rotation_pivot = Vector2(0.5, 1)
 shader_parameter/noise_texture = ExtResource("6_5ni0s")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8bhf"]
+size = Vector2(66.0125, 224.799)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqdig"]
 
@@ -85,6 +89,21 @@ position = Vector2(-1, 0)
 scale = Vector2(1.5, 1.5)
 tile_map_data = PackedByteArray("AABbANz/AAAEABMAAABdANr/AAAEABMAAABeANv/AAAEABMAAABmANz/AAAEABMAAABoANr/AAAEABMAAABwANz/AAAHABMAAAAKAA8AAAAKABYAAAAKABAAAAAMABgAAAAJABAAAAAKABYAAAAJABEAAAAMABgAAAAEABEAAAALABgAAAAFABEAAAALABgAAAAGABEAAAALABgAAAAHABEAAAALABgAAAAIABEAAAALABgAAAADABEAAAAKABgAAAADABAAAAAMABYAAAABAA8AAAAMABYAAAABABAAAAAKABgAAAACABAAAAALABgAAAAEAAYAAAABABkAAAANAAkAAAABABgAAAATAAcAAAABABkAAAASABEAAAABABgAAAAhAA0AAAABABkAAAAWABAAAAABABkAAAALAA8AAAAJABgAAAABAAsAAAAMABgAAAADAAoAAAAMABgAAAAAAA8AAAAKABgAAAABAAoAAAAKABYAAAAAAAsAAAAKABYAAAAAAAwAAAAKABcAAAAAAA0AAAAKABcAAAAAAA4AAAAKABcAAAACAAoAAAALABgAAAAEAAkAAAALABgAAAAFAAkAAAALABgAAAAGAAkAAAALABgAAAAHAAkAAAALABgAAAAIAAkAAAALABgAAAADAAkAAAAKABYAAAAJAAkAAAAMABYAAAAJAAoAAAAKABgAAAAKAAsAAAAKABgAAAALAAsAAAAJABgAAAAYAA4AAAACABcAAAAYABAAAAACABcAAAAdAAkAAAACABcAAAAKAAoAAAAMABYAAAAiAA8AAAABABgAAAA=")
 tile_set = ExtResource("5_x6vty")
+
+[node name="package" type="Area2D" parent="YSorting"]
+position = Vector2(280, 316)
+scale = Vector2(1.121, 1.121)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSorting/package"]
+position = Vector2(-11.5968, 4.4603)
+shape = SubResource("RectangleShape2D_o8bhf")
+
+[node name="Envelope" type="Sprite2D" parent="YSorting/package"]
+y_sort_enabled = true
+texture_filter = 1
+rotation = 0.176718
+texture = ExtResource("12_333ep")
+offset = Vector2(-0.892059, 0)
 
 [node name="Enemies" type="Node2D" parent="YSorting"]
 y_sort_enabled = true
@@ -264,12 +283,57 @@ text = "Press shift to sneak, making sneaking past enemies easier!"
 fit_content = true
 scroll_active = false
 
-[node name="SceneChangeAnimation" parent="." instance=ExtResource("9_8lxb0")]
-z_index = 4096
+[node name="toastNotification" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="toastNotification"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 370.0
+offset_top = -340.0
+offset_right = 370.0
+offset_bottom = -340.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="toastNotification/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -334.0
+offset_top = -72.5
+offset_right = -272.0
+offset_bottom = -57.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(6, 6)
+texture = ExtResource("19_dyke2")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="toastNotification/Control/TextureRect"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 101.0
+offset_bottom = 25.0
+scale = Vector2(0.52, 0.52)
+theme_override_colors/font_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("10_imhhx")
+text = "Deliver the package to
+the Goblin in the dungeon"
+
+[node name="SceneChangeAnimation" parent="." instance=ExtResource("17_y0s4j")]
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_wteeo")
 volume_db = -10.0
+autoplay = true
 bus = &"Music"
 
 [node name="birds" type="AudioStreamPlayer" parent="."]
@@ -278,6 +342,7 @@ volume_db = -30.0
 autoplay = true
 bus = &"Music"
 
+[connection signal="body_entered" from="YSorting/package" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="enemy_timer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="timeout" from="restart_timer" to="." method="_on_restart_timer_timeout"]
 [connection signal="body_entered" from="next-level-area" to="next-level-area" method="_on_body_entered"]

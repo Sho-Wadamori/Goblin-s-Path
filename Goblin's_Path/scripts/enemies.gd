@@ -62,7 +62,8 @@ class_name fov_enemy
 const BASE_SCALE: float = 1.862 # Default Scale
 const NORMAL_SCALE = 1.0
 const SNEAK_SCALE = 1.227 / BASE_SCALE  # ~0.66
-const CHASE_INSPECT_SCALE = 2.4 / BASE_SCALE  # ~1.29
+const CHASE_INSPECT_SCALE = 2.5 / BASE_SCALE  # ~1.29
+const SPRINT_SCALE = 2.2 / BASE_SCALE # ~1.07
 
 ## State & Movement
 var direction: Vector2
@@ -100,16 +101,16 @@ func _ready():
 	wander_direction = Vector2(cos(wander_angle), sin(wander_angle))
 	direction = wander_direction
 	object_detected = false	
-	#print("Enemy ", enemy_id, " created at position ", position)
+	#print_debug("Enemy ", enemy_id, " created at position ", position)
 	
 	player = get_node("../../Goblin")
-	#print("Player found: ", player != null)
+	#print_debug("Player found: ", player != null)
 	if player:
 		# Connect the signal if needed
 		if player.has_signal("object_thrown"):
 			player.connect("object_thrown", Callable(self, "_on_goblin_object_thrown"))
 	else:
-		print("error!!!")
+		print_debug("error!!!")
 
 
 
@@ -129,16 +130,6 @@ func _physics_process(delta: float) -> void:
 	update_raycast_positions()
 	change_view_distance()
 	update_animation()
-	
-	#if Input.is_action_just_pressed("testbutton"):  # Space bar
-		#if player:
-			## Create different offsets for each enemy to avoid overlap
-			#var offset = Vector2(enemy_id * 60, 0)  # Each enemy 60 pixels apart
-			#position = player.position + offset
-			#print("Enemy ", enemy_id, " teleported to player at: ", player.position, " with offset: ", offset)
-			#print("Enemy ", enemy_id, " final position: ", position)
-		#else:
-			#print("Cannot teleport: player is null!")
 
 ## ------------------------- Set Raycast Positions -------------------------
 func update_raycast_positions():
@@ -158,7 +149,7 @@ func update_raycast_positions():
 ## ------------------------- Look For the Object -------------------------
 func _on_goblin_object_thrown() -> void:
 	object_detected = false
-	#print("Enemy ", enemy_id, " received object_thrown signal, reset object_detected to false")
+	#print_debug("Enemy ", enemy_id, " received object_thrown signal, reset object_detected to false")
 	#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
 	#[/color][color=#ffffff]NEW[/color] [color=#00ffff]OBJECT[/color]\
 	#[color=#00ffff] [color=#ff0000][b]THROWN[/b][/color][/color]")
@@ -180,9 +171,9 @@ func look_for_object():
 			
 			# start inspect timer (ONLY IF NOT ALREADY STARTED)
 			if inspect_timer.time_left == 0:
-				#print("Starting inspect timer with wait_time: ", inspect_timer.wait_time)
+				#print_debug("Starting inspect timer with wait_time: ", inspect_timer.wait_time)
 				inspect_timer.start()
-				#print("Timer started, time_left: ", inspect_timer.time_left)
+				#print_debug("Timer started, time_left: ", inspect_timer.time_left)
 				#print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] \
 				#[/color][color=#ff0000]ENEMY[/color][color=#ff0000][b] [/b]\
 				#[/color][color=#ff0000][b]SWITCHED [/b][/color][color=#ffffff]\
@@ -194,9 +185,7 @@ func _on_inspect_timer_timeout():
 	current_state = States.WANDER
 	is_close_to_inspect_object = false
 	change_wander_direction()
-	print_rich("[b][color=#ffff00]DEBUG:[/color][/b][color=#ff0000] FINISHED \
-	[/color][color=#00ff00]INSPECTING[/color][color=#ff0000], [/color][color=#ffffff]\
-	RETURNING TO [/color][color=#00ff00]WANDER STATE[/color][color=#ff0000] [/color]")
+	print_debug("DEBUG: FINISHED, RETURNING TO WANDER STATE")
 	object_detected = true
 	
 	Question.hide()
@@ -214,7 +203,7 @@ func look_for_player():
 
 	# Error Message
 	if not ray_cast_1 or not ray_cast_2 or not ray_cast_3 or not ray_cast_4 or not ray_cast_5:
-		print_rich("[b]ERROR: PATH NOT WORKING :([/b][/color]")
+		print_debug("ERROR: PATH NOT WORKING")
 		return
 
 	# Force raycast update
@@ -263,7 +252,7 @@ func chase_player() -> void: # Chase the player
 func stop_chase() -> void: # Stop chasing the player
 	if chase_timer.time_left <= 0:
 		chase_timer.start()
-		#print("DEBUG: Player out of view")
+		#print_debug("DEBUG: Player out of view")
 
 
 ## ------------------------- Movement -------------------------
@@ -362,14 +351,28 @@ func _on_timer_timeout(): # Return to Wander State after timeout
 func change_view_distance():	# If sneaking
 	# Only do something if the state actually changed
 	var is_sneaking = Input.is_action_pressed("player_sneak")
-	if is_sneaking != is_player_sneaking:
-		is_player_sneaking = is_sneaking
-		if current_state == States.INSPECT or current_state == States.CHASE:
-			apply_fov_scale(CHASE_INSPECT_SCALE)
-		elif is_sneaking:
-			apply_fov_scale(SNEAK_SCALE)
-		else:
-			apply_fov_scale(NORMAL_SCALE)
+	var is_sprinting = Input.is_action_pressed("player_speedbst")
+	
+	var _new_player_state = "normal"
+	if is_sneaking:
+		_new_player_state = "sneaking"
+	elif is_sprinting:
+		_new_player_state = "sprinting"
+	
+	var _current_player_state = "normal"
+	if is_player_sneaking:
+		_current_player_state = "sneaking"
+	
+	if current_state == States.INSPECT or current_state == States.CHASE:
+		apply_fov_scale(CHASE_INSPECT_SCALE)
+	elif is_sneaking:
+		apply_fov_scale(SNEAK_SCALE)
+	elif is_sprinting:
+		apply_fov_scale(SPRINT_SCALE)
+	else:
+		apply_fov_scale(NORMAL_SCALE)
+	
+	is_player_sneaking = is_sneaking
 
 ## -------------------------  Animations -------------------------
 func update_animation():
@@ -442,5 +445,6 @@ func apply_fov_scale(multiplier: float = NORMAL_SCALE):
 	bitmap.scale = scale_vector
 	LightOccluder.scale = scale_vector
 
+###### THINGS TO FIX:
 ###### PLAYER CHASE MIDWAY INSPECTING ANIMATION
 ###### ENEMY ATTACK ANIMATION ON PLAYER COLLISION

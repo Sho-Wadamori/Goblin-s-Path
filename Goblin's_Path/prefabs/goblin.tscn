@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://o2jj8f0o4qpy"]
+[gd_scene load_steps=60 format=3 uid="uid://o2jj8f0o4qpy"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/goblin.gd" id="1_nn12l"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="2_wxx26"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dcqrrg681u3aj" path="res://Goblin's_Path/sprites/UI/joyring.png" id="11_0am2w"]
 [ext_resource type="Texture2D" uid="uid://curnhd8ph7yqw" path="res://Goblin's_Path/sprites/UI/book/icons/RPG_Skill_Dash_Dodge_Movement_Speed_Run_Sprint.png" id="12_7yfap"]
 [ext_resource type="Texture2D" uid="uid://d34skom8cf0gd" path="res://Goblin's_Path/sprites/UI/book/icons/RPG_Stat_Dexterity_Agility_Boots_Movement_Speed.png" id="12_nahnf"]
+[ext_resource type="AudioStream" uid="uid://dtfb8lnu2vfd" path="res://Goblin's_Path/sprites/sound/axe-slash-1-106748.mp3" id="14_djo1x"]
+[ext_resource type="Texture2D" uid="uid://b0u7cyc4hnu2l" path="res://Goblin's_Path/sprites/UI/UI_TravelBook_Spritesheet01a.png" id="15_82gq0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iujfw"]
 radius = 9.87878
@@ -295,42 +297,13 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 RichTextLabel/constants/line_separation = 0
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_akbao")
 
-[sub_resource type="Animation" id="Animation_jqxnp"]
-resource_name = "LevelIntro"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_h814v"]
+atlas = ExtResource("15_82gq0")
+region = Rect2(66, 675, 13, 10)
 
-[sub_resource type="Animation" id="Animation_fk24i"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_r38no"]
-_data = {
-"LevelIntro": SubResource("Animation_jqxnp"),
-"RESET": SubResource("Animation_fk24i")
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpikb"]
+atlas = ExtResource("15_82gq0")
+region = Rect2(98, 675, 13, 10)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaiyv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -399,12 +372,6 @@ one_shot = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ihjy6")
 
-[node name="Footstep-Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_3h84r")
-volume_db = 0.5
-pitch_scale = 1.6
-bus = &"SFX"
-
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
 
@@ -414,10 +381,12 @@ current = true
 script = ExtResource("6_0fs0v")
 
 [node name="CenterContainer" type="CenterContainer" parent="LevelIntro"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 95.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelIntro/CenterContainer"]
 layout_mode = 2
@@ -452,10 +421,95 @@ expand_mode = 3
 stretch_mode = 5
 flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelIntro"]
-libraries = {
-"": SubResource("AnimationLibrary_r38no")
-}
+[node name="Footstep-Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3h84r")
+volume_db = 0.5
+pitch_scale = 1.6
+bus = &"SFX"
+
+[node name="throw" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_djo1x")
+volume_db = -3.0
+bus = &"SFX"
+
+[node name="Health" type="CanvasLayer" parent="."]
+scale = Vector2(2.21, 2.21)
+transform = Transform2D(2.21, 0, 0, 2.21, 0, 0)
+
+[node name="Control" type="Control" parent="Health"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchor_right = 0.45
+anchor_bottom = 0.45
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Health/Control"]
+visible = false
+modulate = Color(1, 1, 1, 0.403922)
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 100.0
+offset_bottom = 37.0
+texture = ExtResource("15_82gq0")
+region_rect = Rect2(65, 289, 30, 30)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Health/Control"]
+layout_mode = 1
+offset_top = 14.0
+offset_right = 63.0
+offset_bottom = 24.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/separation = 8
+
+[node name="Control3" type="Control" parent="Health/Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Filled1" type="TextureRect" parent="Health/Control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_h814v")
+stretch_mode = 5
+
+[node name="Empty1" type="TextureRect" parent="Health/Control/HBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_rpikb")
+stretch_mode = 5
+
+[node name="Filled2" type="TextureRect" parent="Health/Control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_h814v")
+stretch_mode = 5
+
+[node name="Empty2" type="TextureRect" parent="Health/Control/HBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_rpikb")
+stretch_mode = 5
+
+[node name="Filled3" type="TextureRect" parent="Health/Control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_h814v")
+stretch_mode = 5
+
+[node name="Empty3" type="TextureRect" parent="Health/Control/HBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_rpikb")
+stretch_mode = 5
 
 [node name="TouchControls" type="CanvasLayer" parent="."]
 visible = false

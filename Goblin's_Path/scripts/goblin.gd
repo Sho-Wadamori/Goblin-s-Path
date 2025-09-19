@@ -29,6 +29,7 @@ signal object_thrown
 @onready var camera: Camera2D = get_node("Camera2D")
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var is_mobile = OS.has_feature("mobile") or OS.has_feature("HTML5")
+@onready var throw_sfx = $throw
 
 @onready var joystick = $TouchControls/TouchControlContainer/JoystickContainer/JoysStick
 
@@ -50,15 +51,22 @@ var throw = false
 var throw_anim_played = false
 var current_anim = ""
 var auto_walk = false
+var death_handled = false
 
 func _ready():
 	var current_scene_name = get_tree().current_scene.name
-	print(current_scene_name)
+	print_debug(current_scene_name)
 	#await get_tree().create_timer(1).timeout
 	if current_scene_name == "Level1":
 		simulate_start_walk(2)
 	if current_scene_name == "Level2":
 		simulate_start_walk(0.5)
+	
+	SettingsGlobal.checkpoint = get_tree().current_scene.scene_file_path
+	
+	SettingsGlobal.health_changed.connect(on_health_changed)
+	
+	on_health_changed(SettingsGlobal.health)
 
 # ------------------------- Every Tick -------------------------
 func _physics_process(_delta):
@@ -164,7 +172,7 @@ func mechanics():
 		
 		# make the object
 		var throw_object = throw_object_prefab.instantiate()
-		
+		throw_sfx.play()
 		throw_object.angular_velocity = 5.0  # radians per second; positive = clockwise
 		throw_object.linear_velocity = object_direction * 500  # Adjust to change speed
 		
@@ -250,9 +258,13 @@ func update_animation():
 			footstep_sound.play()
 		if sprint:
 			target_speed = 2
+		elif sneak:
+			target_speed = 0.75 
+	
 	else:
 		target_anim = "idle"
 		footstep_sound.stop()
+		
 	if target_anim != current_anim:
 		current_anim = target_anim
 		sprite.play(target_anim)
@@ -260,17 +272,26 @@ func update_animation():
 	
 	sprite.speed_scale = target_speed
 	silhouette.speed_scale = target_speed
+	footstep_sound.pitch_scale = 1.6 * target_speed
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "attack":
 		throw = false
 		throw_anim_played = false
-	elif dead and sprite.animation == "death":
+	elif dead and sprite.animation == "death" and not death_handled:
+		death_handled = true
 		var tree = get_tree()
 		await get_tree().create_timer(1.0).timeout
-		tree.change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
-		print("DEBUG: Player Killed")
+		if SettingsGlobal.health > 1:
+			SettingsGlobal.change_health(SettingsGlobal.health - 1)
+			tree.change_scene_to_file(SettingsGlobal.checkpoint)
+			print_debug("DEBUG: Player Killed, Checkpoint")
+			
+		else:
+			tree.change_scene_to_file("res://Goblin's_Path/scenes/GameOver.tscn")
+			print_debug("DEBUG: Player Killed, Game Over")
+			
 
 
 func simulate_start_walk(timer):
@@ -293,16 +314,31 @@ func _on_throw_button_down() -> void:
 func _on_throw_button_up() -> void:
 	Input.action_release("player_throw")
 
-
 func _on_sneak_button_down() -> void:
 	Input.action_press("player_sneak")
 
 func _on_sneak_button_up() -> void:
 	Input.action_release("player_sneak")
 
-
 func _on_sprint_button_down() -> void:
 	Input.action_press("player_speedbst")
 
 func _on_sprint_button_up() -> void:
 	Input.action_release("player_speedbst")
+
+
+## ------------------------- Health -------------------------
+func on_health_changed(_new_health: int): # yes there is a better way of doing this but it works
+	if SettingsGlobal.health == 3:
+		$Health/Control/HBoxContainer/Filled1.show()
+		$Health/Control/HBoxContainer/Filled2.show()
+		$Health/Control/HBoxContainer/Filled3.show()
+	
+	elif SettingsGlobal.health == 2:
+		$Health/Control/HBoxContainer/Filled3.hide()
+		$Health/Control/HBoxContainer/Empty3.show()
+	elif SettingsGlobal.health == 1:
+		$Health/Control/HBoxContainer/Filled3.hide()
+		$Health/Control/HBoxContainer/Empty3.show()
+		$Health/Control/HBoxContainer/Filled2.hide()
+		$Health/Control/HBoxContainer/Empty2.show()

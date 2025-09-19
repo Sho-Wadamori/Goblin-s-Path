@@ -1,12 +1,19 @@
-Things to add:
+Completed:
 	background music for level 1
-	
-	
-	
-	sound fx for throw, sprint, sneak, chase
-	story part (recieving package and delivering)
 	Game over and complete music 
+	sound fx for throw, sprint, sneak
 	game complete score
+	Finish journal text
+	Tween animations
 	checkpoints
 	health mechanic
-	Finish journal text
+	 - 3 hearts
+	story part (recieving package and delivering)
+	
+	
+Things to add:
+	Sound for enemy
+	 - chase
+	 - footsteps
+	 - alert
+	Finish h2p 

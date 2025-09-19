@@ -1,3 +1,8 @@
+"""
+Footstep script that was surposed to change footstep sound depending on what was below
+gave up
+"""
+
 extends TileMapLayer
 
 

@@ -1,15 +1,34 @@
+"""
+Script for title screen.
+Includes:
+	- Play and quit
+	- tutorial/h2p (how to play)
+		- 4 pages with looping videos
+	- settings
+		- full screen
+		- touch controls
+		- hide/show timer
+		- music volume
+		- sound effect volume
+		- keybinds
+	- journal
+		- 8 creatures
+	- credits
+The changing of pages was done by fading into black, hiding/showing necessary nodes, then fading out.
+Fade in/out makes game super laggy on low-end devices when exported to HTML
+"""
+
 extends Control
 
 ### -------------------- Variables --------------------
 ## Scene Animations
-@onready var SceneChangeAnimation = $MISC/SceneChangeAnimation/AnimationPlayer
 @onready var SceneChangeAnimationParent = $MISC/SceneChangeAnimation
+@onready var box = $MISC/SceneChangeAnimation/Control/ColorRect
 
 ## Sounds
 @onready var click = $"MISC/ClickSound"
-@onready var bg_music = $MISC/bg_music
-@onready var fire_crackle = $MISC/fire_crackle
 @onready var page_flip = $MISC/page_flip
+@onready var bg_music = $MISC/bg_music
 
 ## Page Refrences
 @onready var MainMenu = $"Main Menu"
@@ -32,23 +51,28 @@ extends Control
 @onready var Tab3 = $Framework/ActiveTabs/Tab3Active
 @onready var Tab4 = $Framework/ActiveTabs/Tab4Active
 
+var current_page = null
+
 ## Creature List
 @onready var Creatures := {
+	"Goblin": $Characters/Goblin,
 	"Werewolf": $Characters/Werewolf,
 	"Ogre": $Characters/Ogre,
 	"Leshy": $Characters/Leshy,
+	"Centaur": $Characters/Centaur,
 	"Slime": $Characters/Slime,
+	"Elf": $Characters/Elf,
 	"Golem": $Characters/Golem
 }
-@onready var creature_names := ["Werewolf", "Ogre", "Leshy", "Slime", "Golem"]
+@onready var creature_names := ["Goblin", "Werewolf", "Ogre", "Leshy", "Centaur", "Slime", "Elf", "Golem"]
 var current_creature_index := 0
 
+@onready var H2P_pages := [$HowToPlay/Page1, $HowToPlay/Page2, $HowToPlay/Page3]
+var current_H2P_index := 0
 
 ### -------------------- On Run --------------------
 func _ready() -> void:
 	## Sounds
-	bg_music.play() # play bg music
-	fire_crackle.play() # play fire crackle sound
 	$Settings/MusicSlider.value = 50
 	$Settings/SFXSlider.value = 50
 	_on_music_slider_value_changed($Settings/MusicSlider.value)
@@ -82,8 +106,11 @@ func _ready() -> void:
 	ConnectTitle.show() # show main menu title bg
 	MainMenu.show() # show main menu page
 	
+	## Reset settings
+	SettingsGlobal.checkpoint = null
+	SettingsGlobal.change_health(3)
+	
 	## Scene Animation
-	SceneChangeAnimationParent.show() # cos _ready doesn't have a page_flip_start which does this
 	await page_flip_end()
 
 
@@ -92,16 +119,12 @@ func _on_play_button_pressed() -> void:
 	click.play()
 	
 	## Scene Animation
-	var fade_time = 1  # seconds
 	var tween = create_tween()
-	tween.tween_property(bg_music, "volume_db", -80, fade_time)  # -80 dB is silence
+	tween.tween_property(bg_music, "volume_db", -80, 1.0)   
 
-	SceneChangeAnimationParent.show() # show animation player node
-	SceneChangeAnimation.play("fade_in") # play animation
-	
-	await SceneChangeAnimation.animation_finished # pause everything until animation is finished
-	
+	await fade_in(0.5)
 	bg_music.stop()
+	
 	## Change Scene
 	get_tree().change_scene_to_file("res://Goblin's_Path/scenes/tutorial.tscn") # change to tutorial scene
 
@@ -111,9 +134,7 @@ func _on_quit_button_pressed() -> void:
 	click.play()
 	
 	## Scene Animation
-	SceneChangeAnimationParent.show()
-	SceneChangeAnimation.play("fade_in")
-	await SceneChangeAnimation.animation_finished
+	await fade_in(0.5)
 	
 	## Quit
 	get_tree().quit()
@@ -138,7 +159,7 @@ func _on_tab1_button_pressed() -> void:
 	await page_flip_end()
 
 func _on_feedback_pressed() -> void:
-	OS.shell_open("http://godotengine.org")
+	OS.shell_open("https://sho-w.itch.io/goblins-path")
 
 func _on_full_screen_pressed() -> void:
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
@@ -210,6 +231,12 @@ func _on_tab2_button_pressed() -> void:
 	# rebuild everything
 	H2P.show() # show tutorial page
 	
+	for i in H2P_pages:
+		i.hide()
+	
+	current_H2P_index = 0
+	H2P_pages[current_H2P_index].show()
+	
 	Home.show() # show back to main menu button
 	Next.show() # show next page button
 	Tabs.show() # show tabs
@@ -220,6 +247,8 @@ func _on_tab2_button_pressed() -> void:
 	ActiveTabs.show() # show active tabs
 	FloatTitle.show() # show title floating title bg
 	
+	current_page = "h2p"
+	
 	await page_flip_end()
 
 
@@ -228,9 +257,7 @@ func page_flip_start():
 	click.play() # play click sound
 	
 	## Scene Animation
-	SceneChangeAnimationParent.show() # show the node
-	SceneChangeAnimation.play("fade_in") # play the animation
-	await SceneChangeAnimation.animation_finished # pause everything until animation is finished
+	await fade_in(0.5)
 	
 	page_flip.play() # play page flipping sound 
 	
@@ -256,10 +283,7 @@ func page_flip_start():
 ### -------------------- Page Flip End --------------------
 func page_flip_end():
 	## Scene Animation
-	SceneChangeAnimation.get_parent().get_node("ColorRect").color.a = 255 # ensure rect is transparent 
-	SceneChangeAnimation.play("fade_out") # play animation
-	await SceneChangeAnimation.animation_finished # pause everything until animation is finished
-	SceneChangeAnimationParent.hide() # hide animationplayer node to allow user to click
+	await fade_out(0.5)
 
 
 ### -------------------- Journal --------------------
@@ -279,11 +303,13 @@ func _on_tab3_button_pressed() -> void:
 	ActiveTabs.show() # show active tabs
 	FloatTitle.show() # show title floating title bg
 	
+	current_page = "journal"
+	
 	await page_flip_end()
 
 ### Journal Sub-Pages 
 func _on_table_of_contents_meta_clicked(meta: Variant) -> void:
-	print(meta) # DEBUG PRINT
+	print_debug(meta) # DEBUG PRINT
 	
 	# Show the clicked one (if it exists)
 	if Creatures.has(meta):
@@ -294,7 +320,7 @@ func _on_table_of_contents_meta_clicked(meta: Variant) -> void:
 		
 		await page_flip_end()
 	
-	print("Has Not Been Added Yet") # DEBUG PRINT
+	print_debug("Has Not Been Added Yet") # DEBUG PRINT
 
 func show_creature(index: int) -> void:
 	Characters.show() # show characters page
@@ -342,5 +368,43 @@ func _on_home_pressed() -> void:
 ### -------------------- Next Page Button --------------------
 func _on_next_pressed() -> void:
 	await page_flip_start()
-	show_creature(current_creature_index + 1)
+	if current_page == "journal":
+		show_creature(current_creature_index + 1)
+	
+	elif current_page == "h2p":
+		# Hide current page
+		H2P_pages[current_H2P_index].hide()
+		
+		current_H2P_index = (current_H2P_index + 1) % H2P_pages.size()
+		
+		# Show next page
+		H2P_pages[current_H2P_index].show()
+		
+		H2P.show()
+		Home.show() # show back to main menu button
+		Next.show() # show next page button
+		Tabs.show() # show tabs
+		Tab1.hide()
+		Tab2.show()
+		Tab3.hide()
+		Tab4.hide()
+		ActiveTabs.show() # show active tabs
+		FloatTitle.show() # show title floating title bg
+	
 	await page_flip_end()
+
+
+func fade_in(time = 0.5) -> void:
+	SceneChangeAnimationParent.show()
+	box.color = Color(0, 0, 0, 0)
+	var tween = create_tween()
+	tween.tween_property(box, "color:a", 1.0, time)
+	await tween.finished
+
+func fade_out(time = 0.5) -> void:
+	SceneChangeAnimationParent.show()
+	box.color = Color(0, 0, 0, 1)
+	var tween = create_tween()
+	tween.tween_property(box, "color:a", 0.0, time)
+	await tween.finished
+	SceneChangeAnimationParent.hide()

@@ -1,3 +1,7 @@
+"""
+Script for touch control joy controls (followed tutorial)
+"""
+
 extends Sprite2D
 
 @onready var parent = $".."

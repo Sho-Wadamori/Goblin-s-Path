@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://wvbflnipvmqf"]
+[gd_scene load_steps=69 format=4 uid="uid://wvbflnipvmqf"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/GameOver_Screen.gd" id="1_mxn1u"]
 [ext_resource type="Texture2D" uid="uid://bod32lajsv330" path="res://Goblin's_Path/sprites/sad-emoji.png" id="2_yhqp4"]
@@ -20,6 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://dpifq3r141w7j" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconRestart01a.png" id="18_3iro2"]
 [ext_resource type="Texture2D" uid="uid://06dnnori8ea3" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconHome01a.png" id="19_rg6yn"]
 [ext_resource type="Texture2D" uid="uid://4aksxh328faq" path="res://Goblin's_Path/sprites/characters/orc/Orc.png" id="20_tu3nr"]
+[ext_resource type="Texture2D" uid="uid://cnivekrjp66tn" path="res://Goblin's_Path/sprites/UI/map(1).png" id="21_8ilyx"]
+[ext_resource type="AudioStream" uid="uid://cmfwa813jwv70" path="res://Goblin's_Path/sprites/sound/gamewin.mp3" id="21_32qg4"]
+[ext_resource type="PackedScene" uid="uid://ed8loq44dr5k" path="res://Goblin's_Path/prefabs/scene_change_animation.tscn" id="21_d3nfh"]
+[ext_resource type="AudioStream" uid="uid://ctt4hgj6b420o" path="res://Goblin's_Path/sprites/sound/victory-361739.mp3" id="22_u8p6b"]
+[ext_resource type="AudioStream" uid="uid://dx3snp4rxjboo" path="res://Goblin's_Path/sprites/sound/ui-click.mp3" id="24_ah2pg"]
+[ext_resource type="AudioStream" uid="uid://2f81xedclne1" path="res://Goblin's_Path/sprites/sound/book_page-45210.mp3" id="25_sc31x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vf8hd"]
 texture = ExtResource("6_l5ojn")
@@ -937,26 +943,6 @@ region = Rect2(300, 400, 100, 100)
 atlas = ExtResource("20_tu3nr")
 region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8npew"]
-atlas = ExtResource("20_tu3nr")
-region = Rect2(100, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ek28"]
-atlas = ExtResource("20_tu3nr")
-region = Rect2(200, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o6g0w"]
-atlas = ExtResource("20_tu3nr")
-region = Rect2(300, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_17sef"]
-atlas = ExtResource("20_tu3nr")
-region = Rect2(400, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_riirh"]
-atlas = ExtResource("20_tu3nr")
-region = Rect2(500, 0, 100, 100)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ok42d"]
 atlas = ExtResource("20_tu3nr")
 region = Rect2(0, 100, 100, 100)
@@ -988,6 +974,148 @@ region = Rect2(600, 100, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_et727"]
 atlas = ExtResource("20_tu3nr")
 region = Rect2(700, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nqdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0vj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0k7mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b1nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uc38")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5d1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jruf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edx7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u5y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q1th")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgvwc")
+}],
+"loop": true,
+"name": &"attack2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqw0y")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivahv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2vc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vanfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqw0y")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nqcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8trt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77y70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i1d1")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqo11")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok42d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va3ga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvjx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kijs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwmbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qolg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3sw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_et727")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8npew"]
+atlas = ExtResource("20_tu3nr")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ek28"]
+atlas = ExtResource("20_tu3nr")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6g0w"]
+atlas = ExtResource("20_tu3nr")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17sef"]
+atlas = ExtResource("20_tu3nr")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riirh"]
+atlas = ExtResource("20_tu3nr")
+region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v1a24"]
 animations = [{
@@ -1126,7 +1254,9 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="GameOver" type="Node2D"]
+[sub_resource type="Theme" id="Theme_51k10"]
+
+[node name="GameComplete" type="Node2D"]
 position = Vector2(-99, -102)
 script = ExtResource("1_mxn1u")
 
@@ -1150,6 +1280,7 @@ position = Vector2(74.1756, 126.994)
 rotation = -0.523599
 scale = Vector2(1.15596, 1.15596)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope8" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1164,6 +1295,7 @@ position = Vector2(71.9289, 152.189)
 rotation = -0.191986
 scale = Vector2(1.15596, 1.15596)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope10" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1178,6 +1310,7 @@ position = Vector2(82.0339, 132.911)
 rotation = -0.10472
 scale = Vector2(1.15596, 1.15596)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope7" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1192,6 +1325,7 @@ position = Vector2(44.792, 86.2871)
 rotation = 0.462243
 scale = Vector2(0.85151, 0.85151)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope14" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1206,6 +1340,7 @@ position = Vector2(57.4772, 85.4272)
 rotation = 0.0666455
 scale = Vector2(0.956198, 0.956198)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope16" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1220,6 +1355,7 @@ position = Vector2(75.6805, 84.6388)
 rotation = 0.0498111
 scale = Vector2(0.85151, 0.85151)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope18" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1234,6 +1370,7 @@ position = Vector2(46.2253, 77.1139)
 rotation = -0.00126303
 scale = Vector2(0.85151, 0.85151)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope20" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1248,6 +1385,7 @@ position = Vector2(76.5404, 76.1821)
 rotation = -0.143152
 scale = Vector2(0.85151, 0.85151)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope5" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1262,6 +1400,7 @@ position = Vector2(-6.73671, 134.161)
 rotation = -0.448247
 scale = Vector2(1.40216, 1.40216)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope4" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1276,6 +1415,7 @@ position = Vector2(43.4373, 118.642)
 rotation = -0.168167
 scale = Vector2(1.01015, 1.01015)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope12" type="Sprite2D" parent="Back"]
 texture_filter = 1
@@ -1290,6 +1430,7 @@ position = Vector2(29.6702, 135.666)
 rotation = 0.492358
 scale = Vector2(1.70986, 1.70986)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Settings3" type="Node2D" parent="."]
 texture_filter = 1
@@ -1405,6 +1546,7 @@ position = Vector2(225.51, 3775.28)
 rotation = -0.18326
 scale = Vector2(6.58, 6.58)
 texture = ExtResource("4_i1hhp")
+flip_h = true
 
 [node name="Envelope7" type="Sprite2D" parent="Settings3"]
 texture_filter = 1
@@ -1420,8 +1562,8 @@ scale = Vector2(20.3026, 25.9739)
 texture = ExtResource("12_bnnxr")
 
 [node name="Select Border" type="Sprite2D" parent="Settings3"]
-position = Vector2(289.11, 4312.88)
-scale = Vector2(20.4587, 25.5041)
+position = Vector2(305.511, 4275.27)
+scale = Vector2(20.4587, 19.3294)
 texture = ExtResource("13_dhtiq")
 
 [node name="Title" type="RichTextLabel" parent="Settings3"]
@@ -1482,21 +1624,14 @@ text = "Save/Load"
 
 [node name="play" type="TileMapLayer" parent="Settings3/buttons"]
 texture_filter = 1
-position = Vector2(713.417, -3899.47)
+position = Vector2(713.417, -3726.31)
 scale = Vector2(8.035, 14.975)
-tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
-tile_set = SubResource("TileSet_p5n5x")
-
-[node name="setting" type="TileMapLayer" parent="Settings3/buttons"]
-texture_filter = 1
-position = Vector2(7170.65, -267.149)
-scale = Vector2(8.035, 11.905)
 tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
 tile_set = SubResource("TileSet_p5n5x")
 
 [node name="quit" type="TileMapLayer" parent="Settings3/buttons"]
 texture_filter = 1
-position = Vector2(720.684, -3547.22)
+position = Vector2(720.684, -3466.68)
 scale = Vector2(8.035, 14.975)
 tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
 tile_set = SubResource("TileSet_p5n5x")
@@ -1504,35 +1639,21 @@ tile_set = SubResource("TileSet_p5n5x")
 [node name="Play" type="RichTextLabel" parent="Settings3/buttons"]
 texture_filter = 1
 offset_left = 908.725
-offset_top = 4035.66
+offset_top = 4206.81
 offset_right = 1361.56
-offset_bottom = 4212.66
+offset_bottom = 4383.81
 theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("14_il600")
 theme_override_font_sizes/normal_font_size = 166
 text = "Play Again"
 scroll_active = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Settings" type="RichTextLabel" parent="Settings3/buttons"]
-texture_filter = 1
-offset_left = 7394.15
-offset_top = 6014.92
-offset_right = 7744.16
-offset_bottom = 6191.92
-theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
-theme_override_fonts/normal_font = ExtResource("14_il600")
-theme_override_font_sizes/normal_font_size = 181
-text = "Settings"
-scroll_active = false
-metadata/_edit_use_anchors_ = true
 
 [node name="Quit" type="RichTextLabel" parent="Settings3/buttons"]
 texture_filter = 1
 offset_left = 852.0
-offset_top = 4394.0
+offset_top = 4474.54
 offset_right = 1384.0
-offset_bottom = 4527.0
+offset_bottom = 4607.54
 theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("14_il600")
 theme_override_font_sizes/normal_font_size = 166
@@ -1549,12 +1670,13 @@ anchor_top = 0.907253
 anchor_right = 1.19906
 anchor_bottom = 0.907253
 offset_left = 723.054
-offset_top = 4022.01
+offset_top = 4195.17
 offset_right = 796.054
-offset_bottom = 4052.01
+offset_bottom = 4225.17
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_a8mw4")
 flat = true
 metadata/_edit_group_ = true
@@ -1573,6 +1695,7 @@ offset_bottom = 5046.73
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_a8mw4")
 flat = true
 metadata/_edit_group_ = true
@@ -1584,17 +1707,51 @@ anchor_left = -1.46417
 anchor_top = 1.17388
 anchor_right = -1.45115
 anchor_bottom = 1.17388
-offset_left = 721.0
-offset_top = 4374.0
-offset_right = 794.0
-offset_bottom = 4404.0
+offset_left = 728.0
+offset_top = 4454.0
+offset_right = 801.0
+offset_bottom = 4484.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(8.63, 7.095)
+focus_mode = 0
 theme = SubResource("Theme_2i0b8")
 flat = true
 
+[node name="PlayAgain" type="Sprite2D" parent="Settings3/buttons"]
+position = Vector2(810.064, 4287.35)
+scale = Vector2(8.054, 8.054)
+texture = ExtResource("18_3iro2")
+
+[node name="Home" type="Sprite2D" parent="Settings3/buttons"]
+position = Vector2(822.145, 4545.07)
+scale = Vector2(8.054, 8.054)
+texture = ExtResource("19_rg6yn")
+
+[node name="setting" type="TileMapLayer" parent="Settings3/buttons"]
+visible = false
+texture_filter = 1
+position = Vector2(7170.65, -267.149)
+scale = Vector2(8.035, 11.905)
+tile_map_data = PackedByteArray("AAAAACEAAwAEABsAAAABACEAAwAFABsAAAACACEAAwAGABsAAAADACEAAwAGABsAAAAEACEAAwAHABsAAAA=")
+tile_set = SubResource("TileSet_p5n5x")
+
+[node name="Settings" type="RichTextLabel" parent="Settings3/buttons"]
+visible = false
+texture_filter = 1
+offset_left = 7394.15
+offset_top = 6014.92
+offset_right = 7744.16
+offset_bottom = 6191.92
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("14_il600")
+theme_override_font_sizes/normal_font_size = 181
+text = "Settings"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
 [node name="SettingsButton" type="Button" parent="Settings3/buttons"]
+visible = false
 texture_filter = 1
 anchors_preset = -1
 anchor_left = 1.18604
@@ -1632,21 +1789,31 @@ position = Vector2(814.091, 4464.53)
 scale = Vector2(8.05393, 8.05393)
 texture = ExtResource("17_8fjy2")
 
-[node name="PlayAgain" type="Sprite2D" parent="Settings3/buttons"]
-position = Vector2(810.064, 4114.19)
-scale = Vector2(8.054, 8.054)
-texture = ExtResource("18_3iro2")
-
-[node name="Home" type="Sprite2D" parent="Settings3/buttons"]
-position = Vector2(822.145, 4464.53)
-scale = Vector2(8.054, 8.054)
-texture = ExtResource("19_rg6yn")
-
 [node name="Goblin" type="CharacterBody2D" parent="Settings3"]
-position = Vector2(302.022, 4316.91)
-scale = Vector2(9.89623, 9.89623)
+position = Vector2(140.406, 4289.36)
+scale = Vector2(4.756, 4.756)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Settings3/Goblin"]
+light_mask = 2
+texture_filter = 1
+position = Vector2(-1.56253, 1.89578)
+scale = Vector2(3.945, 3.945)
+sprite_frames = SubResource("SpriteFrames_4nqdb")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Envelope handheld" type="Sprite2D" parent="Settings3/Goblin"]
+texture_filter = 1
+position = Vector2(24.3799, 9.73736)
+rotation = -0.54828
+scale = Vector2(0.605669, 0.605669)
+texture = ExtResource("4_i1hhp")
+
+[node name="Goblin2" type="CharacterBody2D" parent="Settings3"]
+position = Vector2(458.536, 4281.31)
+scale = Vector2(-4.756, 4.756)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Settings3/Goblin2"]
 light_mask = 2
 texture_filter = 1
 position = Vector2(-1.56253, 1.89578)
@@ -1656,7 +1823,7 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.288441
 
-[node name="Envelope handheld" type="Sprite2D" parent="Settings3/Goblin"]
+[node name="Envelope handheld" type="Sprite2D" parent="Settings3/Goblin2"]
 visible = false
 texture_filter = 1
 position = Vector2(23.8048, 10.376)
@@ -1664,10 +1831,113 @@ rotation = -0.54828
 scale = Vector2(0.746552, 0.746552)
 texture = ExtResource("4_i1hhp")
 
+[node name="PnxEbm" type="Sprite2D" parent="."]
+position = Vector2(129, 1193)
+rotation = 0.689178
+texture = ExtResource("21_8ilyx")
+
+[node name="Score" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 1110.0
+offset_top = 469.0
+offset_right = 1498.0
+offset_bottom = 612.0
+scale = Vector2(0.455, 0.455)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("14_il600")
+theme_override_font_sizes/normal_font_size = 166
+bbcode_enabled = true
+text = "Time:"
+fit_content = true
+scroll_active = false
+
+[node name="ScoreValue" type="RichTextLabel" parent="."]
+texture_filter = 1
+offset_left = 1060.68
+offset_top = 497.0
+offset_right = 1456.68
+offset_bottom = 640.0
+scale = Vector2(0.9, 0.9)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("14_il600")
+theme_override_font_sizes/normal_font_size = 166
+bbcode_enabled = true
+text = "[center]00:00.00"
+scroll_active = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1058.68, 641.68)
 metadata/_edit_group_ = true
 
+[node name="SceneChangeAnimation" parent="." instance=ExtResource("21_d3nfh")]
+
+[node name="complete_chime" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_32qg4")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_u8p6b")
+volume_db = -17.0
+autoplay = true
+bus = &"Music"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_ah2pg")
+bus = &"SFX"
+
+[node name="page_flip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_sc31x")
+volume_db = 0.355
+bus = &"SFX"
+
+[node name="ScreenShot" type="Node2D" parent="."]
+position = Vector2(1292, 504)
+scale = Vector2(0.62, 0.62)
+
+[node name="ScreenShotBg" type="Sprite2D" parent="ScreenShot"]
+texture_filter = 1
+position = Vector2(-2.0813, 3.35937)
+scale = Vector2(3.37246, 3.97561)
+texture = ExtResource("9_mvkdn")
+region_enabled = true
+region_rect = Rect2(64, 432, 64, 16)
+
+[node name="ScreenShotTXT" type="RichTextLabel" parent="ScreenShot"]
+texture_filter = 1
+offset_left = -106.521
+offset_top = -31.0
+offset_right = 518.479
+offset_bottom = 138.0
+scale = Vector2(0.334476, 0.334476)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("14_il600")
+theme_override_font_sizes/normal_font_size = 181
+bbcode_enabled = true
+text = "[center]ScreenShot"
+scroll_active = false
+
+[node name="ScreenShotButton" type="Button" parent="ScreenShot"]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = -1.46417
+anchor_top = 1.17388
+anchor_right = -1.45115
+anchor_bottom = 1.17388
+offset_left = -106.521
+offset_top = -24.96
+offset_right = -82.321
+offset_bottom = -16.96
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8.63, 7.095)
+focus_mode = 0
+theme = SubResource("Theme_51k10")
+flat = true
+
 [connection signal="pressed" from="Settings3/buttons/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Settings3/buttons/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="animation_finished" from="Settings3/Goblin/AnimatedSprite2D" to="Settings3/Goblin" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Settings3/Goblin2/AnimatedSprite2D" to="Settings3/Goblin2" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="pressed" from="ScreenShot/ScreenShotButton" to="." method="_on_ss_button_pressed"]

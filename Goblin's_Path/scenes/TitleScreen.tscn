@@ -1,4 +1,4 @@
-[gd_scene load_steps=336 format=4 uid="uid://hgstdmmkkdbb"]
+[gd_scene load_steps=346 format=4 uid="uid://hgstdmmkkdbb"]
 
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/TitleScreen.gd" id="1_r1djq"]
 [ext_resource type="Texture2D" uid="uid://ck286mbqkkeie" path="res://Goblin's_Path/sprites/MediavelFree.png" id="2_2dfwd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://boov218pxaiar" path="res://Goblin's_Path/sprites/envelope.png" id="2_wt0ba"]
 [ext_resource type="Texture2D" uid="uid://cyo7o4bkogqo5" path="res://Goblin's_Path/sprites/UI/PnxEbm.png" id="2_ys32v"]
 [ext_resource type="Texture2D" uid="uid://duci5o71l446s" path="res://Goblin's_Path/sprites/FreeHorrorUi.png" id="3_w28cx"]
+[ext_resource type="Texture2D" uid="uid://cnivekrjp66tn" path="res://Goblin's_Path/sprites/UI/map(1).png" id="4_fiapr"]
 [ext_resource type="Texture2D" uid="uid://cxdeolyulmd3i" path="res://Goblin's_Path/sprites/characters/Enchanted Forest Characters with animations.png" id="4_onwsv"]
 [ext_resource type="Texture2D" uid="uid://irp6fcrhk66n" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBookAnimated_Spritesheet01a.png" id="4_otxc7"]
 [ext_resource type="Texture2D" uid="uid://co4uwkhy2dfgp" path="res://Goblin's_Path/sprites/UI/book/UI_TravelBook_BookCover01a.png" id="5_15oa3"]
@@ -40,15 +41,18 @@
 [ext_resource type="Texture2D" uid="uid://crl64eh8663ny" path="res://Goblin's_Path/sprites/UI/book/icons/CheckBox.png" id="25_neva6"]
 [ext_resource type="Script" path="res://Goblin's_Path/scripts/input_button.gd" id="26_4mkre"]
 [ext_resource type="PackedScene" uid="uid://b337l2kedm1ac" path="res://Goblin's_Path/prefabs/input_button.tscn" id="26_c7ogu"]
+[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/sprint.ogv" id="29_m8xrx"]
 [ext_resource type="AudioStream" uid="uid://dclldshiiivc" path="res://Goblin's_Path/sprites/sound/coffee-amp-book-257497.mp3" id="30_0o5xv"]
-[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/throw/throw2.ogv" id="32_anri3"]
-[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/alert.ogv" id="33_le5cg"]
+[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/throw-_2_.ogv" id="30_dkbk5"]
+[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/sneak.ogv" id="30_gt8y0"]
+[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/alert-_2_.ogv" id="31_o6nqs"]
+[ext_resource type="VideoStream" path="res://Goblin's_Path/sprites/UI/alert/health.ogv" id="32_6rhuh"]
 [ext_resource type="AudioStream" uid="uid://bs45qwdv77078" path="res://Goblin's_Path/sprites/sound/FireCrackle.mp3" id="35_wxhic"]
-[ext_resource type="PackedScene" uid="uid://cqhxlctcqhwb6" path="res://Goblin's_Path/scenes/scene_change_animation.tscn" id="36_k3hsw"]
 [ext_resource type="AudioStream" uid="uid://2f81xedclne1" path="res://Goblin's_Path/sprites/sound/book_page-45210.mp3" id="36_rqy22"]
 [ext_resource type="Texture2D" uid="uid://06dnnori8ea3" path="res://Goblin's_Path/sprites/UI/book/icons/UI_TravelBook_IconHome01a.png" id="38_1wlal"]
 [ext_resource type="Texture2D" uid="uid://cylati3br5rhf" path="res://Goblin's_Path/sprites/UI/book/BoxEmpty.png" id="38_8ovfi"]
 [ext_resource type="Texture2D" uid="uid://6ar4jc456gk0" path="res://Goblin's_Path/sprites/UI/book/icons/arrow.png" id="39_iros6"]
+[ext_resource type="PackedScene" uid="uid://ed8loq44dr5k" path="res://Goblin's_Path/prefabs/scene_change_animation.tscn" id="47_u7gko"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t21pr"]
 texture = ExtResource("2_2dfwd")
@@ -1251,17 +1255,29 @@ spacing_top = -3
 base_font = ExtResource("6_1kjcc")
 spacing_top = -5
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s0xv2"]
-atlas = ExtResource("4_onwsv")
-region = Rect2(256, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua5ab"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(0, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nkome"]
-atlas = ExtResource("4_onwsv")
-region = Rect2(288, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqy6d"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(100, 0, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vc1fa"]
-atlas = ExtResource("4_onwsv")
-region = Rect2(320, 96, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdm3l"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6llhd"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2av8"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1ch5"]
+atlas = ExtResource("16_wu2rf")
+region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gat62"]
 atlas = ExtResource("4_onwsv")
@@ -1282,6 +1298,64 @@ region = Rect2(448, 98, 32, 29)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0n7a"]
 atlas = ExtResource("4_onwsv")
 region = Rect2(480, 98, 32, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ucj5s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua5ab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqy6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdm3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6llhd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2av8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1ch5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gat62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxhun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhb3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6jl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0n7a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0xv2"]
+atlas = ExtResource("4_onwsv")
+region = Rect2(256, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkome"]
+atlas = ExtResource("4_onwsv")
+region = Rect2(288, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc1fa"]
+atlas = ExtResource("4_onwsv")
+region = Rect2(320, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2le12"]
 animations = [{
@@ -1493,7 +1567,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 3.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -2348,10 +2422,6 @@ region = Rect2(0, 192, 32, 32)
 atlas = ExtResource("4_onwsv")
 region = Rect2(32, 192, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v053n"]
-atlas = ExtResource("4_onwsv")
-region = Rect2(64, 192, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8wro"]
 atlas = ExtResource("4_onwsv")
 region = Rect2(96, 192, 32, 32)
@@ -2366,14 +2436,11 @@ animations = [{
 "texture": SubResource("AtlasTexture_2cgat")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v053n")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_n8wro")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kp5sr"]
@@ -3235,6 +3302,7 @@ position = Vector2(2279.26, 4788.06)
 rotation = 0.0880606
 scale = Vector2(32.4767, 32.4767)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope9" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3249,6 +3317,7 @@ position = Vector2(2192.68, 4838.4)
 rotation = 0.287979
 scale = Vector2(32.4767, 32.4767)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope11" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3263,6 +3332,7 @@ position = Vector2(1373.19, 3495.41)
 rotation = -0.392291
 scale = Vector2(28.9489, 28.9489)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope13" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3277,6 +3347,7 @@ position = Vector2(1870.53, 3491.38)
 rotation = 0.230587
 scale = Vector2(28.8546, 28.8546)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope15" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3291,6 +3362,7 @@ position = Vector2(2293.36, 3551.78)
 rotation = -0.172961
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope17" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3305,10 +3377,11 @@ position = Vector2(1713.47, 3056.47)
 rotation = 0.712618
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope19" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
-position = Vector2(1427.56, 3016.2)
+position = Vector2(1425.55, 3016.2)
 rotation = -0.00126303
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("2_wt0ba")
@@ -3319,6 +3392,7 @@ position = Vector2(2061.81, 2977.94)
 rotation = 0.452177
 scale = Vector2(23.9231, 23.9231)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope21" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3333,6 +3407,7 @@ position = Vector2(130.876, 3976.63)
 rotation = 0.57177
 scale = Vector2(53.9413, 53.9413)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3347,6 +3422,7 @@ position = Vector2(1435.61, 3982.67)
 rotation = -0.47142
 scale = Vector2(29.6, 29.6)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope3" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3361,6 +3437,7 @@ position = Vector2(1351.05, 4401.47)
 rotation = 0.362596
 scale = Vector2(33.3804, 33.3804)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope2" type="Sprite2D" parent="TableBackground/envelope"]
 texture_filter = 1
@@ -3368,6 +3445,12 @@ position = Vector2(962.445, 4661.21)
 rotation = 0.492358
 scale = Vector2(48.0383, 48.0383)
 texture = ExtResource("2_wt0ba")
+
+[node name="PnxEbm" type="Sprite2D" parent="TableBackground"]
+position = Vector2(-46.2253, 160.678)
+rotation = 0.689178
+scale = Vector2(0.072, 0.072)
+texture = ExtResource("4_fiapr")
 
 [node name="Framework" type="Node2D" parent="."]
 position = Vector2(-782, -1705)
@@ -3680,7 +3763,6 @@ theme_override_font_sizes/normal_font_size = 121
 text = "Save/Load"
 
 [node name="Main Menu" type="Node2D" parent="."]
-visible = false
 position = Vector2(-782, -1705)
 scale = Vector2(0.496652, 0.496652)
 
@@ -3713,6 +3795,7 @@ position = Vector2(225.51, 3775.28)
 rotation = -0.18326
 scale = Vector2(6.58, 6.58)
 texture = ExtResource("2_wt0ba")
+flip_h = true
 
 [node name="Envelope7" type="Sprite2D" parent="Main Menu"]
 texture_filter = 1
@@ -4079,6 +4162,7 @@ patch_margin_right = 12
 patch_margin_bottom = 12
 
 [node name="Settings" type="Node2D" parent="."]
+visible = false
 
 [node name="Title" type="RichTextLabel" parent="Settings"]
 texture_filter = 1
@@ -4383,18 +4467,52 @@ bbcode_enabled = true
 text = "[center][b]How To Play[/b]"
 autowrap_mode = 0
 
-[node name="throw" type="VideoStreamPlayer" parent="HowToPlay"]
+[node name="Page1" type="Control" parent="HowToPlay"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Movement" type="Control" parent="HowToPlay/Page1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprint Mechanic Text" type="RichTextLabel" parent="HowToPlay/Page1/Movement"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 4214.0
+offset_right = 781.0
+offset_bottom = 4807.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 27
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Movement
+[/b][/center]You can move faster by sprinting.[ul bullet=- ]Press Ctrl to sprint.
+Your movement speed will increase.
+Enemies expand their vision.[/ul]
+Use this mechanic strategically to quickly move around and get a faster completion time."
+
+[node name="Sprint" type="VideoStreamPlayer" parent="HowToPlay/Page1/Movement"]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 3853.59
 offset_right = 1935.0
 offset_bottom = 4925.59
 scale = Vector2(0.307301, 0.307301)
-stream = ExtResource("32_anri3")
+stream = ExtResource("29_m8xrx")
 volume_db = -80.0
 autoplay = true
+expand = true
 loop = true
 
-[node name="ColorRect" type="ColorRect" parent="HowToPlay/throw"]
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page1/Movement/Sprint"]
 layout_mode = 0
 offset_left = 1407.0
 offset_top = 63.0
@@ -4402,7 +4520,7 @@ offset_right = 1843.0
 offset_bottom = 181.0
 color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/throw"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page1/Movement/Sprint"]
 layout_mode = 0
 offset_left = 1407.0
 offset_top = 40.0
@@ -4411,14 +4529,214 @@ offset_bottom = 202.0
 theme_override_fonts/normal_font = ExtResource("6_1kjcc")
 theme_override_font_sizes/normal_font_size = 171
 bbcode_enabled = true
-text = "[center]SPACE KEY"
+text = "[center]CTRL KEY"
 scroll_active = false
 
-[node name="Throw Mechanic Text" type="RichTextLabel" parent="HowToPlay"]
-offset_left = -25.6194
-offset_top = 4188.76
-offset_right = 783.381
-offset_bottom = 4761.76
+[node name="Settings" type="Control" parent="HowToPlay/Page1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sneak Mechanic Text" type="RichTextLabel" parent="HowToPlay/Page1/Settings"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 4198.0
+offset_right = 1513.0
+offset_bottom = 4819.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Settings
+[/b][/center]You can sneak to reduce the enemy field of view.[ul bullet=- ]Hold Shift to sneak.
+Your movement speed will decrease.
+Enemies shrink their vision.
+Their FOV will not shrink if they are in chase or inspect state.[/ul]
+Use this mechanic to squeeze past enemies, sneaking behind them unnoticed."
+
+[node name="Sneak" type="VideoStreamPlayer" parent="HowToPlay/Page1/Settings"]
+layout_mode = 0
+offset_left = 736.131
+offset_top = 3853.59
+offset_right = 2656.13
+offset_bottom = 4925.59
+scale = Vector2(0.307301, 0.307301)
+stream = ExtResource("30_gt8y0")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page1/Settings/Sneak"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 63.0
+offset_right = 1843.0
+offset_bottom = 181.0
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page1/Settings/Sneak"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 40.0
+offset_right = 1842.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]SHIFT KEY"
+scroll_active = false
+
+[node name="Page2" type="Control" parent="HowToPlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprint" type="Control" parent="HowToPlay/Page2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprint Mechanic Text" type="RichTextLabel" parent="HowToPlay/Page2/Sprint"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 4214.0
+offset_right = 781.0
+offset_bottom = 4807.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 27
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Sprint Mechanic
+[/b][/center]You can move faster by sprinting.[ul bullet=- ]Press Ctrl to sprint.
+Your movement speed will increase.
+Enemies expand their vision.[/ul]
+Use this mechanic strategically to quickly move around and get a faster completion time."
+
+[node name="Sprint" type="VideoStreamPlayer" parent="HowToPlay/Page2/Sprint"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 3853.59
+offset_right = 1935.0
+offset_bottom = 4925.59
+scale = Vector2(0.307301, 0.307301)
+stream = ExtResource("29_m8xrx")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page2/Sprint/Sprint"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 63.0
+offset_right = 1843.0
+offset_bottom = 181.0
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page2/Sprint/Sprint"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 40.0
+offset_right = 1842.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]CTRL KEY"
+scroll_active = false
+
+[node name="Sneak" type="Control" parent="HowToPlay/Page2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sneak Mechanic Text" type="RichTextLabel" parent="HowToPlay/Page2/Sneak"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 4198.0
+offset_right = 1513.0
+offset_bottom = 4819.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Sneak Mechanic
+[/b][/center]You can sneak to reduce the enemy field of view.[ul bullet=- ]Hold Shift to sneak.
+Your movement speed will decrease.
+Enemies shrink their vision.
+Their FOV will not shrink if they are in chase or inspect state.[/ul]
+Use this mechanic to squeeze past enemies, sneaking behind them unnoticed."
+
+[node name="Sneak" type="VideoStreamPlayer" parent="HowToPlay/Page2/Sneak"]
+layout_mode = 0
+offset_left = 736.131
+offset_top = 3853.59
+offset_right = 2656.13
+offset_bottom = 4925.59
+scale = Vector2(0.307301, 0.307301)
+stream = ExtResource("30_gt8y0")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page2/Sneak/Sneak"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 63.0
+offset_right = 1843.0
+offset_bottom = 181.0
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page2/Sneak/Sneak"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 40.0
+offset_right = 1842.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]SHIFT KEY"
+scroll_active = false
+
+[node name="Page3" type="Control" parent="HowToPlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Throw" type="Control" parent="HowToPlay/Page3"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Throw Mechanic Text" type="RichTextLabel" parent="HowToPlay/Page3/Throw"]
+layout_mode = 0
+offset_left = -28.2258
+offset_top = 4211.69
+offset_right = 780.775
+offset_bottom = 4784.69
 scale = Vector2(0.843354, 0.843354)
 theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("6_1kjcc")
@@ -4433,30 +4751,80 @@ Enemies expand their vision and rush to the sound.
 They inspect briefly, then return to patrol.[/ul]
 Use this mechanic strategically to lure enemies away, create openings, or sneak past unnoticed."
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="HowToPlay"]
-offset_left = -8.0
-offset_top = 3835.0
-offset_right = 60.0
-offset_bottom = 3875.0
-scale = Vector2(9.245, 9.245)
-texture = ExtResource("7_1ltas")
-patch_margin_left = 7
-patch_margin_top = 7
-patch_margin_right = 7
-patch_margin_bottom = 7
+[node name="Throw" type="VideoStreamPlayer" parent="HowToPlay/Page3/Throw"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 3853.59
+offset_right = 1935.0
+offset_bottom = 4925.59
+scale = Vector2(0.307301, 0.307301)
+stream = ExtResource("30_dkbk5")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
 
-[node name="alert" type="VideoStreamPlayer" parent="HowToPlay"]
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page3/Throw/Throw"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 63.0
+offset_right = 1843.0
+offset_bottom = 181.0
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page3/Throw/Throw"]
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 40.0
+offset_right = 1842.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]SPACE KEY"
+scroll_active = false
+
+[node name="Alert" type="Control" parent="HowToPlay/Page3"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Alert System Text" type="RichTextLabel" parent="HowToPlay/Page3/Alert"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 4189.0
+offset_right = 1510.0
+offset_bottom = 4859.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Alert Mechanic
+[/b][/center]When you are within the enemy field of view, enemies will be alerted.[ul bullet=- ]Exclamation Mark if player is within view.
+Question Mark if player out of view.
+Enemies expand their vision & chase the player.
+They stop chasing after player is outside their view for a few seconds.[/ul]
+Use this mechanic strategically to lure enemies away, create openings, or sneak past unnoticed."
+
+[node name="Alert" type="VideoStreamPlayer" parent="HowToPlay/Page3/Alert"]
+layout_mode = 0
 offset_left = 736.131
 offset_top = 3852.29
 offset_right = 2656.13
 offset_bottom = 4940.29
 scale = Vector2(0.307, 0.307)
-stream = ExtResource("33_le5cg")
+stream = ExtResource("31_o6nqs")
 volume_db = -80.0
 autoplay = true
+expand = true
 loop = true
 
-[node name="ColorRect" type="ColorRect" parent="HowToPlay/alert"]
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page3/Alert/Alert"]
+visible = false
 layout_mode = 0
 offset_left = 1396.41
 offset_top = 67.0413
@@ -4464,7 +4832,8 @@ offset_right = 1849.38
 offset_bottom = 185.042
 color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/alert"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page3/Alert/Alert"]
+visible = false
 layout_mode = 0
 offset_left = 1396.0
 offset_top = 45.0
@@ -4476,29 +4845,153 @@ bbcode_enabled = true
 text = "[center]SHIFT KEY"
 scroll_active = false
 
-[node name="Alert System Text" type="RichTextLabel" parent="HowToPlay"]
-offset_left = 699.886
-offset_top = 4188.76
-offset_right = 1508.89
-offset_bottom = 4761.76
+[node name="Page4" type="Control" parent="HowToPlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" type="Control" parent="HowToPlay/Page4"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer System Text" type="RichTextLabel" parent="HowToPlay/Page4/Timer"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = 4212.0
+offset_right = 781.0
+offset_bottom = 4829.0
 scale = Vector2(0.843354, 0.843354)
 theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = -1
 theme_override_fonts/normal_font = ExtResource("6_1kjcc")
 theme_override_fonts/bold_font = ExtResource("6_1kjcc")
 theme_override_font_sizes/normal_font_size = 66
 theme_override_font_sizes/bold_font_size = 100
 bbcode_enabled = true
-text = "[center][b]Sneak Mechanic
-[/b][/center]You can distract enemies by throwing an object.[ul bullet=- ]Press Space to throw.
-You cannot move while throwing.
-Enemies expand their vision and rush to the sound.
-They inspect briefly, then return to patrol.[/ul]
-Use this mechanic strategically to lure enemies away, create openings, or sneak past unnoticed."
+text = "[center][b]Timer System
+[/b][/center]You can see what your current time is with the timer.[ul bullet=- ]The timer is located on the top right.
+You can hide it in the settings.
+The timer will not restart on death.
+The timer will restart after game over.[/ul]
+Use the timer to race against yourself or others. You can press the screenshot button to take a screenshot of your achievement after completing the game."
+
+[node name="Timer" type="VideoStreamPlayer" parent="HowToPlay/Page4/Timer"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 3853.59
+offset_right = 1935.0
+offset_bottom = 4925.59
+scale = Vector2(0.307301, 0.307301)
+stream = ExtResource("30_dkbk5")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page4/Timer/Timer"]
+visible = false
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 63.0
+offset_right = 1843.0
+offset_bottom = 181.0
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page4/Timer/Timer"]
+visible = false
+layout_mode = 0
+offset_left = 1407.0
+offset_top = 40.0
+offset_right = 1842.0
+offset_bottom = 202.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]SPACE KEY"
+scroll_active = false
+
+[node name="Health" type="Control" parent="HowToPlay/Page4"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health System Text" type="RichTextLabel" parent="HowToPlay/Page4/Health"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 4189.0
+offset_right = 1510.0
+offset_bottom = 4814.0
+scale = Vector2(0.843354, 0.843354)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 66
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][b]Health System
+[/b][/center]You have three lives to complete the game.[ul bullet=- ]After death, you are sent back to the beginning of your current level.
+The timer does not reset on death.
+Once you lose all three lives, you will have failed the game, forcing you to start from the beginning.
+[/ul]
+Try avoiding any deaths if you are aiming for a low completion time."
+
+[node name="Health" type="VideoStreamPlayer" parent="HowToPlay/Page4/Health"]
+layout_mode = 0
+offset_left = 736.131
+offset_top = 3852.29
+offset_right = 2656.13
+offset_bottom = 4940.29
+scale = Vector2(0.307, 0.307)
+stream = ExtResource("32_6rhuh")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect" type="ColorRect" parent="HowToPlay/Page4/Health/Health"]
+visible = false
+layout_mode = 0
+offset_left = 1396.41
+offset_top = 67.0413
+offset_right = 1849.38
+offset_bottom = 185.042
+color = Color(0.0430392, 0.0430392, 0.0430391, 0.513726)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Page4/Health/Health"]
+visible = false
+layout_mode = 0
+offset_left = 1396.0
+offset_top = 45.0
+offset_right = 1847.0
+offset_bottom = 207.0
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 171
+bbcode_enabled = true
+text = "[center]SHIFT KEY"
+scroll_active = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HowToPlay"]
 offset_left = 716.0
 offset_top = 3835.0
 offset_right = 784.0
+offset_bottom = 3875.0
+scale = Vector2(9.245, 9.245)
+texture = ExtResource("7_1ltas")
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="HowToPlay"]
+offset_left = -8.0
+offset_top = 3835.0
+offset_right = 60.0
 offset_bottom = 3875.0
 scale = Vector2(9.245, 9.245)
 texture = ExtResource("7_1ltas")
@@ -4717,6 +5210,34 @@ meta_underlined = false
 [node name="Goblin" type="Node2D" parent="Characters"]
 visible = false
 
+[node name="Goblin" type="AnimatedSprite2D" parent="Characters/Goblin"]
+light_mask = 2
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-1756, -1209)
+scale = Vector2(14, 14)
+sprite_frames = SubResource("SpriteFrames_ucj5s")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.292805
+offset = Vector2(-0.0821263, -11.5395)
+
+[node name="GoblinTXT" type="RichTextLabel" parent="Characters/Goblin"]
+texture_filter = 1
+offset_left = -1552.0
+offset_top = -1621.0
+offset_right = -1278.0
+offset_bottom = -1236.0
+scale = Vector2(1.213, 1.213)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[center][b]Goblin[/b] 
+Goblins are small, cunning creatures commonly found in European folklore, particularly in the British Isles. They are often depicted as humanoid beings with sharp features, pointed ears, and mischievous expressions, thriving in dark forests, caves, or abandoned ruins. In traditional tales, goblins are known for their trickery, stealing valuables, playing pranks, or causing minor misfortune to humans. Some stories portray them as greedy hoarders of treasure, while others depict them as clever, almost impish beings who can be outwitted by clever humans."
+
 [node name="Werewolf" type="Node2D" parent="Characters"]
 visible = false
 
@@ -4729,7 +5250,7 @@ scale = Vector2(11.69, 11.69)
 sprite_frames = SubResource("SpriteFrames_2le12")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.595012
+frame_progress = 0.7456
 offset = Vector2(-0.0821263, -11.5395)
 
 [node name="WerewolfTXT" type="RichTextLabel" parent="Characters/Werewolf"]
@@ -4794,7 +5315,7 @@ scale = Vector2(12.32, 12.32)
 sprite_frames = SubResource("SpriteFrames_ylpwk")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.029234
+frame_progress = 0.912075
 offset = Vector2(-0.0821232, -12.4893)
 
 [node name="LeshyTXT" type="RichTextLabel" parent="Characters/Leshy"]
@@ -4815,15 +5336,32 @@ Leshy, or Leshi, are forest deities in Slavic mythology, particularly from Easte
 [node name="Centaur" type="Node2D" parent="Characters"]
 visible = false
 
-[node name="Centaur2" type="AnimatedSprite2D" parent="Characters/Centaur"]
+[node name="Centaur" type="AnimatedSprite2D" parent="Characters/Centaur"]
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(32.3352, 24.6365)
+position = Vector2(-1709, -1313)
+scale = Vector2(11, 11)
 sprite_frames = SubResource("SpriteFrames_tmrd0")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.406947
 offset = Vector2(-3.43168, -12.5714)
+
+[node name="CentaurTXT" type="RichTextLabel" parent="Characters/Centaur"]
+offset_left = -1553.0
+offset_top = -1618.0
+offset_right = -1279.0
+offset_bottom = -1236.0
+scale = Vector2(1.213, 1.213)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[center][b]Centaurs[/b]
+Centaurs are mythological creatures with the upper body of a human and the lower body of a horse, originating from ancient Greek folklore. They are often depicted as wild and untamed beings, dwelling in forests and mountains, though some stories portray them as wise and noble teachers. Centaurs embody both human intellect and animalistic strength, symbolizing the duality of civilization and primal instinct. In mythology, they appear in numerous tales, from violent confrontations to guidance of heroes, reflecting their complex nature as both feared and respected creatures."
 
 [node name="Slime" type="Node2D" parent="Characters"]
 visible = false
@@ -4832,8 +5370,8 @@ visible = false
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(-1740, -1464)
-scale = Vector2(13.79, 13.79)
+position = Vector2(-1753.56, -1477.7)
+scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_pfv1w")
 animation = &"idle"
 autoplay = "idle"
@@ -4844,8 +5382,8 @@ offset = Vector2(0.00683969, -3.4296)
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(-1743, -1241)
-scale = Vector2(13.79, 13.79)
+position = Vector2(-1756.56, -1254.7)
+scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_1n40b")
 animation = &"idle"
 autoplay = "idle"
@@ -4874,35 +5412,54 @@ visible = false
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(-115.408, 28.58)
+position = Vector2(-1750, -1444.8)
+scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_pjqs4")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.0837685
 offset = Vector2(0.26005, -12.4003)
 
 [node name="Elf" type="AnimatedSprite2D" parent="Characters/Elf"]
 light_mask = 2
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(-97.1019, 28.58)
+position = Vector2(-1754, -1209.8)
+scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_2ng71")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.813312
 offset = Vector2(0.26005, -12.4972)
 
-[node name="Elf2" type="RichTextLabel" parent="Characters/Elf"]
-visible = false
-offset_left = 166.029
-offset_top = -51.1964
-offset_right = 294.029
-offset_bottom = 208.804
-scale = Vector2(0.389734, 0.389734)
+[node name="ElfTXT" type="RichTextLabel" parent="Characters/Elf"]
+offset_left = -1553.0
+offset_top = -1618.0
+offset_right = -1279.0
+offset_bottom = -1236.0
+scale = Vector2(1.213, 1.213)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("6_1kjcc")
-theme_override_font_sizes/normal_font_size = 16
-text = "Golems:
-Golems are anthropomorphic (human-like) beings created entirely from inanimate matter, usually clay or mud. These creatures originate from Jewish folklore, with the earliest mentions dating back to early Judaism (around 5th century BCE). Golems are often depicted as large humanoid figures, with minimal facial features and a rough, unfinished, or unformed appearance. Over the centuries, golems have been used to connote and symbolise war, community, isolation, hope, and despair. "
-fit_content = true
-scroll_active = false
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[center][b]Elves[/b]
+Elves are supernatural beings found in European folklore, particularly in Norse and Germanic traditions. They are often depicted as tall, graceful, and immortal, with pointed ears and an ethereal beauty. Elves are usually associated with nature, inhabiting forests, hills, or other secluded natural places, and are believed to possess magical abilities. In traditional stories, they can be both benevolent, offering guidance, protection, or blessings, and mischievous, playing tricks on humans who disrespect their realm. Over time, elves have become a staple of fantasy literature, evolving into diverse interpretations while retaining their mystical and otherworldly essence."
+
+[node name="ElfQueenTXT" type="RichTextLabel" parent="Characters/Elf"]
+offset_left = -1886.0
+offset_top = -1416.8
+offset_right = -1640.0
+offset_bottom = -1362.8
+scale = Vector2(1.213, 1.213)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[center]This is the elf queen. Can you find her in the game?"
 
 [node name="Golem" type="Node2D" parent="Characters"]
 visible = false
@@ -4916,7 +5473,7 @@ scale = Vector2(6.86, 6.86)
 sprite_frames = SubResource("SpriteFrames_gf25g")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.45249
+frame_progress = 0.808941
 offset = Vector2(-0.164252, -24.0287)
 
 [node name="GolemTXT" type="RichTextLabel" parent="Characters/Golem"]
@@ -4946,6 +5503,21 @@ sprite_frames = SubResource("SpriteFrames_7imm7")
 animation = &"walk"
 autoplay = "idle"
 offset = Vector2(-0.171515, -6.12421)
+
+[node name="GolemTXT2" type="RichTextLabel" parent="Characters/Knight"]
+offset_left = -1552.0
+offset_top = -1612.0
+offset_right = -1279.0
+offset_bottom = -1233.0
+scale = Vector2(1.213, 1.213)
+theme_override_colors/default_color = Color(0.286275, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("6_1kjcc")
+theme_override_fonts/bold_font = ExtResource("6_1kjcc")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[center][b]Knights[/b]
+Knights are heavily armed warriors often depicted as paragons of honor, courage, and loyalty in both historical and fantasy settings. Originating from medieval European traditions, knights were bound by codes of chivalry, serving kings, lords, or noble causes. In fantasy stories, they often take on heroic roles, embarking on quests, protecting the innocent, or confronting monsters such as dragons, goblins, and ogres. Beyond their combat prowess, knights frequently face moral and personal challenges, navigating the tension between duty, justice, and their own desires, which adds depth and complexity to their character."
 
 [node name="Extra Settings" type="Node2D" parent="."]
 position = Vector2(6724, 5422.72)
@@ -5022,11 +5594,13 @@ bus = &"SFX"
 [node name="bg_music" type="AudioStreamPlayer" parent="MISC"]
 stream = ExtResource("30_0o5xv")
 volume_db = 0.005
+autoplay = true
 bus = &"Music"
 
 [node name="fire_crackle" type="AudioStreamPlayer" parent="MISC"]
 stream = ExtResource("35_wxhic")
 volume_db = 0.5
+autoplay = true
 bus = &"SFX"
 
 [node name="page_flip" type="AudioStreamPlayer" parent="MISC"]
@@ -5036,10 +5610,8 @@ bus = &"SFX"
 
 [node name="Camera2D" type="Camera2D" parent="MISC"]
 
-[node name="SceneChangeAnimation" parent="MISC" instance=ExtResource("36_k3hsw")]
+[node name="SceneChangeAnimation" parent="MISC" instance=ExtResource("47_u7gko")]
 visible = false
-z_index = 4096
-position = Vector2(443, -398)
 
 [node name="HomeParent" type="Node2D" parent="MISC"]
 visible = false
@@ -5095,8 +5667,8 @@ flat = true
 [connection signal="pressed" from="Framework/Tabs/Tab2/Tab2Button" to="." method="_on_tab2_button_pressed"]
 [connection signal="pressed" from="Framework/Tabs/Tab3/Tab3Button" to="." method="_on_tab3_button_pressed"]
 [connection signal="pressed" from="Framework/Tabs/Tab4/Tab4Button" to="." method="_on_tab4_button_pressed"]
-[connection signal="pressed" from="Main Menu/buttons/DEVButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main Menu/buttons/DEVButton" to="." method="_on_dev_button_pressed"]
+[connection signal="pressed" from="Main Menu/buttons/DEVButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main Menu/buttons/Play/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Main Menu/buttons/H2P/H2PButton" to="." method="_on_tab2_button_pressed"]
 [connection signal="pressed" from="Main Menu/buttons/Settings/SettingsButton" to="." method="_on_tab1_button_pressed"]

@@ -1,3 +1,7 @@
+"""
+Script for settings keybind changing thing
+"""
+
 extends Control
 
 
